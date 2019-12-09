@@ -1,0 +1,40 @@
+.activo{
+   background-color: #17a2b8;
+   color:#fff !important;
+   /* border: 1px solid transparent; */
+   border-radius: 0.25rem;
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 80px;
+    cursor: pointer;
+}
+
+/* quitar las flechas de los numeros */
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+    }
+
+/* boton como enlace */
+
+    button.enlace{
+        border:0; 
+        background-color: rgba(104, 13, 13, 0) !important;
+        cursor:pointer;
+    }
+
+
+
+/* Para el plugin de ordenacion */
+/* table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+} */
+
