@@ -102,7 +102,7 @@
                                                         {{$store->name}} </option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> 
                                             <button type="button" class="btn btn-default btn-block" name="Guardar"
                                                 onclick="asociar({{ $campaign->id}},'/campaign/asociarstore','#tokenStore','storesduallistbox[]','Stores','store','campaign_stores')">Asociar
                                             Stores</button>

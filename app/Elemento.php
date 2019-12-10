@@ -36,6 +36,37 @@ class Elemento extends Model
           ;
         }
 
+        public function scopeUbi($query,$ubi)
+        {
+            return $query->where('ubicacion','LIKE',"%$ubi%");
+        }
+        public function scopeMob($query,$mob)
+        {
+            if($mob)
+                return $query->where('mobiliario','LIKE',"%$mob%");
+        }
+        public function scopeCart($query,$cart)
+        {
+            if($cart)
+                return $query->where('carteleria','LIKE',"%$cart%");
+        }
+        public function scopeMat($query,$mat)
+        {
+            if($mat)
+                return $query->where('material','LIKE',"%$mat%");
+        }
+        public function scopeMed($query,$med)
+        {
+            if($med)
+                return $query->where('medida','LIKE',"%$med%");
+        }
+        public function scopePropx($query,$propx)
+        {
+            if($propx)
+                return $query->where('propxelemento','LIKE',"%$propx%");
+        }
+    
+
     public function storeelementos()  
     {
         return $this->hasMany(StoreElemento::class);

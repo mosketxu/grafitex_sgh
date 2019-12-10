@@ -24,7 +24,7 @@
                         <span class="hidden" id="campaign_id"></span>
                     </div>
                     <div class="col-auto mr-auto">
-                    <a href="{{route('storeelementos.edit',$store->id)}}" role="button" title="Añadir elemento">
+                        <a href="{{route('storeelementos.edit',$store->id)}}" role="button" title="Añadir elemento">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a>
                     </div>

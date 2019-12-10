@@ -32,10 +32,11 @@ Route::group(['middleware' => ['auth']], function () {
     //Store
     Route::resource('store', 'StoreController');//->middleware('admin');
     Route::post('store/updateimagenindex', 'StoreController@updateimagenindex')->name('store.updateimagenindex');
-
+    
     //Store elementos
     Route::get('/store/storeelementos/{storeId}','StoreElementosController@index')->name('storeelementos.index'); 
     Route::get('/store/storeelementos/{storeId}/edit','StoreElementosController@edit')->name('storeelementos.edit');
+    Route::post('store/storeelementos/{storeId}/store', 'StoreElementosController@store')->name('storeelementos.store');
     Route::delete('/store/storeelementos/{storeId}','StoreElementosController@destroy')->name('storeelementos.destroy');
     
     // Elementos

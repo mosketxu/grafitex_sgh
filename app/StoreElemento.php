@@ -23,33 +23,6 @@ class StoreElemento extends Model
       ;
     }
 
-    public function scopeUbicacion($query,$ubicacion)
-    {
-        if($ubicacion)
-            return $query->where('ubicacion','LIKE',"%$ubicacion%");
-    }
-    public function scopeMobiliario($query,$mobiliario)
-    {
-        if($mobiliario)
-            return $query->where('mobiliario','LIKE',"%$mobiliario%");
-    }
-    public function scopeCarteleria($query,$carteleria)
-    {
-        if($carteleria)
-            return $query->where('carteleria','LIKE',"%$carteleria%");
-    }
-    public function scopeMaterial($query,$material)
-    {
-        if($material)
-            return $query->where('material','LIKE',"%$material%");
-    }
-    public function scopePropxelemento($query,$propxelemento)
-    {
-        if($propxelemento)
-            return $query->where('propxelemento','LIKE',"%$propxelemento%");
-    }
-
-
     public function elemen()
     {
         return $this->belongsTo(Elemento::class,'elemento_id');

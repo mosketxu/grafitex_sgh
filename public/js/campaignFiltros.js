@@ -14,7 +14,7 @@
         nonSelectedListLabel: 'No Seleccionadas',
         selectedListLabel: 'Seleccionadas',
         preserveSelectionOnMove: 'moved',
-        moveOnSelect: false,
+        moveOnSelect: false, 
         filterPlaceHolder:'Filtros...', 
         showFilterInputs:false,
     });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\{Store,Elemento, StoreElemento,Ubicacion,Mobiliario,Propxelemento,Carteleria,Medida,Material};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Element;
 
 class StoreElementosController extends Controller
 {
@@ -45,9 +47,28 @@ class StoreElementosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$store_id)
     {
-        //
+        $request->validate([
+            'elemento_id'=>'required'
+        ]);
+
+        $elementificador=Elemento::find($request->elemento_id)->elementificador;
+
+        DB::table('store_elementos')
+            ->insert([
+            'store_id'=>$store_id,
+            'elemento_id'=>$request->elemento_id,
+            'elementificador'=>$elementificador,
+            ]);
+
+        $notification = array(
+            'message' => 'Elemento añadido satisfactoriamente a la store!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    
+
     }
 
     /**
@@ -69,38 +90,32 @@ class StoreElementosController extends Controller
      */
     public function edit($storeId, Request $request)
     {
-
-        $ubicacion=$request->get('ubicacion');
-        $mobiliario=$request->get('mobiliario');
-        $carteleria=$request->get('carteleria');
-        $material=$request->get('material');
-        $propxelemento=$request->get('propxelemento');
-
         
         $store=Store::find($storeId);
-        $mob= $request->mobiliario_id ? $request->mobiliario_id : '';
+
+        $ubi=$request->get('ubi');
+        $mob=$request->get('mob');
+        $cart=$request->get('cart');
+        $mat=$request->get('mat');
+        $med=$request->get('med');
+        $propx=$request->get('propx');
 
         $elementosDisp = Elemento::whereNotIn('id', function ($query) use ($storeId) {
             $query->select('elemento_id')->from('store_elementos')->where('store_id', '=', $storeId);
-        })
-        ->ubicacion($ubicacion)
-        ->mobiliario($mobiliario)
-        ->carteleria($carteleria)
-        ->material($material)
-        ->propxelemento($propxelemento)
+            })
+        ->ubi($request->ubi)
+        ->mob($request->mob)
+        ->cart($request->cart)
+        ->mat($request->mat)
+        ->med($request->med)
+        ->propx($request->propx)
         ->paginate(10)
         ->onEachSide(1);
 
         // dd($totalelementosDisp);
 
-        $propxelementoes=Ubicacion::orderBy('ubicacion')->get();
-        $mobiliarios=Mobiliario::orderBy('mobiliario')->get();
-        $propxelementos=Propxelemento::orderBy('propxelemento')->get();
-        $cartelerias=Carteleria::orderBy('carteleria')->get();
-        $medidas=Medida::orderBy('medida')->get();
-        $materiales=Material::orderBy('material')->get();
-        return view('stores.storeelementos.edit',compact('store','elementosDisp','busqueda',
-            'ubicaciones','mobiliarios','propxelementos','cartelerias','medidas','familias','materiales'));
+        return view('stores.storeelementos.edit',compact('store','elementosDisp',
+            'ubi','mob','propx','cart','med','mat'));
     }
 
     /**
@@ -112,7 +127,6 @@ class StoreElementosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**

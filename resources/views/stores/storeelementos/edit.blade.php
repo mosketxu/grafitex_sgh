@@ -40,7 +40,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col">
-                                <div class="row">
+                                <div class="row" style="font-size: 0.8rem;">
                                     <div class="form-group col">
                                         <label>Store</label><br>{{ $store->id }}
                                     </div>
@@ -85,6 +85,29 @@
                         <div class="table-responsive" style="height: 350px">
                             <table id="tcampaignElementos" class="table table-hover table-sm small sortable" cellspacing="0" width=100%>
                                 <thead>
+                                    <tr class="">
+                                        <form method="GET" action="{{route('storeelementos.edit',$store->id) }}">
+                                            <th><input id="ubi" name="ubi" type="text" class="form-control form-control-sm" value='{{$ubi}}' placeholder="Filtro Ubicación"/></th>
+                                            <th><input id="mob" name="mob" type="text" class="form-control  form-control-sm" value='{{$mob}}'  placeholder="Filtro Mobiliario"/></th>
+                                            <th><input id="propx" name="propx" type="text" class="form-control  form-control-sm" value='{{$propx}}'  placeholder="Filtro Prop x Elem"/></th>
+                                            <th><input id="cart" name="cart" type="text" class="form-control  form-control-sm" value='{{$cart}}'  placeholder="Filtro Carteleria"/></th>
+                                            <th><input id="med" name="med" type="text" class="form-control  form-control-sm" value='{{$med}}'  placeholder="Filtro Medida"/></th>
+                                            <th><input id="mat" name="mat" type="text" class="form-control  form-control-sm" value='{{$mat}}'  placeholder="Filtro Material"/></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th width="100px">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button type="submit" class="form-control  form-control-sm enlace" name="Filtra"><i class="fas fa-search fa-lg text-primary"></i></button>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button type="button" class="form-control  form-control-sm enlace" name="Borrar Filtros" onclick="borrarFiltros()"><i class="far fa-times-circle fa-lg text-danger"></i></button>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th></th>
+                                        </form>
+                                    </tr>
                                     <tr>
                                         {{-- <th>#</th> --}}
                                         <th id="tUbicación">Ubicación</th>
@@ -97,25 +120,13 @@
                                         <th id="tObservaciones">Observaciones</th>
                                         <th width="50px" class="text-center"><span class="ml-1"></th>
                                     </tr>
-                                    <tr>
-                                        <form method="GET" action="{{route('storeelementos.edit',$store->id) }}">
-                                            <th><input name="ubicacion" type="text" class="form-control" value='{{$ubicacion}}' /></th>
-                                            <th><input name="mobiliario" type="text" class="form-control" value='{{$mobiliario}}' /></th>
-                                            <th><input name="propxelemento" type="text" class="form-control" value='{{$propxelemento}}' /></th>
-                                            <th><input name="carteleria" type="text" class="form-control" value='{{$carteleria}}' /></th>
-                                            <th><input name="medida" type="text" class="form-control" value='{{$medida}}' /></th>
-                                            <th><input name="material" type="text" class="form-control" value='{{$material}}' /></th>
-                                            <button type="submit" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </form>
-
-                                    </tr>
                                 </thead>
                                 <tbody>
                                    @foreach ($elementosDisp as $elemento)
-                                   <tr>
-                                        {{-- <td>{{$elemento->id}}</td> --}}
+                                    <form action="{{route('storeelementos.store',$store->id)}}" method="post">
+                                        @csrf
+                                    <tr>
+                                        <td class="d-none"><input type="hidden" name="elemento_id" value="{{$elemento->id}}"> </td>
                                         <td>{{$elemento->ubicacion}}</td>
                                         <td>{{$elemento->mobiliario}}</td>
                                         <td>{{$elemento->propxelemento}}</td>
@@ -124,7 +135,9 @@
                                         <td>{{$elemento->material}}</td>
                                         <td>{{$elemento->unitxprop}}</td>
                                         <td>{{$elemento->observaciones}}</td>
+                                        <td class=" text-center"><button type="submit" class="btn btn-tool"><i  class="fas fa-plus text-primary"></i></button></td>
                                     </tr>
+                                    </form>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -149,7 +162,21 @@
     <script>
         $(document).ready( function () {
         });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')     
+            }
+        }); 
     
+        function borrarFiltros(){
+            $("#ubi").val('');   
+            $("#mob").val('');   
+            $("#propx").val(''); 
+            $("#cart").val('');  
+            $("#med").val('');
+            $("#mat").val('');
+        }
         $('#menuelementos').addClass('active');
         $('#navcampaigns').toggleClass('activo');
     
