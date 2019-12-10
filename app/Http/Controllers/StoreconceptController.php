@@ -26,7 +26,7 @@ class StoreconceptController extends Controller
     {
         $campo='storeconcept';
         $route='storeconcept.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**

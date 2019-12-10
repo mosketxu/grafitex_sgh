@@ -47,30 +47,30 @@ class MaestroController extends Controller
     {
           
         DB::table('store_elementos')->delete();
-        // DB::table('elementos')->delete();
-        // DB::table('stores')->delete();
-        // DB::table('ubicacions')->delete();
-        // DB::table('areas')->delete();
-        // DB::table('cartelerias')->delete();
-        // DB::table('medidas')->delete();
-        // DB::table('mobiliarios')->delete();
-        // DB::table('segmentos')->delete();
-        // DB::table('propxelementos')->delete();
-        // DB::table('storeconcepts')->delete();
-        // DB::table('materiales')->delete();
+        DB::table('elementos')->delete();
+        DB::table('stores')->delete();
+        DB::table('ubicacions')->delete();
+        DB::table('areas')->delete();
+        DB::table('cartelerias')->delete();
+        DB::table('medidas')->delete();
+        DB::table('mobiliarios')->delete();
+        DB::table('segmentos')->delete();
+        DB::table('propxelementos')->delete();
+        DB::table('storeconcepts')->delete();
+        DB::table('materiales')->delete();
 
-        // Ubicacion::insert(Maestro::select('ubicacion')->distinct('ubicacion')->get()->toArray());
-        // Area::insert(Maestro::select('area')->distinct('area')->get()->toArray());
-        // Carteleria::insert(Maestro::select('carteleria')->distinct('carteleria')->get()->toArray());
-        // Medida::insert(Maestro::select('medida')->distinct('medida')->get()->toArray());
-        // Mobiliario::insert(Maestro::select('mobiliario')->distinct('mobiliario')->get()->toArray());
-        // Propxelemento::insert(Maestro::select('propxelemento')->distinct('propxelemento')->get()->toArray());
-        // Segmento::insert(Maestro::select('segmento')->distinct('segmento')->get()->toArray());
-        // Storeconcept::insert(Maestro::select('storeconcept')->distinct('storeconcept')->get()->toArray());
-        // Material::insert(Maestro::select('material')->distinct('material')->get()->toArray());
+        Ubicacion::insert(Maestro::select('ubicacion')->distinct('ubicacion')->get()->toArray());
+        Area::insert(Maestro::select('area')->distinct('area')->get()->toArray());
+        Carteleria::insert(Maestro::select('carteleria')->distinct('carteleria')->get()->toArray());
+        Medida::insert(Maestro::select('medida')->distinct('medida')->get()->toArray());
+        Mobiliario::insert(Maestro::select('mobiliario')->distinct('mobiliario')->get()->toArray());
+        Propxelemento::insert(Maestro::select('propxelemento')->distinct('propxelemento')->get()->toArray());
+        Segmento::insert(Maestro::select('segmento')->distinct('segmento')->get()->toArray());
+        Storeconcept::insert(Maestro::select('storeconcept')->distinct('storeconcept')->get()->toArray());
+        Material::insert(Maestro::select('material')->distinct('material')->get()->toArray());
 
-        // Maestro::insertStores();
-        // Maestro::insertElementos();
+        Maestro::insertStores();
+        Maestro::insertElementos();
         Maestro::insertStoreElementos();
 
         $notification = array(

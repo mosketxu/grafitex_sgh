@@ -26,7 +26,7 @@ class PropxelementoController extends Controller
     {
         $campo='propxelemento';
         $route='propxelemento.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**

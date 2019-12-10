@@ -26,7 +26,7 @@ class MaterialController extends Controller
     {
         $campo='material';
         $route='material.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**

@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('elemento', 'ElementoController');    
     //Auxiliares
     Route::group(['prefix'=>'auxiliares'],function(){
-        Route::view('/', 'auxiliares.index')->name('auxiliares');
+        Route::get('/', 'AuxiliaresController@index')->name('auxiliares.index');
+        // Route::view('/', 'auxiliares.index')->name('auxiliares');
 
         Route::resource('/country','CountryController');
         Route::resource('/area','AreaController');

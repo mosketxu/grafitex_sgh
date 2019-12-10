@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('auxiliares')}}" id="menuauxiliares" class="nav-link">
+                    <a href="{{route('auxiliares.index')}}" id="menuauxiliares" class="nav-link">
                         <i class="nav-icon fas fa-cube"></i>
                         <p>Auxiliares</p>
                     </a>

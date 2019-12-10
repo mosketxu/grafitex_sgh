@@ -26,7 +26,7 @@ class CountryController extends Controller
     {
         $campo='country';
         $route='country.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**
@@ -70,11 +70,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $datos=Country::find($id);
-        $campo='country';
-        $route='country.update';
-        return view('auxiliares.edit',compact('datos','campo','route'));
-
+        //
     }
 
     /**

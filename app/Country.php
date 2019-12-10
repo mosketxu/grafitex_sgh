@@ -8,7 +8,7 @@ class Country extends Model
 {
     public $timestamps = false;
     protected $table = "countries"; 
-    protected $fillable=['id'];
+    protected $fillable=['id','country'];
 
     public function countries()
     {

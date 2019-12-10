@@ -26,7 +26,7 @@ class MobiliarioController extends Controller
     {
         $campo='mobiliario';
         $route='mobiliario.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**

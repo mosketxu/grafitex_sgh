@@ -1,10 +1,11 @@
+
 @extends('layouts.grafitex')
 
 @section('styles')
 @endsection
 
-@section('title','Edición '.ucfirst($campo))
-@section('titlePag','Edición '.ucfirst($campo))
+@section('title','Nuevo '.ucfirst($campo))
+@section('titlePag','Nuevo '.ucfirst($campo))
 @section('navbar')
     @include('_partials._navbar')
 @endsection
@@ -42,21 +43,18 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="formelemento" role="form" method="POST" action="{{ route($route,$datos->id) }}">
+                        <form id="formelemento" role="form" method="POST" action="{{ route($route) }}">
                             @csrf
-                            @method('PATCH')
                             <div class="card-body">
-                                <input type="text" class="d-none" id="id" name="id"
-                                    value="{{$datos->id}}">
                                 <div class="form-group row justify-content-md-center">
                                     <label class="col-sm-2 col-form-label col-form-label-sm" for="store">{{ucfirst($campo)}}</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control-sm form-control" id={{$campo}} name={{$campo}} value="{{$datos->$campo}}">
+                                        <input type="text" class="form-control-sm form-control" name="{{$campo}}" value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                                 <a class="btn btn-default" href="{{route('auxiliares.index')}}" title="Ir la página anterior">Volver</a>
                             </div>
                         </form>

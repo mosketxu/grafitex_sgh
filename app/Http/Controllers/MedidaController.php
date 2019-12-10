@@ -26,7 +26,7 @@ class MedidaController extends Controller
     {
         $campo='medida';
         $route='medida.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**

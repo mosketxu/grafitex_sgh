@@ -26,7 +26,7 @@ class AreaController extends Controller
     {
         $campo='area';
         $route='area.store';
-        return view('auxiliares.create',compact('campo','route'));
+        return view('auxiliares.createaux',compact('campo','route'));
     }
 
     /**
