@@ -61,7 +61,7 @@ class StoreController extends Controller
             'area_id'=>'required',
             'segmento'=>'required',
             'concepto_id'=>'required',
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             ]);
             
             
@@ -143,7 +143,7 @@ class StoreController extends Controller
             'area_id'=>'required',
             'segmento'=>'required',
             'concepto_id'=>'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             ]);
 
             
@@ -184,7 +184,7 @@ class StoreController extends Controller
     public function updateimagenindex(Request $request)
     {
         $request->validate([
-            'imagen' => 'required|image|mimes:pdf,jpeg,png,jpg,gif,svg|max:2048',
+            'imagen' => 'required|image|mimes:pdf,jpeg,png,jpg,gif,svg|max:4096',
         ]);
             
         $store=Store::find($request->id);

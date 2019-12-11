@@ -136,7 +136,7 @@ class CampaignElementoController extends Controller
     public function updateimagenindex(Request $request)
     {
         $request->validate([
-            'photo' => 'required|image|mimes:pdf,jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required|image|mimes:pdf,jpeg,png,jpg,gif,svg|max:4096',
             ]);
         
             $campElem=CampaignElemento::find($request->elementoId);

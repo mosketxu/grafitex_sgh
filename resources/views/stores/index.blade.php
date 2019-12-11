@@ -121,7 +121,7 @@
                                             <td width="100px">
                                                 <div class="text-center">
                                                 <a href="{{ route('store.edit',$store) }}" title="Edit"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
-                                                <a href="{{ route('storeelementos.index',$store->id) }}" title="Elementosss"><i class="far fas fa-cubes text-teal fa-2x mx-1"></i></a>
+                                                <a href="{{ route('storeelementos.index',$store->id) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mx-1"></i></a>
                                                 <a href="#!" class="btn-delete " title="Eliminar"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
                                             </div>
                                         </form>
