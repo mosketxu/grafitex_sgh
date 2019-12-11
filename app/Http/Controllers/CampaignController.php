@@ -55,6 +55,21 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
+        $rules=[
+            'campaign_name'=>'required|unique:campaigns',
+            'campaign_initdate'=>'required',
+            'campaign_enddate'=>'required',
+        ];
+
+        $messages = [
+            'campaign_name.required' => 'Agrega el nombre de la campaña.',
+            'campaign_name.unique' => 'El nombre de la campaña ya existe. Usa otro.',
+            'campaign_initdate.required' => 'La fecha Inicio es necesaria.',
+            'campaign_enddate.required' => 'La fecha Fin es necesaria.',
+        ];
+
+        $this->validate($request, $rules, $messages);
+
         $campaign = Campaign::create($request->all());
 
         return redirect()->route('campaign.index');
@@ -450,7 +465,7 @@ class CampaignController extends Controller
      */
     public function destroy($id)
     {
-        Campaign::where('id',$id)->delete();
+        Campaign::where('id',$id)->forceDelete();
 
 
          $notification = array(
