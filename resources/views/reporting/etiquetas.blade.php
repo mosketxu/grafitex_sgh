@@ -67,7 +67,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($store->campaignelementos->chunk(5) as $chunk)
+                                @foreach($store->campaignelemen->chunk(5) as $chunk)
                                 <tr>
                                     @foreach($chunk as $etiqueta)
                                     <td class="celda">

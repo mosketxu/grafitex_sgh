@@ -30,6 +30,11 @@ class Store extends Model
       ;
     }
 
+    public function campaignelemen()
+    {
+        return $this->hasMany(CampaignElemento::class,'store_id');
+    }
+    
     public function storeelementos()
     {
         return $this->hasMany(StoreElemento::class);
@@ -90,8 +95,5 @@ class Store extends Model
             ->save('storage/store/thumbnails/thumb-'.$file_name);
 
         return $file_name;
-
     }
-
-
 }
