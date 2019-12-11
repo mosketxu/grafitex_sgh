@@ -16,7 +16,7 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->bigInteger('id'); /*store code*/
             $table->primary('id');
-            $table->string('name',50)->index();
+            $table->string('name',100)->index();
             $table->string('country',2)->index();
             $table->string('zona',2)->index();
             $table->bigInteger('area_id')->index();

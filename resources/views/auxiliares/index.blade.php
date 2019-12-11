@@ -49,17 +49,10 @@
                         {{-- Country --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-indigo p-0 row">
-                                    <div class="col-5" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Countries</h3>
-                                    </div>
-                                    <div class="col-1" >
-                                        {{-- <a href="{{route('country.create') }}" title="Nuevo"><i class="fas fa-plus-circle text-white fa-lg mx-3"></i></a> --}}
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                <div class="card-header text-white bg-indigo p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Country</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -74,15 +67,6 @@
                                                 @foreach($countries as $country)
                                                 <tr>
                                                     <td>{{$country->country}}</td>
-                                                    {{-- <td>
-                                                        <div class="text-right">
-                                                            <a href="{{route('country.edit',$country->country)}}" title="Editar"><i class="far fa-edit text-primary fa-2x ml-1"></i></a>
-                                                        <form action="/auxiliares/country/'{{$country->country}}" method="POST" style="display:inline">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                            <button id="country{{$country->country}}" type="submit" class="enlace"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>
-                                                        </form>
-                                                    </div></td> --}}
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -94,14 +78,10 @@
                         {{-- Area --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-olive p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Area</h3>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                <div class="card-header text-white bg-olive p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Area</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -136,14 +116,10 @@
                         {{-- Segmento --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-navy p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Segmento</h3>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                <div class="card-header text-white bg-navy p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Segmento</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -180,14 +156,10 @@
                         {{-- Store Concept --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-purple p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Store Concept</h3>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                <div class="card-header text-white bg-purple p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Store Concept</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -222,14 +194,10 @@
                         {{-- Ubicacion --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-fuchsia p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Ubicación</h3>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                <div class="card-header text-white bg-fuchsia p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Ubicación</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -264,15 +232,11 @@
                         {{-- Mobiliario --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-pink p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Mobiliario</h3>
+                                <div class="card-header text-white bg-pink p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Mobiliario</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>        
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -308,15 +272,11 @@
                         {{-- Propxelemento --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-maroon p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Prop x Elemento</h3>
+                                <div class="card-header text-white bg-maroon p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Prop x Elemento</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>        
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -350,15 +310,11 @@
                         {{-- Carteleria --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-orange p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Carteleria</h3>
+                                <div class="card-header text-white bg-orange p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Carteleria</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>        
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -392,14 +348,10 @@
                         {{-- Medida --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-lime p-0 row">
-                                    <div class="col-6" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Medida</h3>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
+                                <div class="card-header text-white bg-lime p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Medida</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -408,7 +360,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Medida</th>
-                                                    <th class="text-right" width="100px"><a href="{{route('medida.create') }}" title="Nuevo"><i class="fas fa-plus-circle text-orange fa-2x mx-3"></i></a></th>
+                                                    <th class="text-right" width="100px"><a href="{{route('medida.create') }}" title="Nuevo"><i class="fas fa-plus-circle text-lime fa-2x mx-3"></i></a></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -436,23 +388,19 @@
                         {{-- Material --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
-                                <div class="card-header text-white bg-teal p-0 row">
-                                    <div class="col-6" dta-card-widget="collapse" style="cursor: pointer">
-                                            <h3 class="card-title pl-3">Material</h3>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="card-tools pr-3 text-right" data-card-widget="collapse" style="cursor: pointer">
-                                                <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                            </div>
-                                        </div>
+                                <div class="card-header text-white bg-teal p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Material</h3>
+                                    <div class="card-tools pr-3">
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
+                                </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="tMaterial" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
                                                 <tr>
                                                     <th>Material</th>
-                                                    <th class="text-right" width="100px"><a href="{{route('material.create') }}" title="Nuevo"><i class="fas fa-plus-circle text-orange fa-2x mx-3"></i></a></th>
+                                                    <th class="text-right" width="100px"><a href="{{route('material.create') }}" title="Nuevo"><i class="fas fa-plus-circle text-teal fa-2x mx-3"></i></a></th>
                                                 </tr>
                                             </thead>
                                             <tbody>

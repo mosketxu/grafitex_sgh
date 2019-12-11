@@ -17,7 +17,7 @@ class CreateMaestrosTable extends Migration
             $table->bigIncrements('id');
             $table->string('store',4)->index();
             $table->string('country',2);
-            $table->string('name',50)->index();
+            $table->string('name',100)->index();
             $table->string('area',20);
             $table->string('segment2018',20)->nullable();
             $table->string('segmento',20)->index();
