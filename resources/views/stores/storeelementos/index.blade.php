@@ -121,7 +121,7 @@
                                         <td>{{$elemento->elemen->unitxprop}}</td>
                                         <td>{{$elemento->elemen->observaciones}}</td>
                                         <td  width="100px">
-                                            <form id="formDelete" action="{{route('storeelementos.destroy',$elemento->id)}}" method="POST" style="display:inline">
+                                            <form id="formDelete" action="{{route('storeelementos.destroy',[$store->id,$elemento->id])}}" method="POST" style="display:inline">
                                                 <input type="hidden" name="_method" value="DELETE" />
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                                 <button type="submit" class="enlace"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>

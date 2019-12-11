@@ -135,11 +135,16 @@ class StoreElementosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($store_id,$elemento_id, Request $request)
     {
-
+        // dd($store_id.'-'.$elemento_id);
+        $s=StoreElemento::where('store_id',$store_id)
+        ->where('elemento_id',$elemento_id)
+        ->first();
+        // dd($s);
         try{
-            StoreElemento::destroy($id);;   
+            // StoreElemento::destroy($s->id);
+            $s->delete();
         }catch(\ErrorException $ex){
             return back()->withError($ex->getMessage());
         }

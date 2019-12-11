@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/store/storeelementos/{storeId}','StoreElementosController@index')->name('storeelementos.index'); 
     Route::get('/store/storeelementos/{storeId}/edit','StoreElementosController@edit')->name('storeelementos.edit');
     Route::post('store/storeelementos/{storeId}/store', 'StoreElementosController@store')->name('storeelementos.store');
-    Route::delete('/store/storeelementos/{storeId}','StoreElementosController@destroy')->name('storeelementos.destroy');
+    Route::delete('/store/storeelementos/{storeId}/{elementoId}','StoreElementosController@destroy')->name('storeelementos.destroy');
     
     // Elementos
     Route::resource('elemento', 'ElementoController');    
