@@ -148,7 +148,15 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach($tiendaszonas as $tiendazona)
+                                                <tr>
+                                                    <td>{{$tiendazona->country}}</td>
+                                                    <td>{{$tiendazona->area}}</td>
+                                                    <td>{{$tiendazona->totales}}</td>
+                                                    <td>{{$tiendazona->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -176,7 +184,14 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($materiales as $material)
+                                                    <tr>
+                                                        <td>{{$material->material}}</td>
+                                                        <td>{{$material->totales}}</td>
+                                                        <td>{{$material->unidades}}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -206,7 +221,14 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($segmentos as $segmento)
+                                                <tr>
+                                                    <td>{{$segmento->segmento}}</td>
+                                                    <td>{{$segmento->totales}}</td>
+                                                    <td>{{$segmento->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -234,7 +256,14 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($conceptos as $concepto)
+                                                <tr>
+                                                    <td>{{$concepto->storeconcept}}</td>
+                                                    <td>{{$concepto->totales}}</td>
+                                                    <td>{{$concepto->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -262,7 +291,14 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($mobiliarios as $mobiliario)
+                                                <tr>
+                                                    <td>{{$mobiliario->mobiliario}}</td>
+                                                    <td>{{$mobiliario->totales}}</td>
+                                                    <td>{{$mobiliario->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -292,7 +328,14 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($propxelementos as $propxelemento)
+                                                <tr>
+                                                    <td>{{$propxelemento->propxelemento}}</td>
+                                                    <td>{{$propxelemento->totales}}</td>
+                                                    <td>{{$propxelemento->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -320,7 +363,15 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($cartelerias as $carteleria)
+                                                <tr>
+                                                    <td>{{$carteleria->carteleria}}</td>
+                                                    <td>{{$carteleria->totales}}</td>
+                                                    <td>{{$carteleria->unidades}}</td>
+                                                </tr>
+                                                    
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -348,7 +399,14 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($medidas as $medida)
+                                                <tr>
+                                                    <td>{{$medida->medida}}</td>
+                                                    <td>{{$medida->totales}}</td>
+                                                    <td>{{$medida->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -379,7 +437,15 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($materialmedidas as $matmedida)
+                                                <tr>
+                                                    <td>{{$matmedida->material}}</td>
+                                                    <td>{{$matmedida->medida}}</td>
+                                                    <td>{{$matmedida->totales}}</td>
+                                                    <td>{{$matmedida->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -409,7 +475,16 @@
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="">
+                                            <tbody>
+                                                @foreach ($idiomamatmedidas as $idiomamatmedida)
+                                                <tr>
+                                                    <td>{{$idiomamatmedida->country}}</td>
+                                                    <td>{{$idiomamatmedida->material}}</td>
+                                                    <td>{{$idiomamatmedida->medida}}</td>
+                                                    <td>{{$idiomamatmedida->totales}}</td>
+                                                    <td>{{$idiomamatmedida->unidades}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -424,100 +499,11 @@
 @endsection
 
 @push('scriptchosen')
-<script src="{{ asset('js/datatablesdefault.js')}}"></script>
-<script src="{{ asset('js/sortTable.js')}}"></script>
+
 <script>
     $(document).ready( function () {
-        // $('#tcampaignDetalles').DataTable({
-        //     'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaigndetalle",
-        //     'columns': [
-        //         { 'data': 'segmento' },{ 'data': 'ubicacion' }, { 'data': 'medida' }, { 'data': 'mobiliario' },
-        //         { 'data': 'area' }, { 'data': 'material' }, { 'data': 'totales' }, { 'data': 'unidades' },
-        //     ],
-        //     'paging':true,
-        // });
-        $('#tcampaignStores').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignstore",
-            'columns': [
-                { 'data': 'country' },{ 'data': 'area' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignMateriales').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignmaterial",
-            'columns': [
-                { 'data': 'material' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignSegmentos').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignsegmento",
-            'columns': [
-                { 'data': 'segmento' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignStoreConcepts').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignstoreconcept",
-            'columns': [
-                { 'data': 'storeconcept' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignMobiliarios').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignmobiliario",
-            'columns': [
-                { 'data': 'mobiliario' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignPropxelementos').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignpropxelemento",
-            'columns': [
-                { 'data': 'propxelemento' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignCartelerias').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaigncarteleria",
-            'columns': [
-                { 'data': 'carteleria' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignMedida').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignmedida",
-            'columns': [
-                { 'data': 'medida' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignMaterialMedida').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignmaterialmedida",
-            'columns': [
-                { 'data': 'material' },{ 'data': 'medida' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-        $('#tcampaignIdiomaMaterialMedida').DataTable({
-            'ajax': "http://grafitexlte.test/api/api/{{$campaign->id}}/campaignidiomamaterialmedida",
-            'columns': [
-                { 'data': 'country' },{ 'data': 'material' },{ 'data': 'medida' }, { 'data': 'totales' }, { 'data': 'unidades' }
-            ],
-            'info':false,
-            'searching':false,
-        });
-
     });
+
     $('#menucampaign').addClass('active');
     $('#navestadisticas').toggleClass('activo');
 </script>

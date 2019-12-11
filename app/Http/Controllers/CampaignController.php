@@ -368,7 +368,7 @@ class CampaignController extends Controller
 
     public function conteo($campaignId, Request $request) 
     {
-        if ($request->busca) {
+        if ($request->busca) { 
             $busqueda = $request->busca;
         } else {
             $busqueda = '';
@@ -384,22 +384,61 @@ class CampaignController extends Controller
             ->groupBy('segmento','ubicacion','medida','mobiliario','area','material')
             ->paginate('50');
 
-        // $totalElementos=CampaignElemento::where('campaign_id',$campaignId)->count();
+        $tiendaszonas= CampaignElemento::distinct('store')
+            ->where('campaign_id',$campaignId)
+            ->select('country','area', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+            ->groupBy('country','area')
+            ->get();
 
-        $conteostoresAreaCountry=CampaignElemento::distinct('store_id')->where('campaign_id',$campaignId)
-        ->select('country','area',DB::raw('count(*) as totales'))
-        ->groupBy('country','area')
+        $materiales=  CampaignElemento::where('campaign_id',$campaignId)
+        ->select('material', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('material')
         ->get();
-        
-        $conteoCountryAreaSegmentoConcept= CampaignElemento::where('campaign_id',$campaignId)
-        ->select('country','area','segmento','storeconcept', DB::raw('count(*) as totales'))
-        ->groupBy('country','area','segmento','storeconcept')
-        ->get();
-        
-        // $conteoMateriales=Campaign::getConteoMaterial($campaignId);
 
-        return view('campaign.conteos', compact('campaign','conteodetallado','conteostoresAreaCountry','total','totalstores','busqueda'))
-            ->with('notice', 'Generación realizada satisfactoriamente.');    
+        $segmentos= CampaignElemento::where('campaign_id',$campaignId)
+        ->select('segmento', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('segmento')
+        ->get();
+
+        $conceptos=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('storeconcept', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('storeconcept')
+        ->get();
+
+        $mobiliarios=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('mobiliario', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('mobiliario')
+        ->get();
+
+        $propxelementos=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('propxelemento', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('propxelemento')
+        ->get();
+
+        $cartelerias=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('carteleria', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('carteleria')
+        ->get();
+
+        $medidas=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('medida', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('medida')
+        ->get();
+
+        $materialmedidas=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('material','medida', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('material','medida')
+        ->get();
+
+        $idiomamatmedidas=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('country','material','medida', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('country','material','medida')
+        ->get();
+
+        return view('campaign.conteos', 
+            compact('campaign','conteodetallado','tiendaszonas','materiales','segmentos',
+                'conceptos','mobiliarios','propxelementos','cartelerias','medidas',
+                'materialmedidas','idiomamatmedidas','busqueda'));
     }
 
 
