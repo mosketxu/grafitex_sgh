@@ -108,6 +108,7 @@ class CampaignController extends Controller
     {
         $campaign = Campaign::find($id);
 
+
         $storesDisponibles = Maestro::select('store','name')->whereNotIn('store', function ($query) use ($id) {
             $query->select('store_id')->from('campaign_stores')->where('campaign_id', '=', $id);
         })->groupBy('store','name')->get();
@@ -465,7 +466,7 @@ class CampaignController extends Controller
      */
     public function destroy($id)
     {
-        Campaign::where('id',$id)->forceDelete();
+        Campaign::where('id',$id)->delete();
 
 
          $notification = array(

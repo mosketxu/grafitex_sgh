@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-0 p-0">
-                                        <label for="observaciones">Observacioness</label>
+                                        <label for="observaciones">Observaciones</label>
                                         <input  type="text" class="form-control form-control-sm" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
                                     </div>
                             </div>

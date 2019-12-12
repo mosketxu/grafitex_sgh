@@ -20,7 +20,6 @@ class CreateCampaignsTable extends Migration
             $table->date('campaign_enddate');
             $table->string('campaign_state')->default('Creada');
             $table->string('slug');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
