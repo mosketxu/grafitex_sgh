@@ -29,7 +29,6 @@
             <thead>
                <tr>
                   <th>Familia</th>
-                  <th>Tipo</th>
                   <th class="text-center">Tramo 1</th>
                   <th class="bg-light text-center">Tarifa 1</th>
                   <th class="text-center">Tramo 2</th>
@@ -45,7 +44,6 @@
                   {{-- <form id="form{{$tarifaMaterial->id}}" role="form" method="post"
                   action="javascript:void(0)"> --}}
                   <td>{{$tarifaMaterial->familia}}</td>
-                  <td class="text-center">{{$tarifaMaterial->tipo}} </td>
                   <td class="text-center">{{$tarifaMaterial->tramo1}} </td>
                   <td class="bg-light text-center">{{$tarifaMaterial->tarifa1}} €</td>
                   <td class="text-center">{{$tarifaMaterial->tramo2}} </td>

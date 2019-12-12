@@ -27,7 +27,7 @@
             <tbody>
                @foreach ($tarifasPicking as $tarifaPicking)
                <tr>
-                  <td>{{$tarifaPicking->familia}}</td>
+                  <td>{{$tarifaPicking->zona}}</td>
                   <td class="bg-light text-center">{{$tarifaPicking->tarifa1}} €</td>
                   <td>
                      <a href="{{ route('tarifa.edit',$tarifaPicking->id) }}" title="Edit">

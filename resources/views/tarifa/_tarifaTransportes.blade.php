@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach ($tarifasTransportes as $tarifaTransporte)
                     <tr>
-                        <td>{{$tarifaTransporte->familia}}</td>
+                        <td>{{$tarifaTransporte->zona}}</td>
                         <td class="bg-light text-center">{{$tarifaTransporte->tarifa1}} €</td>
                         <td width="100px">
                             <a href="{{ route('tarifa.edit',$tarifaTransporte->id) }}" title="Edit">

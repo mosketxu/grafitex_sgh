@@ -38,7 +38,7 @@
     {{-- main content  --}}
     <section class="content">
         <div class="container-fluid">
-            <div class="card">
+            <div class="card ">
                 <div class="card-header">
                 </div>
                 <div class="card-body">
@@ -63,7 +63,7 @@
                     </div>
                     @foreach ($tarifafamilias as $tarifafamilia) 
                     {{-- <div class="card collapsed-card"> --}}
-                    <div class="card">
+                    <div class="card collapsed-card">
                         {{-- card-header --}}
                         <div class="card-header text-white bg-{{$colors[rand(0,17)]}} p-0" data-card-widget="collapse" style="cursor: pointer">
                             <h3 class="card-title pl-3">{{$tarifafamilia->familia}}  </h3>

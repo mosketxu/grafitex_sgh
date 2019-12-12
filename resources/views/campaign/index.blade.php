@@ -51,11 +51,11 @@
                                         <th>Campaña</th>
                                         <th>Fecha Inicio</th>
                                         <th>Fecha Fin Prevista</th>
-                                        <th>Estado</th>
-                                        <th>Creada el:</th>
-                                        <th>Modificada el:</th>
                                         {{-- <th>Estado</th> --}}
-                                        <th class="text-right"><span class="ml-1">Est. </span> &nbsp; &nbsp; &nbsp;Acción</th>
+                                        {{-- <th>Creada el:</th>
+                                        <th>Modificada el:</th> --}}
+                                        <th>Estado</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="">
@@ -126,8 +126,6 @@
                 { 'data': 'campaign_initdate' },
                 { 'data': 'campaign_enddate' },
                 { 'data': 'campaign_state' },
-                { 'data': 'created_at' },
-                { 'data': 'updated_at' },
                 { 'data': 'btn' },
             ],
             'processing': true,
