@@ -25,7 +25,7 @@
                         <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                     </div>
                     <div class="col-auto mr-auto">
-                        <a href="" role="button" data-toggle="modal" data-target="#importMaestro">
+                        <a href="" role="button" data-toggle="modal" data-target="#importMaestro" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a>
                     </div>
@@ -76,12 +76,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="importMaestroLabel">Nueva importacion de maestro</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                            </button>
+                            </button> --}}
                         </div>
                         <div class="modal-body">
-                            <form role="form" method="post" action="{{ route('maestro.import') }}" enctype="multipart/form-data" >
+                            <form id="formulario" role="form" method="post" action="{{ route('maestro.import') }}" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col">
@@ -90,8 +90,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" name="Guardar" onclick="form.submit()">Subir</button>
+                                    <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="subirfichero()">Subir</button>
                                 </div>
                             </form>
                         </div>
@@ -106,7 +106,6 @@
 
 <script>
     // @include('_partials._errortemplate')
-    <script>
     @if(Session::has('message'))
         toastr.options={
                 progressBar:true,
@@ -126,13 +125,18 @@
         toastr.error("{{ Session::get('error') }}");
     @endif
 </script>
-</script>
         
     
 <script src="{{ asset('js/datatablesdefault.js')}}"></script>
 
 
 <script>
+
+    function subirfichero(){
+        $('.modalSubir').attr('disabled',true);
+        $('#formulario').submit();
+    }
+
     $(document).ready( function () {
         $('#tMaestro').DataTable({
             'ajax': "{{ route('api.maestros.index') }}",

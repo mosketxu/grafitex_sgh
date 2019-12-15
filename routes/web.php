@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'campaign'], function () {
             Route::post('/asociar', 'CampaignController@asociar');
             Route::post('/asociarstore', 'CampaignController@asociarstore');
-            Route::get('/{id?}/generarcampaign', 'CampaignController@generarcampaign')->name('campaign.generar');
+            Route::post('/{id?}/generarcampaign', 'CampaignController@generarcampaign')->name('campaign.generar');
             Route::get('/{id?}/filtro', 'CampaignController@filtrar')->name('campaign.filtrar');
             Route::get('/{id?}/conteo', 'CampaignController@conteo')->name('campaign.conteo');
             Route::get('/{id?}/eliminar', 'CampaignController@destroy')->name('campaign.eliminar');

@@ -25,7 +25,7 @@
                     <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                 </div>
                 <div class="col-auto mr-auto">
-                    <a  type="button" href="#" title="Generar" class="nav-link btn-outline-primary" data-toggle="modal" data-target="#campaignFiltrarModal">
+                    <a type="button" href="#" title="Generar" class="nav-link btn-outline-primary" data-toggle="modal" data-target="#campaignFiltrarModal"  data-backdrop="static" data-keyboard="false">
                         <i class="fas fa-plus-circle fa-lg text-primary"></i>
                         <span class="badge badge-primary">Generar</span>
                     </a>
@@ -257,12 +257,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="campaignFiltrarModalLabel">Generar Campaña</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button>
+                        </button> --}}
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="">
+                        <form id="formulario" method="post" action="{{route('campaign.generar',$campaign->id) }}">
                             @csrf
                             <div class="row">
                                 <p>Se va a proceder a generar los elementos de la campaña.</p>
@@ -270,8 +270,9 @@
                                 <p>Pulse <span class="badge badge-primary">Generar</span> para continuar o <span class="badge badge-secondary">Cerrar</span> para cancelar. </p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <a  type="button" href="{{route('campaign.generar',$campaign->id) }}" title="Generar" class="btn btn-primary" name="Generar">Generar</a> 
+                                <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                <button  type="button" onclick="generar()" title="Generar" class="btn btn-primary  modalSubir" name="Generar">Generar</a> 
+                                {{-- <a  type="button" href="{{route('campaign.generar',$campaign->id) }}" title="Generar" class="btn btn-primary  modalSubir" name="Generar">Generar</a>  --}}
                             </div>
                         </form>
                     </div>
@@ -287,6 +288,11 @@
     $(document).ready( function () {
 
     });
+
+    function generar(){
+        $('.modalSubir').attr('disabled',true);
+        $('#formulario').submit();
+    }
 
     $('#menucampaign').addClass('active');
     $('#navfiltros').toggleClass('activo');
