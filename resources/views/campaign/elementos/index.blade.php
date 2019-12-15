@@ -70,7 +70,7 @@
                         <div class="row">
                             <div class="col-10 row">
                                 {{ $elementos->links() }} &nbsp; &nbsp;
-                                Hay {{$totalElementos}} elementos
+                                Hay {{$elementos->total()}} elementos
                                 
                             </div>
                             <div class="col-2 float-right mb-2">

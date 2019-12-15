@@ -14,7 +14,7 @@ class Store extends Model
         'zona','area_id','area','segmento',
         'concepto_id','concepto','observaciones','imagen'];
 
-        protected $with=['are','concep'];
+        protected $with=['are','concep','storeelementos'];
 
     public function scopeSearch($query, $busca)
     {
@@ -30,11 +30,17 @@ class Store extends Model
       ;
     }
 
-    public function campaignelemen()
+    // public function campaignelemen()
+    // {
+    //     return $this->hasMany(CampaignElemento::class,'store_id');
+    // }
+
+    public function campaigntiendas()
     {
-        return $this->hasMany(CampaignElemento::class,'store_id');
+        return $this->hasMany(CampaignTienda::class);
     }
     
+
     public function storeelementos()
     {
         return $this->hasMany(StoreElemento::class);

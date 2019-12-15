@@ -44,9 +44,13 @@ class Campaign extends Model
             DB::table($tabla)->insert($dataSet);
         }
     }
-    public function campaignStores(){
-        return $this->hasMany(CampaignStore::class);
+    public function campTiendas(){
+        return $this->hasMany(CampaignTienda::class);
     }
+
+    // public function campaignStores(){
+    //     return $this->hasMany(CampaignStore::class);
+    // }
     public function campaignElementos(){
         return $this->hasMany(CampaignElemento::class);
     }

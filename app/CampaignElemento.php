@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\DB;
 class CampaignElemento extends Model
 {
     public $timestamps = true;
+    
+    protected $with=['campatiendas'];
 
-    protected $fillable=['campaign_id', 'store_id','country','name','area','segmento','storeconcept','ubicacion','mobiliario',
+    protected $fillable=['campaign_id','tienda_id', 'store_id','country','name','area','segmento','storeconcept','ubicacion','mobiliario',
         'propxlemento','carteleria','medida','material','unitxprop','imagen','observaciones','precio'
     ];
 
@@ -25,10 +27,15 @@ class CampaignElemento extends Model
     //     return $this->belongsTo(CampaignStore::class,'store_id');
     // }
 
-    public function tienda()
+    public function campatiendas()
     {
-        return $this->belongsTo(Store::class,'store_id');
+        return $this->belongsTo(CampaignTienda::class);
     }
+
+    // public function tienda()
+    // {
+    //     return $this->belongsTo(Store::class,'store_id');
+    // }
 
     public function tarifa()
     {
@@ -65,7 +72,6 @@ class CampaignElemento extends Model
                 ->where('familia',$elemento->familia)
                 ->count();
 
-            // dd($conteo);
             $fam=Tarifa::where('id',$elemento->familia)->first();
                 
             if($conteo<$fam->tramo2)

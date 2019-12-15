@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Campaign, Store, CampaignPresupuesto,CampaignPresupuestoDetalle,CampaignPresupuestoExtra,VCampaignResumenElemento,VCampaignPromedio,CampaignPresupuestoPickingtransporte};
+use App\{Campaign, CampaignElemento, Store, CampaignPresupuesto,CampaignPresupuestoDetalle,CampaignPresupuestoExtra,VCampaignResumenElemento,VCampaignPromedio,CampaignPresupuestoPickingtransporte, CampaignTienda};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -29,20 +29,17 @@ class CampaignReportingController extends Controller
     public function pdf($campaignId){
 
         $today=Carbon::now()->format('d/m/Y');
-        $campaign=Campaign::find($campaignId);
         
-        $etiquetas=Store::whereIn('id', function($q){
-            $q->select('store_id')->from('campaign_elementos');})
-            ->with(['campaignelemen' => function ($query) use($campaignId){
-                $query->where('campaign_id',$campaignId);
-            }])
-            ->get();
-        
-        $pdf = \PDF::loadView('reporting.etiquetas',compact('campaign','etiquetas','today'));
+        $etiquetas=Campaign::where('id',$campaignId)
+        ->first();
+
+
+        $pdf = \PDF::loadView('reporting.etiquetas',compact('etiquetas','today'));
         // $pdf->setPaper('a4','landscape');
         $pdf->setPaper('a4','portrait');
-        // return $pdf->download('etiquetas.pdf'); así lo descarga
-        return $pdf->stream(); // así lo muestra en pantalla
+
+        return $pdf->download('etiquetas.pdf'); //así lo descarga
+        // return $pdf->stream(); // así lo muestra en pantalla
    }
 
    public function pdfPresupuesto($presupuestoId){

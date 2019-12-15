@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateCampaignStoresTable extends Migration
+class CreateCampaignTiendasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCampaignStoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('campaign_stores', function (Blueprint $table) {
+        Schema::create('campaign_tiendas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('campaign_id');
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
-            $table->unsignedBigInteger('store_id')->index();
-            $table->string('store',100)->index();
+            $table->bigInteger('store_id')->index();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateCampaignStoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campaign_stores');
+        Schema::dropIfExists('campaign_tiendas');
     }
 }

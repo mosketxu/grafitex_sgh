@@ -13,10 +13,13 @@ class CreateCampaignElementosTable extends Migration
      */
     public function up()
     {
+
         Schema::create('campaign_elementos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('campaign_id');
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
+            $table->unsignedBigInteger('tienda_id');
+            $table->foreign('tienda_id')->references('id')->on('campaign_tiendas')->onDelete('cascade');
             $table->bigInteger('store_id')->index();
             // $table->foreign('store_id')->references('id')->on('stores');
             $table->string('name',100)->index();

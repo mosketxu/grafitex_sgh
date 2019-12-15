@@ -16,6 +16,7 @@ use App\{
     CampaignCountry,
     CampaignElemento,
     CampaignGaleria,
+    CampaignTienda,
     VCampaignGaleria,
     TarifaFamilia,
 };
@@ -266,6 +267,10 @@ class CampaignController extends Controller
             CampaignGaleria::where('campaign_id','=',$id)->delete();
         }
 
+        if(CampaignTienda::where('campaign_id','=',$id)->count()>0){
+            CampaignTienda::where('campaign_id','=',$id)->delete();
+        }
+
         //Filtros
         // Si no se ha seleccionado ningun Area entiendo que los quiero todos
         if(CampaignArea::where('campaign_id','=',$id)->count()==0){
@@ -292,6 +297,7 @@ class CampaignController extends Controller
             $ubicacions=Maestro::select('ubicacion')->groupBy('ubicacion')->get();
             Campaign::inserta('campaign_ubicacions',$ubicacions,'ubicacion',$id);
         }
+
         // Si no se ha seleccionado ningun store entiendo que los quiero todos
         if(CampaignStore::where('campaign_id','=',$id)->count()==0){
             $stores=Maestro::select('store','name')
@@ -303,8 +309,8 @@ class CampaignController extends Controller
                 foreach ($t as $store) {
                     $dataSet[] = [
                         'campaign_id'  => $id,
-                        'store_id'  => $store->store,
-                        'store'  => $store->name,
+                        'store_id'  => $store['store'],
+                        'store'  => $store['name'],
                     ];
                 }
                 DB::table('campaign_stores')->insert($dataSet);
@@ -312,32 +318,34 @@ class CampaignController extends Controller
         }
 
         
-        //recupero todos los elementos elegidos y los inserto
-        $generar=Maestro::CampaignStore($id)->get();
+        // Separo en una tabla los stores y en otra todo lo demás. Para la segunda fase y para las etiquetas
+        
+        $tiendas=Maestro::CampaignTiendas($id)->get();
 
-        foreach (array_chunk($generar->toArray(),100) as $t){
+        foreach ($tiendas as $tienda) {
+
+            $tiendaId = CampaignTienda::insertGetId(["campaign_id"=>$id,"store_id"=>$tienda->store]);
+            $generar=Maestro::CampaignElementos($id,$tienda->store)->get();
+
             $dataSet = [];
-            foreach ($t as $gen) {
+            foreach ($generar as $gen){
                 if ($gen['country']=='PT'){
                     $zona='PT';
-                }
-                else{
+                }else{
                     if($gen['area']=='Canarias')
                         $zona='CA';
                     else
                         $zona='ES';
                 }
-
-                // busco a que familia pertenece el elemento para poder cotizar después                
                 $familia=TarifaFamilia::getFamilia($gen['material'],$gen['medida']);
                 $fam=$familia['id'];
-
+    
                 if (is_null($fam))
                     $fam=1;
-                
+                    
                 $dataSet[] = [
                     'campaign_id'  => $id,
-                    // 'store_id'  => $campStoreId->id,
+                    'tienda_id'  => $tiendaId,
                     'store_id'  => $gen['store'],
                     'name'  => $gen['name'],
                     'country'  => $gen['country'],
@@ -356,11 +364,9 @@ class CampaignController extends Controller
                     'imagen'  => str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida']))))).'.jpg',
                 ];
             }
-
-            // print_r($dataSet);die(); //luego View Source
             DB::table('campaign_elementos')->insert($dataSet);
         }
-        
+
         //relleno la tabla imagenes
         $imagenes=VCampaignGaleria::getGaleria($id);
         foreach (array_chunk($imagenes->toArray(),1000) as $t){

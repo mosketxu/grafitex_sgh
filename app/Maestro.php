@@ -15,7 +15,7 @@ class Maestro extends Model
 
     // protected $guarded = [];
 
-    static function scopeCampaignStore($query, $campaign)
+    static function scopeCampaignTiendas($query, $campaign)
     {
         return $query
         ->whereIn('store', function ($query) use ($campaign) {
@@ -28,10 +28,47 @@ class Maestro extends Model
             $query->select('mobiliario')->from('campaign_mobiliarios')->where('campaign_id', '=', $campaign);})
         ->whereIn('medida', function ($query) use ($campaign) {
             $query->select('medida')->from('campaign_medidas')->where('campaign_id', '=', $campaign);})
+        ->select('maestros.store as store')
+        ->groupBy('maestros.store');
+    }
+
+    
+    //antes se llamaba scopeCampaignStore
+    // static function scopeCampaignElementos($query, $campaign)
+    // {
+    //     return $query
+    //     ->whereIn('store', function ($query) use ($campaign) {
+    //         $query->select('store_id')->from('campaign_stores')->where('campaign_id', '=', $campaign);})
+    //     ->whereIn('segmento', function ($query) use ($campaign) {
+    //         $query->select('segmento')->from('campaign_segmentos')->where('campaign_id', '=', $campaign);})
+    //     ->whereIn('ubicacion', function ($query) use ($campaign) {
+    //         $query->select('ubicacion')->from('campaign_ubicacions')->where('campaign_id', '=', $campaign);})
+    //     ->whereIn('mobiliario', function ($query) use ($campaign) {
+    //         $query->select('mobiliario')->from('campaign_mobiliarios')->where('campaign_id', '=', $campaign);})
+    //     ->whereIn('medida', function ($query) use ($campaign) {
+    //         $query->select('medida')->from('campaign_medidas')->where('campaign_id', '=', $campaign);})
+    //     ->select('maestros.store','maestros.country','maestros.name','maestros.area','maestros.segmento','maestros.storeconcept',
+    //         'maestros.ubicacion','maestros.mobiliario','maestros.propxelemento','maestros.carteleria','maestros.medida','maestros.material',
+    //         'maestros.unitxprop','maestros.observaciones', DB::raw($campaign.' as campaign_id'));
+    // }
+
+    
+    static function scopeCampaignElementos($query, $campaign, $tienda)
+    {
+        return $query
+        ->where('store',$tienda)
+        ->whereIn('ubicacion', function ($query) use ($campaign) {
+            $query->select('ubicacion')->from('campaign_ubicacions')->where('campaign_id', '=', $campaign);})
+        ->whereIn('mobiliario', function ($query) use ($campaign) {
+            $query->select('mobiliario')->from('campaign_mobiliarios')->where('campaign_id', '=', $campaign);})
+        ->whereIn('medida', function ($query) use ($campaign) {
+            $query->select('medida')->from('campaign_medidas')->where('campaign_id', '=', $campaign);})
         ->select('maestros.store','maestros.country','maestros.name','maestros.area','maestros.segmento','maestros.storeconcept',
             'maestros.ubicacion','maestros.mobiliario','maestros.propxelemento','maestros.carteleria','maestros.medida','maestros.material',
             'maestros.unitxprop','maestros.observaciones', DB::raw($campaign.' as campaign_id'));
-    }
+        }
+
+
 
     static function insertStores()
     {
