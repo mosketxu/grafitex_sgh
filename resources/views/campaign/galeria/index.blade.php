@@ -107,7 +107,7 @@
                                     <form id="form{{$imagen->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data"">
                                     {{-- <form id="" role="form" method="post" action="{{ route('campaign.galeria.updateindex') }}" enctype="multipart/form-data" id="uploadimage{{$imagen->id}}"> --}}
                                         @csrf
-                                        <input type="text" class="d-none" id="imagenId" name="imagenId" value="{{$imagen->id}}">
+                                        <input type="text" class="d-none" name="imagenId" value="{{$imagen->id}}">
                                         <td>{{$imagen->id}}</td>
                                         <td>{{$imagen->mobiliario}}</td>
                                         <td>{{$imagen->carteleria}}</td>

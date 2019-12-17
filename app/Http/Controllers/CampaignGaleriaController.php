@@ -120,6 +120,8 @@ class CampaignGaleriaController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:12288',
         ]);
         
+
+
         $campGal=json_decode($request->campaigngaleria);
 
 
@@ -144,7 +146,7 @@ class CampaignGaleriaController extends Controller
 
         // verifico que realmente llega un fichero
         if($files=$request->file('photo')){
-            // for save the original image
+            // for save the original
             $imageUpload=Image::make($files);
             $originalPath='storage/galeria/';
             $imageUpload->save($originalPath.$file_name);
@@ -167,6 +169,7 @@ class CampaignGaleriaController extends Controller
    
     public function updateimagenindex(Request $request)
     {
+        // dd('llego');
         $request->validate([
             'photo' => 'required|image|mimes:pdf,jpeg,png,jpg,gif,svg|max:12288',
             ]);

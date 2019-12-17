@@ -117,7 +117,7 @@
                                     {{-- <form id="form{{$elemento->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data" id="uploadimage{{$elemento->id}}"> --}}
                                     {{-- comentado <form id="" role="form" method="post" action="{{ route('campaign.elementos.updateimagenindex') }}" enctype="multipart/form-data" id="uploadimage{{$elemento->id}}"> --}}
                                         @csrf
-                                        <input type="text" class="d-none" id="elementoId" name="elementoId" value="{{$elemento->id}}">
+                                        <input type="text" class="d-none" name="elementoId" value="{{$elemento->id}}">
                                         <td class="d-none">{{$elemento->id}}</td>
                                         <td>{{$elemento->store_id}}</td>
                                         <td>{{$elemento->name}}</td>
