@@ -452,15 +452,15 @@ class CampaignController extends Controller
         ->groupBy('material','medida')
         ->get();
 
-        $idiomamatmedidas=CampaignElemento::where('campaign_id',$campaignId)
-        ->select('country','material','medida', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
-        ->groupBy('country','material','medida')
+        $idiomamatmobmedidas=CampaignElemento::where('campaign_id',$campaignId)
+        ->select('country','material','medida','mobiliario', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('country','material','medida','mobiliario')
         ->get();
 
         return view('campaign.conteos', 
             compact('campaign','conteodetallado','tiendaszonas','materiales','segmentos',
                 'conceptos','mobiliarios','propxelementos','cartelerias','medidas',
-                'materialmedidas','idiomamatmedidas','busqueda'));
+                'materialmedidas','idiomamatmobmedidas','busqueda'));
     }
 
 

@@ -81,7 +81,7 @@
                                         Medida: {{$etiqueta['medida'] }}<br>
                                         Cantidad: {{$etiqueta['unitxprop'] }}<br>
                                         @if(file_exists( 'storage/galeria/'.$etiquetas->id.'/'.$etiqueta['imagen'] ))
-                                            <img src="{{asset('storage/galeria/'.$etiquetas->id.'/'.$etiqueta['imagen'])}}" class="img-thumbnail"/>
+                                            <img src="{{asset('storage/galeria/'.$etiquetas->id.'/'.$etiqueta['imagen'].'?'.time())}}" class="img-thumbnail"/>
                                         @else
                                             <img src="{{asset('storage/galeria/pordefecto.jpg')}}" class="img-thumbnail"/>
                                         @endif                                        

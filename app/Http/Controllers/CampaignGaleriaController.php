@@ -221,11 +221,8 @@ class CampaignGaleriaController extends Controller
         $campaigngaleria->imagen = $file_name;
         $campaigngaleria->save();
 
-        // $image = CampaignGaleria::latest()->first(['photo_name']);
         return Response()->json($campaigngaleria);
 
-        // return back()
-        //     ->with('success', 'You have successfully upload image.');
     }
 
     /**

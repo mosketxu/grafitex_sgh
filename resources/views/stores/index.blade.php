@@ -97,7 +97,7 @@
                                                     <div>
                                                         <input type="file" id="inputFile{{$store->id}}" name="imagen" style="display:none">
                                                         @if(file_exists( 'storage/store/'.$store->imagen ))
-                                                            <img src="{{asset('storage/store/'.$store->imagen)}}" 
+                                                            <img src="{{asset('storage/store/'.$store->imagen.'?'.time())}}" 
                                                                 alt="{{$store->imagen}}" title="{{$store->imagen}}"
                                                                 id="original{{$store->id}}"
                                                                 class="img-fluid img-thumbnail" 

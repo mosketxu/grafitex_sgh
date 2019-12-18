@@ -144,7 +144,7 @@
                                                 <div>
                                                     <input type="file" id="inputFile{{$elemento->id}}" name="photo" style="display:none">
                                                     @if(file_exists( 'storage/galeria/'.$campaign->id.'/'.$elemento->imagen ))
-                                                        <img src="{{asset('storage/galeria/'.$campaign->id.'/'.$elemento->imagen)}}" alt={{$elemento->imagen}} title={{$elemento->imagen}}
+                                                        <img src="{{asset('storage/galeria/'.$campaign->id.'/'.$elemento->imagen.'?'.time())}}" alt={{$elemento->imagen}} title={{$elemento->imagen}}
                                                             id="original{{$elemento->id}}" class="img-fluid img-thumbnail" 
                                                             style="width: 100px;cursor:pointer"
                                                             onclick='document.getElementById("inputFile{{$elemento->id}}").click()'/>

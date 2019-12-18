@@ -457,7 +457,7 @@
                             <div class="card collapsed-card">
                                 <div class="card-header text-white bg-olive p-0" data-card-widget="collapse"
                                     style="cursor: pointer">
-                                    <h3 class="card-title pl-3">Por Idioma Material Medida</h3>
+                                    <h3 class="card-title pl-3">Por Idioma Material Medida Mobiliario</h3>
                                     <div class="card-tools pr-3">
                                         <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
                                     </div>
@@ -471,18 +471,20 @@
                                                     <th>Idioma</th>
                                                     <th>Material</th>
                                                     <th>Medidas</th>
+                                                    <th>Mobiliarios</th>
                                                     <th>Totales</th>
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($idiomamatmedidas as $idiomamatmedida)
+                                                @foreach ($idiomamatmobmedidas as $idiomamatmobmedida)
                                                 <tr>
-                                                    <td>{{$idiomamatmedida->country}}</td>
-                                                    <td>{{$idiomamatmedida->material}}</td>
-                                                    <td>{{$idiomamatmedida->medida}}</td>
-                                                    <td>{{$idiomamatmedida->totales}}</td>
-                                                    <td>{{$idiomamatmedida->unidades}}</td>
+                                                    <td>{{$idiomamatmobmedida->country}}</td>
+                                                    <td>{{$idiomamatmobmedida->material}}</td>
+                                                    <td>{{$idiomamatmobmedida->medida}}</td>
+                                                    <td>{{$idiomamatmobmedida->mobiliario}}</td>
+                                                    <td>{{$idiomamatmobmedida->totales}}</td>
+                                                    <td>{{$idiomamatmobmedida->unidades}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
