@@ -17,26 +17,27 @@
         <!-- Wrap the content of your PDF inside a main tag -->
         <main>
             <div class="">
-                <table width="100%" cellspacing="0">
-                    <thead>
-                        <tr style="background-color: #139cdc;">
-                            <th style="text-align: right;" width="25%">
-                                <img src="{{asset('img/grafitexLogo.png')}}" width="50px"></th>
-                            <th class="titulo"  width="50%">
-                                MATERIAL INTERNO <br>
-                                CAMPAÑA {{$etiquetas->campaign_name}}<br>
-                                Grafitex Servicios Digitales, S.A.
-                            </th>
-                            <th style="color:#ffffff;text-align:center;"  width="25%">
-                                Fecha prevista:<br> 
-                                {{$etiquetas->campaign_enddate}}
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="">
                 @foreach($etiquetas->campTiendas as $campaignstore)        
+                    <div class="">
+                        <table width="100%" cellspacing="0">
+                            <thead>
+                                <tr style="background-color: #139cdc;">
+                                    <th style="text-align: right;" width="25%">
+                                        <img src="{{asset('img/grafitexLogo.png')}}" width="50px"></th>
+                                    <th style="color:#ffffff;text-align:center;"  width="50%">
+                                        MATERIAL INTERNO <br>
+                                        CAMPAÑA {{$etiquetas->campaign_name}}<br>
+                                        Grafitex Servicios Digitales, S.A.
+                                    </th>
+                                    <th style="color:#ffffff;text-align:center;"  width="25%">
+                                        Fecha prevista:<br> 
+                                        {{$etiquetas->campaign_enddate}}
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+    
                     <div class="etiquetas">
                         <table width="100%" cellspacing="0" border="1">
                             <thead>
