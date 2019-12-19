@@ -20,8 +20,6 @@ use App\{
     VCampaignGaleria,
     TarifaFamilia,
 };
-use App\Exports\CampaignExport;
-use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -183,10 +181,6 @@ class CampaignController extends Controller
 
         return redirect()->route('campaign.index')->with('success','Registro actualizado satisfactoriamente');
     }
-    public function export() 
-{
-        return Excel::download(new CampaignExport, 'campaign.xlsx');
-}
 
     public function asociarstore(Request $request)
     {

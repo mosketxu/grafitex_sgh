@@ -463,6 +463,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <td><a href="{{action('CampaignElementoController@export',$campaign->id)}}"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                                     <div class="table-responsive">
                                         <table id="tcampaignIdiomaMaterialMedida"
                                             class="table table-hover table-sm small" cellspacing="0" width=100%>
