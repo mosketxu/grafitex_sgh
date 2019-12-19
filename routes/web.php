@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/{campaign}/{campaigngaleria}/edit', 'CampaignElementoController@editelemento')->name('campaign.elemento.editelemento');
                 Route::post('/update', 'CampaignElementoController@update')->name('campaign.elemento.update');
                 Route::post('/updateimagenindex', 'CampaignElementoController@updateimagenindex')->name('campaign.elementos.updateimagenindex');
+                Route::get('/export/{campaignid}', 'CampaignElementoController@export');
             });
             // galeria
             Route::group(['prefix' => 'galeria'], function () {
