@@ -1,7 +1,7 @@
 @extends('layouts.grafitex')
 
 @section('styles')
-@endsection
+@endsection     
 
 @section('title','Grafitex-Elemento Editar')
 @section('titlePag','Selección del elemento')
@@ -165,8 +165,10 @@
                                     </div>
                                 </div>
                                 <div class="col-3" style="max-height: 350px;">
+                                    @can('campaign.edit')
                                     <input type="file" id="inputFile{{$campaignelemento->id}}" name="photo"
-                                        style="display:none">
+                                    style="display:none">
+                                    @endcan
                                     @if(file_exists( 'storage/galeria/'.$campaign->id.'/'.$campaignelemento->imagen ))
                                     <img src="{{asset('storage/galeria/'.$campaign->id.'/'.$campaignelemento->imagen.'?'.time())}}"
                                         alt={{$campaignelemento->imagen}} title={{$campaignelemento->imagen}} id="original"
@@ -178,15 +180,18 @@
                                         style="height: 350px;cursor:pointer"
                                         onclick='document.getElementById("inputFile{{$campaignelemento->id}}").click()' />
                                     @endif
+                                    @can('campaign.edit')
                                     <a href="#" name="Upload"
-                                        onclick="subirImagen('formelemento','{{$campaignelemento->id}}')"><i
-                                            class="fas fa-upload text-primary fa-lg mx-1"></i></a>
-                                    {{-- <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></a> --}}
+                                    onclick="subirImagen('formelemento','{{$campaignelemento->id}}')"><i
+                                    class="fas fa-upload text-primary fa-lg mx-1"></i></a>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
+                            @can('campaign.edit')
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            @endcan
                         </div>
                     </form>
                 </div>
@@ -197,7 +202,6 @@
 @endsection
 
 @push('scriptchosen')
-{{-- <script src="{{ asset('js/campaignElementos.js')}}"></script> --}}
 
 <script>
     $(document).ready(function (e) {

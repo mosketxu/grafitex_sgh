@@ -5,12 +5,16 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
     </li>
+    @can('tarifa.index')
     <li class="nav-item d-none d-sm-inline-block">
       <a  href="{{route('tarifa.index') }}" class="nav-link" title="Familas"><span id="navtarifas"  class="px-1">Tarifas</span></a>
     </li>
+    @endcan
+    @can('tarifafamilia.index')
     <li class="nav-item d-none d-sm-inline-block" >
       <a  href="{{route('tarifafamilia.index') }}"class="nav-link" title="Familias"><span id="navfamilias" class="px-1">Familias</span></a>
     </li>
+    @endcan
   </ul>
     <!-- Right Side Of Navbar --> 
     <ul class="navbar-nav ml-auto">

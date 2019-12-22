@@ -90,7 +90,9 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="imagen" value="{{$store->imagen}}" readonly>  
+                                @can('store.edit')
                                 <input type="file" name="photo" value="">  
+                                @endcan
                             </div>
                             <div class="col-4">
                             <img src="{{asset('storage/store/'.$store->imagen)}}" alt={{$store->imagen}} title={{$store->imagen}} 
@@ -100,7 +102,9 @@
                     </div>
                     <div class="card-footer">
                         <a href="{{route('store.index')}}" type="button" class="btn btn-default">Volver</a>
+                        @can('store.edit')
                         <button type="button" class="btn btn-primary" name="Guardar" onclick="form.submit()">Actualizar</button>
+                        @endcan
                     </div>
                 </form>
                 </div>

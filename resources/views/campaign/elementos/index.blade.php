@@ -4,7 +4,7 @@
 @endsection
 
 @section('title','Grafitex-Elementos Campaña') 
-@section('titlePag','Elementos de la Campaña')
+@section('titlePag','Elementos de la Campaña') 
 @section('navbar')
     @include('campaign._navbarcampaign')
 @endsection
@@ -114,8 +114,6 @@
                                    @foreach ($elementos as $elemento)
                                    <tr>
                                     <form id="form{{$elemento->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
-                                    {{-- <form id="form{{$elemento->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data" id="uploadimage{{$elemento->id}}"> --}}
-                                    {{-- comentado <form id="" role="form" method="post" action="{{ route('campaign.elementos.updateimagenindex') }}" enctype="multipart/form-data" id="uploadimage{{$elemento->id}}"> --}}
                                         @csrf
                                         <input type="text" class="d-none" name="elementoId" value="{{$elemento->id}}">
                                         <td class="d-none">{{$elemento->id}}</td>
@@ -142,7 +140,9 @@
                                         <td>
                                             <div class="row">
                                                 <div>
+                                                    @can('campaign.edit')
                                                     <input type="file" id="inputFile{{$elemento->id}}" name="photo" style="display:none">
+                                                    @endcan
                                                     @if(file_exists( 'storage/galeria/'.$campaign->id.'/'.$elemento->imagen ))
                                                         <img src="{{asset('storage/galeria/'.$campaign->id.'/'.$elemento->imagen.'?'.time())}}" alt={{$elemento->imagen}} title={{$elemento->imagen}}
                                                             id="original{{$elemento->id}}" class="img-fluid img-thumbnail" 
@@ -156,15 +156,17 @@
                                                     @endif                                        
                                                 </div>
                                                 <div>
+                                                    @can('campaign.edit')
                                                     <a href="#" name="Upload" onclick="subirImagenIndex('form{{$elemento->id}}','{{$elemento->id}}')"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
-                                                    {{-- comentado <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></a> --}}
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="text-center">
+                                                @can('campaign.edit')
                                                 <a href="{{ route('campaign.elemento.editelemento',[$campaign->id,$elemento->id]) }}" title="Edit"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
-                                                {{-- comentado <a href="" title="Delete"><i class="far fa-trash-alt text-danger fa-lg ml-1"></i></a> --}}
+                                                @endcan
                                             </div>
                                         </td>
                                     </form>

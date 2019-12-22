@@ -30,9 +30,11 @@
                         <td>{{$tarifaTransporte->zona}}</td>
                         <td class="bg-light text-center">{{$tarifaTransporte->tarifa1}} €</td>
                         <td width="100px">
+                            @can('tarifa.edit')
                             <a href="{{ route('tarifa.edit',$tarifaTransporte->id) }}" title="Edit">
                                 <i class="far fa-edit text-primary fa-2x mx-1"></i>
                             </a>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

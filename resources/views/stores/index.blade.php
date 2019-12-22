@@ -25,12 +25,11 @@
                         <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                     </div>
                     <div class="col-auto mr-auto">
+                        @can('store.create')
                         <a href="" role="button" data-toggle="modal" data-target="#storeCreateModal">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a>
-                        {{-- <a href="{{route('elemento.create')}}" role="button">
-                            <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
-                        </a> --}}
+                        @endcan
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -112,17 +111,23 @@
                                                                 onclick='document.getElementById("inputFile{{$store->id}}").click()'/>
                                                         @endif       
                                                     </div>
-                                                    <div>
-                                                        <a href="#" name="Upload" onclick="subirImagenIndex('form{{$store->id}}','{{$store->id}}')"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
-                                                        {{-- <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></a> --}}
-                                                    </div>
                                                 </div>
                                             </td>
-                                            <td width="100px">
+                                            <td width="180px">
                                                 <div class="text-center">
+                                                @can('store.create')
+                                                <a href="#" class="mr-4" name="Upload" onclick="subirImagenIndex('form{{$store->id}}','{{$store->id}}')"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
+                                                @endcan
+
+                                                @can('store.edit')
                                                 <a href="{{ route('store.edit',$store) }}" title="Edit"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
+                                                @endcan
+                                                @can('storeelemento.index')
                                                 <a href="{{ route('storeelementos.index',$store->id) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mx-1"></i></a>
+                                                @endcan
+                                                @can('store.destroy')
                                                 <a href="#!" class="btn-delete " title="Eliminar"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
+                                                @endcan
                                             </div>
                                         </form>
                                     </tr>
@@ -205,7 +210,9 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                @can('store.create')
                                 <button type="button" class="btn btn-primary" name="Guardar" onclick="form.submit()">Guardar</button>
+                                @endcan
                             </div>
                         </form>
                     </div>

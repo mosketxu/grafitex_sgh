@@ -4,14 +4,14 @@
          <tbody>
             <tr>
                <td style="width: 49%;">
-                     <img src="{{asset('storage/grafitexLogo.png')}}" width="50px">
+                     <img src="{{asset('img/grafitexLogo.png')}}" width="50px">
                      <b>Grafitex Servicios Digitales, S.A</b><br>
                      Ferrocarrils Catalans, 103-107<br>
                      08038 Barcelona<br>
                      Tlf. 93.200.73.22
                </td>
                <td style="width: 49%;text-align:center;">
-                     <img src="{{asset('storage/SGH.jpg')}}" width="200"><br>
+                     <img src="{{asset('img/SGH.jpg')}}" width="200"><br>
                      www.sunglasshut.com
                </td>
             </tr>

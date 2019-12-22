@@ -18,25 +18,26 @@
    {{-- content header --}}
    <div class="content-header">
       <div class="container-fluid">
-         <div class="row">
+         <div class="row"> 
             <div class="col-auto ">
                <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                <span class="hidden" id="campaign_id"></span>
             </div>
             <div class="col-auto mr-auto">
+               @can('presupuesto.edit')
                <a href="{{route('campaign.presupuesto.refresh',[$campaignpresupuesto->campaign_id,$campaignpresupuesto->id])}}" role="button" title="Refrescar tarifas">
-                  <i class="fas fa-sync-alt fa-lg text-primary mt-2"></i>
+                  <i class="fas fa-sync-alt fa-2x text-primary mt-2"></i>
+               </a> &nbsp;&nbsp;
+               @endcan
+               @can('presupuesto.create')
+               <a href="{{route('campaign.presupuesto.pdfPresupuesto',$campaignpresupuesto->id)}}" role="button" title="Imprimir Presupuesto">
+                  <i class="far fa-file-pdf fa-2x text-danger mt-2"></i>
                </a>
+               @endcan
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
                   {{-- @yield('breadcrumbs') --}}
-                  <a href="{{route('campaign.presupuesto.pdfPresupuesto',$campaignpresupuesto->id)}}" role="button" title="Imprimir Presupuesto">
-                     <i class="far fa-file-pdf fa-2x text-danger mt-2"></i>
-                  </a>
-                  {{-- <a href="{{route('campaign.presupuesto.previewPresupuesto',$campaignpresupuesto->id)}}" role="button">
-                     <i class="far fa-file-alt fa-2x text-primary mt-2"></i>
-                  </a> --}}
                </ol>
             </div>
          </div>
@@ -185,9 +186,6 @@
                                              @foreach($extras as $extra)
                                                 <form id="form{{$extra->id}}" role="form" method="post"
                                                          action="javascript:void(0)">
-                                                {{-- <form id="form{{$extra->id}}" role="form" method="post"
-                                                         action="{{ route('campaign.presupuesto.extra.update',$extra->id) }}" > --}}
-                                                         
                                                    <input type="hidden" name="_tokenExtra{{$extra->id}}"
                                                       value="{{ csrf_token()}}" id="tokenExtra{{$extra->id}}">
                                                    @csrf
@@ -244,13 +242,16 @@
                                                       </td>
                                                       {{-- acciones --}}
                                                       <td class="my-0 py-1">
+                                                         @can('presupuesto.edit')
                                                          <a class="editar" title="Editar">
                                                             <i id="editar{{$extra->id}}" class="fas fa-edit text-primary fa-2x mx-1"></i>
                                                          </a>
+                                                         @endcan
+                                                         @can('presupuesto.destroy')
                                                          <a href="{{ route('campaign.presupuesto.extra.delete',$extra->id) }}" title="Eliminar">
                                                             <i class="far fa-trash-alt text-danger fa-2x ml-1"></i>
                                                          </a>
-                                                         {{-- <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></button> --}}
+                                                         @endcan
                                                       </td>
                                                    </tr>
                                                 </form>
@@ -258,7 +259,6 @@
                                           </tbody>
                                           @endif
                                           <tfoot>
-                                             {{-- <form id="formExtraNew" role="form" method="post" action="javascript:void(0)"> --}}
                                              <form id="formExtraNew" role="form" method="post" action="{{ route('campaign.presupuesto.extra.store') }}">
                                                 <input type="hidden" name="_tokenExtraNew" value="{{ csrf_token()}}" id="tokenExtraNew">
                                                 @csrf
@@ -300,16 +300,16 @@
                                                       value="">
                                                    </td>
                                                    <td class="text-center">
+                                                      @can('presupuesto.create')
                                                       <a href="#" title="Validar" onclick="document.getElementById('formExtraNew').submit()">
                                                          <i class="fas fa-plus text-success fa-2x mx-1"></i>
                                                       </a>
-                                                      {{-- <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></button> --}}
+                                                      @endcan
                                                    </td>
                                                 </tr>
                                              </form>
                                           </tfoot>
                                        </table>
-                                       {{-- <button type="button" class="btn btn-default btn-block" name="Guardar">Guardar extras</button> --}}
                                     </div>
                                  </div>
                               </div>

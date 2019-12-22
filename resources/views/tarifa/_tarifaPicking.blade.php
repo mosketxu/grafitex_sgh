@@ -30,6 +30,8 @@
                   <td>{{$tarifaPicking->zona}}</td>
                   <td class="bg-light text-center">{{$tarifaPicking->tarifa1}} €</td>
                   <td>
+                     @can('tarifa.edit')
+                     @endcan
                      <a href="{{ route('tarifa.edit',$tarifaPicking->id) }}" title="Edit">
                         <i class="far fa-edit text-primary fa-2x mx-1"></i>
                      </a>

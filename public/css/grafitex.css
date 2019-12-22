@@ -31,7 +31,11 @@
         cursor:pointer;
     }
 
-
+/* para los label de los permisos quitar la negrita */*
+    .labelpermiso{
+        font-weight: 400 !important;
+        font-size: 0.9rem;
+    }
 
 /* Para el plugin de ordenacion */
 /* table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 

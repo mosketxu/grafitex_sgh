@@ -7,7 +7,7 @@
 @section('titlePag','Edición del presupuesto')
 @section('navbar')
 @include('campaign._navbarcampaign')
-@endsection
+@endsection 
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -114,15 +114,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer  p-0">
-                            <div class="row">
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
-                                </div>
-                                <div class="col-6">
-                                    <input type ='button' class="btn btn-default btn-block" onclick="location.href = '{{route('campaign.presupuesto',$campaign->id) }}'" value="Volver"/>
-                                </div>
-                            </div>
+                        <div class="card-footer">
+                            @can('presupuesto.edit')
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            @endcan
+                            <input type ='button' class="btn btn-default" onclick="location.href = '{{route('campaign.presupuesto',$campaign->id) }}'" value="Volver"/>
                         </div>
                     </form>
                 </div>

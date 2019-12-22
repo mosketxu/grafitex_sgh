@@ -6,7 +6,7 @@
 @section('title','Grafitex-Galeria Editar')
 @section('titlePag','Edición de Imagenes de la Campaña')
 @section('navbar')
-@include('campaign._navbarcampaign')
+@include('campaign._navbarcampaign') 
 @endsection
 @section('breadcrumbs')
 {{-- {{ Breadcrumbs::render('campaignGaleria') }} --}}
@@ -64,7 +64,6 @@
                     </div>
                 </div>
                 <form id="formgaleria" role="form" method="post" action="{{ route('campaign.galeria.update') }}" enctype="multipart/form-data">
-                {{-- <form id="imageUploadForm" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data"> --}}
                     @csrf
                     <div class="card-body">
                         <input type="text" class="d-none" id="campaigngaleria" name="campaigngaleria" value="{{$campaigngaleria}}">
@@ -110,7 +109,9 @@
                             </div>
                             <div class="col-6" style="">
                                 <div class="col-sm-9">
+                                    @can('campaign.edit')
                                     <input type="file" id="inputFile{{$campaigngaleria->id}}" name="photo" style="display:none">
+                                    @endcan
                                     @if(file_exists( 'storage/galeria/'.$campaign->id.'/'.$campaigngaleria->imagen ))
                                         <img src="{{asset('storage/galeria/'.$campaign->id.'/'.$campaigngaleria->imagen.'?'.time())}}" alt={{$campaigngaleria->imagen}} title={{$campaigngaleria->imagen}}
                                             id="original" class="img-fluid img-thumbnail" 
@@ -122,14 +123,17 @@
                                             style="max-height: 250px; max-width: 350px;cursor:pointer"
                                             onclick='document.getElementById("inputFile{{$campaigngaleria->id}}").click()'/>
                                         @endif                                        
+                                    @can('campaign.edit')
                                     <a href="#" name="Upload" onclick="subirImagen('formgaleria','{{$campaigngaleria->id}}')"><i class="fas fa-upload text-primary fa-lg mx-1"></i></a>
-                                    {{-- <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></a> --}}
+                                    @endcan
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
+                        @can('campaign.edit')
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        @endcan
                         <a class="btn btn-default" href="{{route('campaign.galeria',$campaigngaleria->campaign_id)}}" title="Ir la página anterior">Volver</a>
                     </div>
                 </form>

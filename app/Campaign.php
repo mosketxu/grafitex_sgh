@@ -31,6 +31,15 @@ class Campaign extends Model
          });
     }
 
+    public function scopeSearch($query, $busca)
+    {
+      return $query->where('campaign_name', 'LIKE', "%$busca%")
+      ->orWhere('campaign_initdate', 'LIKE', "%$busca%")
+      ->orWhere('campaign_initdate', 'LIKE', "%$busca%")
+      ->orWhere('campaign_state', 'LIKE', "%$busca%")
+      ;
+    }
+
     static function inserta($tabla,$datos,$campo,$campaignId)
     {
         foreach (array_chunk($datos->toArray(),1000) as $t){

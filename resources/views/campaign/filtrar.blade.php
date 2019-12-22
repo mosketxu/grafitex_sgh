@@ -25,10 +25,12 @@
                     <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                 </div>
                 <div class="col-auto mr-auto">
+                    @can('campaign.create')
                     <a type="button" href="#" title="Generar" class="nav-link btn-outline-primary" data-toggle="modal" data-target="#campaignFiltrarModal"  data-backdrop="static" data-keyboard="false">
                         <i class="fas fa-plus-circle fa-lg text-primary"></i>
                         <span class="badge badge-primary">Generar</span>
                     </a>
+                    @endcan
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -103,9 +105,11 @@
                                                     @endforeach
                                                 </select>
                                             </div> 
+                                            @can('campaign.create')
                                             <button type="button" class="btn btn-default btn-block" name="Guardar"
                                                 onclick="asociar({{ $campaign->id}},'/campaign/asociarstore','#tokenStore','storesduallistbox[]','Stores','store','campaign_stores')">Asociar
                                             Stores</button>
+                                            @endcan
                                         </form>
                                     </div>
                                 </div>
@@ -134,9 +138,11 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @can('campaign.create')
                                             <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                                onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenSegmento','segmentosduallistbox[]','Segmentos','segmento','campaign_segmentos')">Asociar
-                                                Segmentos</button>
+                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenSegmento','segmentosduallistbox[]','Segmentos','segmento','campaign_segmentos')">Asociar
+                                            Segmentos</button>
+                                            @endcan
 
                                         </form>
                                     </div>
@@ -167,9 +173,11 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @can('campaign.create')
                                             <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                                onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenUbicacion','ubicacionesduallistbox[]','Ubicaciones','ubicacion','campaign_ubicacions')">Asociar
-                                                Ubicaciones</button>
+                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenUbicacion','ubicacionesduallistbox[]','Ubicaciones','ubicacion','campaign_ubicacions')">Asociar
+                                            Ubicaciones</button>
+                                            @endcan
                                         </form>
                                     </div>
                                 </div>
@@ -206,9 +214,11 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @can('campaign.create')
                                             <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                                onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenMedida','medidasduallistbox[]','Medidas','medida','campaign_medidas')">Asociar
-                                                Medidas</button>
+                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenMedida','medidasduallistbox[]','Medidas','medida','campaign_medidas')">Asociar
+                                            Medidas</button>
+                                            @endcan
                                         </form>
                                     </div>
                                 </div>
@@ -239,9 +249,11 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @can('campaign.create')
                                             <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                                onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenMobiliario','mobiliariosduallistbox[]','Mobiliarios','mobiliario','campaign_mobiliarios')">Asociar
-                                                Mobiliario</button>
+                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenMobiliario','mobiliariosduallistbox[]','Mobiliarios','mobiliario','campaign_mobiliarios')">Asociar
+                                            Mobiliario</button>
+                                            @endcan
                                         </form>
                                     </div>
                                 </div>
@@ -271,8 +283,10 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                @can('campaign.create')
                                 <button  type="button" onclick="generar()" title="Generar" class="btn btn-primary  modalSubir" name="Generar">Generar</a> 
                                 {{-- <a  type="button" href="{{route('campaign.generar',$campaign->id) }}" title="Generar" class="btn btn-primary  modalSubir" name="Generar">Generar</a>  --}}
+                                @endcan
                             </div>
                         </form>
                     </div>

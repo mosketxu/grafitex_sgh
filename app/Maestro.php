@@ -15,6 +15,61 @@ class Maestro extends Model
 
     // protected $guarded = [];
 
+    public function scopeSto($query,$sto)
+    {
+        return $query->where('store','LIKE',"%$sto%");
+    }
+    public function scopeNam($query,$nam)
+    {
+        return $query->where('name','LIKE',"%$nam%");
+    }
+    public function scopeCoun($query,$coun)
+    {
+        return $query->where('country','LIKE',"%$coun%");
+    }
+    public function scopeAre($query,$are)
+    {
+        return $query->where('area','LIKE',"%$are%");
+    }
+    public function scopeSeg($query,$seg)
+    {
+        return $query->where('segmento','LIKE',"%$seg%");
+    }
+    public function scopeConce($query,$conce)
+    {
+        return $query->where('storeconcept','LIKE',"%$conce%");
+    }
+    public function scopeUbi($query,$ubi)
+    {
+        return $query->where('ubicacion','LIKE',"%$ubi%");
+    }
+    public function scopeMob($query,$mob)
+    {
+        if($mob)
+            return $query->where('mobiliario','LIKE',"%$mob%");
+    }
+    public function scopeCart($query,$cart)
+    {
+        if($cart)
+            return $query->where('carteleria','LIKE',"%$cart%");
+    }
+    public function scopeMat($query,$mat)
+    {
+        if($mat)
+            return $query->where('material','LIKE',"%$mat%");
+    }
+    public function scopeMed($query,$med)
+    {
+        if($med)
+            return $query->where('medida','LIKE',"%$med%");
+    }
+    public function scopePropx($query,$propx)
+    {
+        if($propx)
+            return $query->where('propxelemento','LIKE',"%$propx%");
+    }
+
+    
     static function scopeCampaignTiendas($query, $campaign)
     {
         return $query
@@ -31,27 +86,6 @@ class Maestro extends Model
         ->select('maestros.store as store')
         ->groupBy('maestros.store');
     }
-
-    
-    //antes se llamaba scopeCampaignStore
-    // static function scopeCampaignElementos($query, $campaign)
-    // {
-    //     return $query
-    //     ->whereIn('store', function ($query) use ($campaign) {
-    //         $query->select('store_id')->from('campaign_stores')->where('campaign_id', '=', $campaign);})
-    //     ->whereIn('segmento', function ($query) use ($campaign) {
-    //         $query->select('segmento')->from('campaign_segmentos')->where('campaign_id', '=', $campaign);})
-    //     ->whereIn('ubicacion', function ($query) use ($campaign) {
-    //         $query->select('ubicacion')->from('campaign_ubicacions')->where('campaign_id', '=', $campaign);})
-    //     ->whereIn('mobiliario', function ($query) use ($campaign) {
-    //         $query->select('mobiliario')->from('campaign_mobiliarios')->where('campaign_id', '=', $campaign);})
-    //     ->whereIn('medida', function ($query) use ($campaign) {
-    //         $query->select('medida')->from('campaign_medidas')->where('campaign_id', '=', $campaign);})
-    //     ->select('maestros.store','maestros.country','maestros.name','maestros.area','maestros.segmento','maestros.storeconcept',
-    //         'maestros.ubicacion','maestros.mobiliario','maestros.propxelemento','maestros.carteleria','maestros.medida','maestros.material',
-    //         'maestros.unitxprop','maestros.observaciones', DB::raw($campaign.' as campaign_id'));
-    // }
-
     
     static function scopeCampaignElementos($query, $campaign, $tienda)
     {
@@ -67,8 +101,6 @@ class Maestro extends Model
             'maestros.ubicacion','maestros.mobiliario','maestros.propxelemento','maestros.carteleria','maestros.medida','maestros.material',
             'maestros.unitxprop','maestros.observaciones', DB::raw($campaign.' as campaign_id'));
         }
-
-
 
     static function insertStores()
     {

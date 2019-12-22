@@ -13,9 +13,36 @@ class MaestroController extends Controller
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('maestro.index');
+        $sto=$request->get('sto');
+        $nam=$request->get('nam');
+        $coun=$request->get('coun');
+        $are=$request->get('are');
+        $seg=$request->get('seg');
+        $conce=$request->get('conce');
+        $ubi=$request->get('ubi');
+        $mob=$request->get('mob');
+        $cart=$request->get('cart');
+        $mat=$request->get('mat');
+        $med=$request->get('med');
+        $propx=$request->get('propx');
+
+        $maestros=Maestro::sto($request->sto)
+        ->nam($request->nam)
+        ->coun($request->coun)
+        ->are($request->are)
+        ->seg($request->seg)
+        ->conce($request->conce)
+        ->ubi($request->ubi)
+        ->mob($request->mob)
+        ->cart($request->cart)
+        ->mat($request->mat)
+        ->med($request->med)
+        ->propx($request->propx)
+        ->paginate(10);
+
+        return view('maestro.index',compact('maestros','sto','nam','coun','are','seg','conce','ubi','mob','cart','mat','med','propx'));
     }
 
 

@@ -10,7 +10,7 @@
 @endsection
 @section('breadcrumbs')
 {{-- {{ Breadcrumbs::render('campaignGaleria') }} --}}
-@endsection
+@endsection 
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -105,7 +105,6 @@
                                    @foreach ($campaigngaleria as $imagen)
                                    <tr>
                                     <form id="form{{$imagen->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data"">
-                                    {{-- <form id="" role="form" method="post" action="{{ route('campaign.galeria.updateindex') }}" enctype="multipart/form-data" id="uploadimage{{$imagen->id}}"> --}}
                                         @csrf
                                         <input type="text" class="d-none" name="imagenId" value="{{$imagen->id}}">
                                         <td>{{$imagen->id}}</td>
@@ -118,7 +117,9 @@
                                         <td id="imagen{{$imagen->id}}">{{$imagen->imagen}}</td>
                                         <td>
                                             <div class="">
+                                                @can('campaign.edit')
                                                 <input type="file" id="inputFile{{$imagen->id}}" name="photo" style="display:none">
+                                                @endcan
                                                 @if(file_exists( 'storage/galeria/'.$campaign->id.'/'.$imagen->imagen ))
                                                     <img src="{{asset('storage/galeria/'.$campaign->id.'/'.$imagen->imagen.'?'.time())}}" alt={{$imagen->imagen}} title={{$imagen->imagen}}
                                                         id="original{{$imagen->id}}" class="img-fluid img-thumbnail" 
@@ -130,14 +131,16 @@
                                                         style="width: 100%;cursor:pointer"
                                                         onclick='document.getElementById("inputFile{{$imagen->id}}").click()'/>
                                                 @endif                                        
-                                                {{-- <button type="submit"><i class="fas fa-upload text-primary fa-lg mx-1"></i></a> --}}
                                             </div>
                                         </td>
                                         <td width="100px">
                                             <div class="text-center">
+                                                @can('campaign.edit')
                                                 <a href="#" name="Upload" onclick="subirImagenIndex('form{{$imagen->id}}','{{$imagen->id}}')"><i class="fas fa-upload text-primary fa-2x mx-1"></i></a>
+                                                @endcan
+                                                @can('campaign.edit')
                                                 <a href="{{ route('campaign.galeria.editgaleria',[$campaign->id,$imagen->id]) }}" title="Edit"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
-                                                {{-- <a href="" title="Delete"><i class="far fa-trash-alt text-danger fa-lg ml-1"></i></a> --}}
+                                                @endcan
                                             </div>
                                        </td>
                                     </form>
@@ -155,7 +158,6 @@
 @endsection
 
 @push('scriptchosen')
-{{-- <script src="{{ asset('js/campaignElementos.js')}}"></script> --}}
 
 <script>
     $(document).ready(function() {

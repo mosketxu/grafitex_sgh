@@ -54,13 +54,17 @@
                      <form id="form_id" role="form" method="post"
                         action="{{ route('tarifa.destroy',$tarifaMaterial->id) }}">
                         <div class="text-center">
+                           @can('tarifa.create')
                            <a href="{{ route('tarifa.edit',$tarifaMaterial->id) }}" title="Edit">
                               <i class="far fa-edit text-primary fa-2x mx-1"></i>
                            </a>
+                           @endcan
                            @csrf
                            @method('DELETE')
+                           @can('presupuesto.destroy')
                            <button type="submit" class="enlace"><i
-                                 class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>
+                              class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>
+                           @endcan
                         </div>
                      </form>
                   </td>

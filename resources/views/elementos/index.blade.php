@@ -1,4 +1,4 @@
-@extends('layouts.grafitex')
+@extends('layouts.grafitex') 
 
 @section('styles')
 @endsection
@@ -25,9 +25,11 @@
                         <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                     </div>
                     <div class="col-auto mr-auto">
+                        @can('elemento.create')
                         <a href="" role="button" data-toggle="modal" data-target="#elementoCreateModal">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a>
+                        @endcan
                         {{-- <a href="{{route('elemento.create')}}" role="button">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a> --}}
@@ -83,10 +85,6 @@
                                 <tbody>
                                     @foreach ($elementos as $elemento)
                                     <tr data-id="{{$elemento->id}}">
-                                        {{-- <form id="form{{$elemento->id}}" role="form" method="post" action="javascript:void(0)">
-                                            @csrf
-                                            <input type="text" class="d-none" id="id" name="id" value="{{$elemento->id}}">
-                                            <input type="text" class="d-none" id="elementificador" name="elementificador" value="{{$elemento->elementificador}}"> --}}
                                             <td>{{$elemento->id}}</td>
                                             <td>{{$elemento->ubica->ubicacion}}</td>
                                             <td>{{$elemento->mobi->mobiliario}}</td>
@@ -99,8 +97,12 @@
                                             <td>{{$elemento->observaciones}}</td>
                                             <td  width="100px">
                                                 <div class="text-center">
+                                                    @can('elemento.edit')
                                                     <a href="{{route('elemento.edit',$elemento->id)}}" title="Editar"><i class="far fa-edit text-primary fa-2x ml-1"></i></a>
+                                                    @endcan
+                                                    @can('elemento.destroy')
                                                     <a href="#!" class="btn-delete " title="Eliminar"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
+                                                    @endcan
                                                 </div>
                                              </td>
                                          {{-- </form> --}}
@@ -132,7 +134,6 @@
                                                 <option value="">Selecciona</option>
                                                 @foreach($ubicaciones as $ubicacion )
                                                 <option value="{{$ubicacion->id}}" {{old('ubicacion_id')==$ubicacion->id ? 'selected' : ''}}>{{$ubicacion->ubicacion}}</option>
-                                                
                                                 @endforeach
                                             </select>
                                         </div>
@@ -208,7 +209,9 @@
                                     </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    @can('elemento.edit')
                                     <button type="button" class="btn btn-primary" name="Guardar" onclick="form.submit()">Guardar</button>
+                                    @endcan
                                 </div>
                             </form>
                         </div>
@@ -261,9 +264,6 @@
                         timeOut: 0,
                     };
                     toastr.error("Este elemento está en Stores. No se puede eliminar.");
-
-
-
                 });
             }
         });

@@ -12,7 +12,7 @@
 
 @section('breadcrumbs')
 {{-- {{ Breadcrumbs::render('campaign') }} --}}
-@endsection
+@endsection 
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -25,9 +25,11 @@
                     <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                 </div>
                 <div class="col-auto mr-auto">
+                    @can('presupuesto.create')
                     <a href="" role="button" data-toggle="modal" data-target="#campaignPresupuestoCreateModal">
-                        <i class="fas fa-plus-circle fa-lg text-primary mt-2"></i>
+                        <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                     </a>
+                    @endcan
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -116,19 +118,20 @@
                                                 <input type="hidden" name="_tokenPresupuesto" value="{{ csrf_token()}}"
                                                     id="tokenPresupuesto">
                                                 @csrf
-                                                {{-- <form action="{{ route('campaign.presupuesto.delete',$presupuesto->id) }}"
-                                                method="POST"> --}}
                                                 @method('DELETE')
+                                                @can('presupuesto.edit')
                                                 <a href="{{route('campaign.presupuesto.edit', $presupuesto->id )}}"
                                                     title="Edit"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
-                                                    {{-- <button type="submit" class="btn btn-danger" id="boton{{$presupuesto->id}}" 
-                                                        style="display:none"></button> --}}
+                                                @endcan
+                                                @can('presupuesto.index')
                                                 <a href="{{route('campaign.presupuesto.cotizacion', $presupuesto->id )}}"
                                                     title="Cotización"><i class="fas fa-calculator  text-primary fa-2x mx-1"></i></a>
-                                                <a href="#"
-                                                    onclick="borrarPresupuesto({{$presupuesto->id}},'campaign.presupuesto.delete','#tokenPresupuesto')"
-                                                    title="Eliminar"><i
-                                                        class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
+                                                @endcan
+                                                @can('presupuesto.destroy')
+                                                <a href="#" onclick="borrarPresupuesto({{$presupuesto->id}},'campaign.presupuesto.delete','#tokenPresupuesto')" title="Eliminar">
+                                                    <i class="far fa-trash-alt text-danger fa-2x ml-1"></i>
+                                                </a>
+                                                @endcan
                                             </form>
                                         </div>
                                     </td>

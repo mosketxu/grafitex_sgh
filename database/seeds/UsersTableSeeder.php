@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Caffeinated\Shinobi\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,22 +12,34 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-		factory(\App\User::class, 1)->create([
-			'name' => 'admin',
-			'email' => 'admin@admin.com',
-			'password' => bcrypt('1234'),
-		]);
+		// factory(\App\User::class, 1)->create([
+		// 	'name' => 'admin',
+		// 	'email' => 'admin@admin.com',
+		// 	'password' => bcrypt('1234'),
+		// ]);
 
-		factory(\App\User::class, 1)->create([
-			'name' => 'alex',
-			'email' => 'alex@alex.com',
-			'password' => bcrypt('1234'),
-		]);
+		// factory(\App\User::class, 1)->create([
+		// 	'name' => 'alex',
+		// 	'email' => 'alex@alex.com', 
+		// 	'password' => bcrypt('1234'),
+		// ]);
 
-		factory(\App\User::class, 1)->create([
-			'name' => 'grafitex',
-			'email' => 'grafitex@grafitex.com',
-			'password' => bcrypt('1234'),
+		// factory(\App\User::class, 1)->create([
+		// 	'name' => 'grafitex',
+		// 	'email' => 'grafitex@grafitex.com',
+		// 	'password' => bcrypt('1234'),
+		// ]);
+
+		// factory(\App\User::class, 1)->create([
+		// 	'name' => 'sgh',
+		// 	'email' => 'sgh@shg.com',
+		// 	'password' => bcrypt('1234'),
+		// ]);
+
+		Role::create([
+			'name'=>'Admin',
+			'slug'=>'admin',
+			'special'=>'all-access'
 		]);
     }
 }

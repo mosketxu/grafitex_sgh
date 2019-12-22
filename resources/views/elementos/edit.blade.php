@@ -8,7 +8,7 @@
 @section('navbar')
     @include('_partials._navbar')
 @endsection
-@section('breadcrumbs')
+@section('breadcrumbs') 
 {{-- {{ Breadcrumbs::render('campaignElementos') }} --}}
 @endsection
 
@@ -51,7 +51,6 @@
                                     <select class="form-control form-control-sm" id="ubicacion_id" name="ubicacion_id">
                                         @foreach($ubicaciones as $ubicacion )
                                         <option value="{{$ubicacion->id}}" {{old('ubicacion_id',$ubicacion->id)==$ubicacion->id ? 'selected' : ''}}>{{$ubicacion->ubicacion}}</option>
-                                        
                                         @endforeach
                                     </select>
                                 </div>
@@ -121,7 +120,9 @@
                         </div>
                         <div class="card-footer">
                             <a href="{{route('elemento.index')}}" type="button" class="btn btn-default">Volver</a>
+                            @can('elemento.edit')
                             <input class="btn btn-primary" type="submit" value="Actualizar">
+                            @endcan
                         </div>
                     </form>
                 </div>
