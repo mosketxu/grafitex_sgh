@@ -75,9 +75,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $roles = auth()->user()->roles;
+
+        return view('users.edit', compact('user','roles'));
+
     }
 
     /**
@@ -93,6 +96,7 @@ class UserController extends Controller
         return view('users.edit', compact('user','roles'));
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -107,22 +111,22 @@ class UserController extends Controller
             // 'email' => 'required|email|unique:users,email,'.$user->id,
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => '',
-        ]);
-
-        if ($data['password'] != null) {
-            $data['password'] = bcrypt($data['password']);
-        } else {
-            unset($data['password']);
-        }
-           
-        $user->update($data);
-        $user->roles()->sync($request->get('roles'));
-
-        $notification = array(
-            'message' => '¡Usuario actualizado satisfactoriamente!',
-            'alert-type' => 'success'
-        );
-        return redirect('user')->with($notification);
+            ]);
+            
+            if ($data['password'] != null) {
+                $data['password'] = bcrypt($data['password']);
+            } else {
+                unset($data['password']);
+            }
+            
+            $user->update($data);
+            $user->roles()->sync($request->get('roles'));
+            
+            $notification = array(
+                'message' => '¡Usuario actualizado satisfactoriamente!',
+                'alert-type' => 'success'
+            );
+        return redirect()->back()->with($notification);
 
     }
 

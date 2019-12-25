@@ -64,9 +64,15 @@
                                     @foreach ($roles as $rol )
                                     <li>
                                         <label>
+                                            @can('user.edit')
                                             <input type="checkbox" name="roles[]" value="{{$rol->id}}"  
-                                                {{ (in_array($rol->id, old('roles', [])) || isset($user) && $user->roles()->pluck('name', 'roles.id')->contains($rol->name)) ? 'checked' : '' }}
-                                            >{{$rol->name}} - <em>{{$rol->description}} </em></option>    
+                                                {{ (in_array($rol->id, old('roles', [])) || isset($user) && $user->roles()->pluck('name', 'roles.id')->contains($rol->name)) ? 'checked' : '' }}>
+                                                {{$rol->name}} - <em>{{$rol->description}} </em>
+                                            @elsecan('user.show')
+                                            <input type="checkbox" name="roles[]" value="{{$rol->id}}" class="d-none"  
+                                                {{ (in_array($rol->id, old('roles', [])) || isset($user) && $user->roles()->pluck('name', 'roles.id')->contains($rol->name)) ? 'checked' : '' }}>
+                                                {{$rol->name}} - <em>{{$rol->description}} </em>
+                                            @endcan    
                                         </label>
 
                                         {{old('rol_id')==$rol->id ? 'checked' : ''}}
@@ -89,8 +95,8 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{route('user.index')}}" type="button" class="btn btn-default">Volver</a>
-                        @can('user.edit')
+                        <a href="{{route('home')}}" type="button" class="btn btn-default">Volver</a>
+                        @canany(['user.edit','user.show'])
                         <button type="button" class="btn btn-primary" name="Guardar" onclick="form.submit()">Actualizar</button>
                         @endcan
                     </div>

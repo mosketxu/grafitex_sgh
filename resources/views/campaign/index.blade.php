@@ -25,9 +25,11 @@
                         <span class="h3 m-0 text-dark">@yield('titlePag')</span>
                     </div>
                     <div class="col-auto mr-auto">
+                        @can('campaign.create')
                         <a href="" role="button" data-toggle="modal" data-target="#campaignCreateModal">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a>
+                        @endcan
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -99,7 +101,7 @@
                                                 @can('campaign.index')
                                                 <a href="{{route('campaign.etiquetas.index',$campaign->id) }}" title="Etiquetas HTML"><i class="fas fa-code text-indigo fa-2x mr-1"></i></a>
                                                 @endcan
-                                                @can('prespuesto.index')
+                                                @can('presupuesto.index')
                                                 <a href="{{route('campaign.presupuesto', $campaign->id ) }}" title="Presupuesto"><i class="fas fa-money-check-alt text-fuchsia fa-2x mr-1"></i></a>
                                                 @endcan
                                                 @can('campaign.index')

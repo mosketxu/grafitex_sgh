@@ -10,7 +10,7 @@
         ->middleware('can:user.create');
         
     Route::put('user/{user}','UserController@update')->name('user.update')
-        ->middleware('can:user.edit');
+        ->middleware('can:user.show');
 
     Route::get('user/{user}','UserController@show')->name('user.show')
         ->middleware('can:user.show');

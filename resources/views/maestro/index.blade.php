@@ -19,7 +19,7 @@
     <div class="content-wrapper">
         {{-- content header --}}
         <div class="content-header">
-            <div class="container-fluid">
+            <div class="container-fluid"> 
                 <div class="row">
                     <div class="col-auto ">
                         <span class="h3 m-0 text-dark">@yield('titlePag')</span>
@@ -47,6 +47,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
+                                {{$maestros->links() }} &nbsp; &nbsp;
                                 Hay {{$maestros->total()}} registros
                             </div>
                             <div class="col-2 float-right mb-2">

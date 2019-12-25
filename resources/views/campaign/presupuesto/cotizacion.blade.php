@@ -29,7 +29,7 @@
                   <i class="fas fa-sync-alt fa-2x text-primary mt-2"></i>
                </a> &nbsp;&nbsp;
                @endcan
-               @can('presupuesto.create')
+               @can('presupuesto.index')
                <a href="{{route('campaign.presupuesto.pdfPresupuesto',$campaignpresupuesto->id)}}" role="button" title="Imprimir Presupuesto">
                   <i class="far fa-file-pdf fa-2x text-danger mt-2"></i>
                </a>
