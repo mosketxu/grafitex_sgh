@@ -26,5 +26,5 @@ Route::get('maestro/{maestro}/edit','MaestroController@edit')->name('maestro.edi
 Route::post('/maestro/import', 'MaestroController@import')->name('maestro.import')
 ->middleware('can:maestro.create');
 
-Route::get('/maestro/actualizatablas','MaestroController@actualizartablas')->name('maestro.actualizatablas')
+Route::get('maestros/actualizatablas','MaestroController@actualizartablas')->name('maestro.actualizatablas')
 ->middleware('can:maestro.edit');;

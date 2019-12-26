@@ -45,6 +45,18 @@ class MaestroController extends Controller
         return view('maestro.index',compact('maestros','sto','nam','coun','are','seg','conce','ubi','mob','cart','mat','med','propx'));
     }
 
+  /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+  
 
     public function import(Request $request)
     {
@@ -72,7 +84,6 @@ class MaestroController extends Controller
 
     public function actualizarTablas()
     {
-          
         DB::table('store_elementos')->delete();
         DB::table('elementos')->delete();
         DB::table('stores')->delete();

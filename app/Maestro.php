@@ -176,24 +176,20 @@ class Maestro extends Model
 
     static function insertStoreElementos()
     {
-        $storeElementos=Maestro::select('store','elementificador')
-            ->groupBy('store','elementificador')
-            ->get();
-        $cont=0;
-        foreach (array_chunk($storeElementos->toArray(),50) as $t){
+        Maestro::chunk(100, function ($maestros) {
             $dataSet = [];
-            foreach ($t as $elemento) {
-                $dataSet[] = [
+            foreach ($maestros as $elemento) {
+                $existe=StoreElemento::where('store_id',$elemento['store'])->where('elementificador',$elemento['elementificador'])->count();
+                if($existe==0){
+                    $dataSet[] = [
                     'store_id'=>$elemento['store'],
                     'elemento_id'=>Elemento::where('elementificador',$elemento['elementificador'])->first()['id'],
                     'elementificador'=>$elemento['elementificador'],
-                ];
-                // $cont++;
-                // if($cont>3750)
-                // dd($cont);
+                    ];
+                };
             }
-            DB::table('store_elementos')->insert($dataSet);
-        }
+            DB::table('store_elementos')->insertOrIgnore($dataSet);
+        });
         return true;
     }
 }
