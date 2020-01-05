@@ -190,6 +190,5 @@ class Maestro extends Model
             }
             DB::table('store_elementos')->insertOrIgnore($dataSet);
         });
-        return true;
     }
 }

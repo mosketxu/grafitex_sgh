@@ -14,48 +14,58 @@ class Store extends Model
         'zona','area_id','area','segmento',
         'concepto_id','concepto','observaciones','imagen'];
 
-        protected $with=['are','concep','storeelementos'];
+    protected $with=['are','concep','storeelementos'];
 
-    public function scopeSearch($query, $busca)
-    {
-      return $query->where('id', 'LIKE', "%$busca%")
-      ->orWhere('name', 'LIKE', "%$busca%")
-      ->orWhere('country', 'LIKE', "%$busca%")
-      ->orWhere('zona', 'LIKE', "%$busca%")
-      ->orWhere('area', 'LIKE', "%$busca%")
-      ->orWhere('segmento', 'LIKE', "%$busca%")
-      ->orWhere('concepto', 'LIKE', "%$busca%")
-      ->orWhere('observaciones', 'LIKE', "%$busca%")
-      ->orWhere('imagen', 'LIKE', "%$busca%")
-      ;
-    }
-
+        
     // public function campaignelemen()
     // {
-    //     return $this->hasMany(CampaignElemento::class,'store_id');
-    // }
-
+        //     return $this->hasMany(CampaignElemento::class,'store_id');
+        // }
+            
     public function campaigntiendas()
     {
         return $this->hasMany(CampaignTienda::class);
     }
     
-
+    
     public function storeelementos()
     {
         return $this->hasMany(StoreElemento::class);
     }
-
+    
     public function are()  
     {
         return $this->belongsTo(Area::class,'area_id');
     }
-
-
+    
+    
     public function concep()  
     {
         return $this->belongsTo(Storeconcept::class,'concepto_id');
     }
+
+    public function scopeSearch($query, $busca)
+    {
+        return $query->where('id', 'LIKE', "%$busca%")
+        ->orWhere('name', 'LIKE', "%$busca%")
+        ->orWhere('country', 'LIKE', "%$busca%")
+        ->orWhere('zona', 'LIKE', "%$busca%")
+        ->orWhere('area', 'LIKE', "%$busca%")
+        ->orWhere('segmento', 'LIKE', "%$busca%")
+        ->orWhere('concepto', 'LIKE', "%$busca%")
+        ->orWhere('observaciones', 'LIKE', "%$busca%")
+        ->orWhere('imagen', 'LIKE', "%$busca%")
+        ;
+    }
+
+    public function scopeSeg($query,$campaignId)
+    {
+        if (CampaignSegmento::where('campaign_id',$campaignId)->count()>0){
+            return $query->whereIn('segmento',function($q) use($campaignId){
+                $q->select('segmento')->from('campaign_segmentos')->where('campaign_id',$campaignId);
+            });}
+    }
+
 
     static function subirImagen($storeId,$imagen)
     {

@@ -24,13 +24,13 @@ Route::get('campaign/{campaign}/edit','CampaignController@edit')->name('campaign
 //Generar Campaña
 Route::group(['prefix' => 'campaign'], function () {
 
-    Route::post('/asociar', 'CampaignController@asociar')
+    Route::post('/asociar', 'CampaignController@asociar')->name('campaign.asociar')
         ->middleware('can:campaign.edit');
     
-    Route::post('/asociarstore', 'CampaignController@asociarstore')
-        ->middleware('can:campaign.edit');;
-    
-    Route::post('/{campaign}/generarcampaign', 'CampaignController@generarcampaign')->name('campaign.generar')
+    Route::post('/asociarstore', 'CampaignController@asociarstore')->name('campaign.asociarstore')
+        ->middleware('can:campaign.edit');
+
+    Route::post('generarcampaign/{tipo}/{campaign}', 'CampaignController@generarcampaign')->name('campaign.generar')
         ->middleware('can:campaign.create');
 
     Route::get('/{campaign}/filtro', 'CampaignController@filtrar')->name('campaign.filtrar')

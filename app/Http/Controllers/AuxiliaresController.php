@@ -9,16 +9,16 @@ class AuxiliaresController extends Controller
 {
     public function index()
     {
-        $countries=Country::get();
-        $areas=Area::orderBy('area')->get();
-        $segmentos=Segmento::orderBy('segmento')->get();
-        $conceptos=Storeconcept::orderBy('storeconcept')->get();
-        $ubicaciones=Ubicacion::orderBy('ubicacion')->get();
-        $mobiliarios=Mobiliario::orderBy('mobiliario')->get();
-        $propxelementos=Propxelemento::orderBy('propxelemento')->get();
-        $cartelerias=Carteleria::orderBy('carteleria')->get();
-        $medidas=Medida::orderBy('medida')->get();
-        $materiales=Material::orderBy('material')->get();
+        $countries=Country::paginate(10)->onEachSide(2);
+        $areas=Area::orderBy('area')->paginate(10)->onEachSide(2);
+        $segmentos=Segmento::orderBy('segmento')->paginate(10)->onEachSide(2);
+        $conceptos=Storeconcept::orderBy('storeconcept')->paginate(10)->onEachSide(2);
+        $ubicaciones=Ubicacion::orderBy('ubicacion')->paginate(10)->onEachSide(2);
+        $mobiliarios=Mobiliario::orderBy('mobiliario')->paginate(10)->onEachSide(2);
+        $propxelementos=Propxelemento::orderBy('propxelemento')->paginate(10)->onEachSide(2);
+        $cartelerias=Carteleria::orderBy('carteleria')->paginate(10)->onEachSide(2);
+        $medidas=Medida::orderBy('medida')->paginate(10)->onEachSide(2);
+        $materiales=Material::orderBy('material')->paginate(10)->onEachSide(2);
         return view('auxiliares.index',compact('countries','areas','segmentos','conceptos','ubicaciones','mobiliarios','propxelementos','cartelerias','medidas','materiales'));
     }
 }

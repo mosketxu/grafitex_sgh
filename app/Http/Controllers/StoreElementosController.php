@@ -21,11 +21,11 @@ class StoreElementosController extends Controller
         } else {
             $busqueda = '';
         } 
-
+        
         $store=Store::find($storeId);
         $storeelementos=StoreElemento::search($request->busca)
         ->join('elementos','store_elementos.elemento_id','elementos.id')
-        ->where('store_id',$storeId)
+        ->where('store_elementos.store_id',$storeId)
         ->paginate('10')->onEachSide(1);
 
         return view('stores.storeelementos.index',compact('store','busqueda','storeelementos','totalElementos'));
@@ -53,13 +53,13 @@ class StoreElementosController extends Controller
             'elemento_id'=>'required'
         ]);
 
-        $elementificador=Elemento::find($request->elemento_id)->elementificador;
+        $elemento=Elemento::find($request->elemento_id);
 
         DB::table('store_elementos')
             ->insert([
             'store_id'=>$store_id,
             'elemento_id'=>$request->elemento_id,
-            'elementificador'=>$elementificador,
+            'elementificador'=>$elemento->elementificador,
             ]);
 
         $notification = array(
@@ -131,7 +131,7 @@ class StoreElementosController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

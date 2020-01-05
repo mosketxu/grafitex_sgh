@@ -27,7 +27,7 @@
                 <div class="col-auto mr-auto">
                     @can('campaign.create')
                     <a type="button" href="#" title="Generar" class="nav-link btn-outline-primary" data-toggle="modal" data-target="#campaignFiltrarModal"  data-backdrop="static" data-keyboard="false">
-                        <i class="fas fa-plus-circle fa-lg text-primary"></i>
+                        <i class="fas fa-plus-circle fa-2x text-primary"></i>
                         <span class="badge badge-primary">Generar</span>
                     </a>
                     @endcan
@@ -89,26 +89,27 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="_tokenStore" value="{{ csrf_token()}}" id="tokenStore">
+                                        {{-- <form action="#" method="post"> --}}
+                                        <form action="{{route('campaign.asociarstore')}}" method="post">
                                             <div class="form-group">
                                                 @csrf
+                                                <input type="hidden" name="_tokenStore" value="{{ csrf_token()}}" id="tokenStore">
                                                 <input type="hidden" class="" name="campaign_id" value="{{$campaign->id}} " />
                                                 <select class="duallistbox" multiple="multiple" name="storesduallistbox[]" size="5">
                                                     @foreach ($storesDisponibles as $store )
-                                                    <option value="{{$store}}">{{$store->store}} {{$store->name}}
+                                                    <option value="{{$store}}">{{$store->store}} {{$store->name}} </option>
                                                     </option>
                                                     @endforeach
                                                     @foreach ($storesAsociadas as $store )
-                                                    <option value="{{$store}}" selected="selected">{{$store->store}}
-                                                        {{$store->name}} </option>
+                                                    <option value="{{$store}}" selected="selected">{{$store->store}} {{$store->name}} </option>
                                                     @endforeach
                                                 </select>
                                             </div> 
                                             @can('campaign.create')
-                                            <button type="button" class="btn btn-default btn-block" name="Guardar"
+                                            {{-- <button type="button" class="btn btn-default btn-block" name="Guardar"
                                                 onclick="asociar({{ $campaign->id}},'/campaign/asociarstore','#tokenStore','storesduallistbox[]','Stores','store','campaign_stores')">Asociar
-                                            Stores</button>
+                                            Stores</button> --}}
+                                            <button type="submit" class="btn btn-default btn-block" name="Guardar">Asociar Stores</button>
                                             @endcan
                                         </form>
                                     </div>
@@ -122,13 +123,14 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="_tokenSegmento" value="{{ csrf_token()}}" id="tokenSegmento">
+                                        <form action="{{route('campaign.asociar')}}" method="post">
+                                            @csrf
                                             <div class="form-group">
-                                                @csrf
+                                                <input type="hidden" name="_tokenSegmento" value="{{ csrf_token()}}" id="tokenSegmento">
                                                 <input type="hidden" class="" name="campaign_id" value="{{$campaign->id}} " />
-                                                <select class="duallistboxSinFiltro" multiple="multiple"
-                                                    name="segmentosduallistbox[]" size="5">
+                                                <input type="hidden" class="" name="campo" value="segmento" />
+                                                <input type="hidden" class="" name="tabla" value="campaign_segmentos" />
+                                                <select class="duallistboxSinFiltro" multiple="multiple" name="duallistbox[]" size="5">
                                                     @foreach ($segmentosDisponibles as $segmento )
                                                     <option value="{{$segmento}}">{{$segmento->segmento}}</option>
                                                     @endforeach
@@ -139,44 +141,7 @@
                                                 </select>
                                             </div>
                                             @can('campaign.create')
-                                            <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenSegmento','segmentosduallistbox[]','Segmentos','segmento','campaign_segmentos')">Asociar
-                                            Segmentos</button>
-                                            @endcan
-
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- Filtro Ubicacion -->
-                                <div class="card collapsed-card">
-                                    <div class="card-header text-black bg-warning p-0" data-card-widget="collapse" style="cursor: pointer">
-                                        <h3 class="card-title pl-3">Ubicación</h3>
-                                        <div class="card-tools pr-3">
-                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body collapse">
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="_tokenUbicacion" value="{{ csrf_token()}}"
-                                                id="tokenUbicacion">
-                                            <div class="form-group">
-                                                @csrf
-                                                <input type="hidden" class="" name="campaign_id" value="{{$campaign->id}} " />
-                                                <select class="duallistboxSinFiltro" multiple="multiple"
-                                                    name="ubicacionesduallistbox[]" size="5">
-                                                    @foreach ($ubicacionesDisponibles as $ubicacion )
-                                                    <option value="{{$ubicacion}}">{{$ubicacion->ubicacion}}</option>
-                                                    @endforeach
-                                                    @foreach ($ubicacionesAsociadas as $ubicacion )
-                                                    <option value="{{$ubicacion}}" selected="selected">
-                                                        {{$ubicacion->ubicacion}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            @can('campaign.create')
-                                            <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenUbicacion','ubicacionesduallistbox[]','Ubicaciones','ubicacion','campaign_ubicacions')">Asociar
-                                            Ubicaciones</button>
+                                            <button type="submit" class="btn btn-default btn-block" name="Guardar">Asociar Segmentos</button>
                                             @endcan
                                         </form>
                                     </div>
@@ -188,6 +153,38 @@
                                 Filtros de Elementos
                             </div>
                             <div class="card-body">
+                                <!-- Filtro Ubicacion -->
+                                <div class="card collapsed-card">
+                                    <div class="card-header text-black bg-warning p-0" data-card-widget="collapse" style="cursor: pointer">
+                                        <h3 class="card-title pl-3">Ubicación</h3>
+                                        <div class="card-tools pr-3">
+                                            <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body collapse">
+                                        <form action="{{route('campaign.asociar')}}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="hidden" name="_tokenUbicacion" value="{{ csrf_token()}}" id="tokenUbicacion">
+                                                <input type="hidden" class="" name="campaign_id" value="{{$campaign->id}} " />
+                                                <input type="hidden" class="" name="campo" value="ubicacion" />
+                                                <input type="hidden" class="" name="tabla" value="campaign_ubicacions" />
+                                                <select class="duallistboxSinFiltro" multiple="multiple" name="duallistbox[]" size="5">
+                                                    @foreach ($ubicacionesDisponibles as $ubicacion )
+                                                    <option value="{{$ubicacion}}">{{$ubicacion->ubicacion}}</option>
+                                                    @endforeach
+                                                    @foreach ($ubicacionesAsociadas as $ubicacion )
+                                                    <option value="{{$ubicacion}}" selected="selected">
+                                                        {{$ubicacion->ubicacion}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @can('campaign.create')
+                                            <button type="submit" class="btn btn-default btn-block" name="Guardar">Asociar Ubicacion</button>
+                                            @endcan
+                                        </form>
+                                    </div>
+                                </div>
                                 <!-- Filtro Medida -->
                                 <div class="card collapsed-card">
                                     <div class="card-header text-white bg-secondary p-0" data-card-widget="collapse" style="cursor: pointer">
@@ -197,14 +194,14 @@
                                         </div>
                                     </div>
                                     <div class="card-body collapse">
-                                        <form action="#" method="post">
-                                            <input type="hidden" name="_tokenMedida" value="{{ csrf_token()}}" id="tokenMedida">
+                                        <form action="{{route('campaign.asociar')}}" method="post">
+                                            @csrf
                                             <div class="form-group">
-                                                @csrf
-                                                <input type="hidden" class="" name="campaign_id"
-                                                    value="{{$campaign->id}} " />
-                                                <select class="duallistbox" multiple="multiple" name="medidasduallistbox[]"
-                                                    size="5">
+                                                <input type="hidden" name="_tokenMedida" value="{{ csrf_token()}}" id="tokenMedida">
+                                                <input type="hidden" class="" name="campaign_id" value="{{$campaign->id}} " />
+                                                <input type="hidden" class="" name="campo" value="medida" />
+                                                <input type="hidden" class="" name="tabla" value="campaign_medidas" />
+                                                <select class="duallistbox" multiple="multiple" name="duallistbox[]" size="5">
                                                     @foreach ($medidasDisponibles as $medida )
                                                     <option value="{{$medida}}">{{$medida->medida}}</option>
                                                     @endforeach
@@ -215,9 +212,7 @@
                                                 </select>
                                             </div>
                                             @can('campaign.create')
-                                            <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenMedida','medidasduallistbox[]','Medidas','medida','campaign_medidas')">Asociar
-                                            Medidas</button>
+                                            <button type="submit" class="btn btn-default btn-block" name="Guardar">Asociar Medida</button>
                                             @endcan
                                         </form>
                                     </div>
@@ -231,15 +226,14 @@
                                         </div>
                                     </div>
                                     <div class="card-body collapse">
-                                        <form id="mobiliarioform" action="#" method="post">
-                                            <input type="hidden" name="_tokenMobiliario" value="{{ csrf_token()}}"
-                                                id="tokenMobiliario">
+                                        <form action="{{route('campaign.asociar')}}" method="post">
+                                            @csrf
                                             <div class="form-group">
-                                                @csrf
-                                                <input type="hidden" class="" name="campaign_id"
-                                                    value="{{$campaign->id}} " />
-                                                <select class="duallistbox" multiple="multiple" name="mobiliariosduallistbox[]"
-                                                    size="5">
+                                                <input type="hidden" name="_tokenMobiliario" value="{{ csrf_token()}}" id="tokenMobiliario">
+                                                <input type="hidden" class="" name="campaign_id" value="{{$campaign->id}} " />
+                                                <input type="hidden" class="" name="campo" value="mobiliario" />
+                                                <input type="hidden" class="" name="tabla" value="campaign_mobiliarios" />
+                                                <select class="duallistbox" multiple="multiple" name="duallistbox[]" size="5">
                                                     @foreach ($mobiliariosDisponibles as $mobiliario )
                                                     <option value="{{$mobiliario}}">{{$mobiliario->mobiliario}}</option>
                                                     @endforeach
@@ -250,9 +244,7 @@
                                                 </select>
                                             </div>
                                             @can('campaign.create')
-                                            <button type="button" class="btn btn-default btn-block" name="Guardar"
-                                            onclick="asociar({{ $campaign->id}},'/campaign/asociar','#tokenMobiliario','mobiliariosduallistbox[]','Mobiliarios','mobiliario','campaign_mobiliarios')">Asociar
-                                            Mobiliario</button>
+                                            <button type="submit" class="btn btn-default btn-block" name="Guardar">Asociar Mobiliario</button>
                                             @endcan
                                         </form>
                                     </div>
@@ -269,24 +261,26 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="campaignFiltrarModalLabel">Generar Campaña</h5>
-                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> --}}
                     </div>
                     <div class="modal-body">
-                        <form id="formulario" method="post" action="{{route('campaign.generar',$campaign->id) }}">
-                            @csrf
-                            <div class="row">
-                                <p>Se va a proceder a generar los elementos de la campaña.</p>
-                                <p>En caso de haberse generado previamente, se eliminarán los existentes y se volverán a generar.</p>
-                                <p>Pulse <span class="badge badge-primary">Generar</span> para continuar o <span class="badge badge-secondary">Cerrar</span> para cancelar. </p>
+                        {{-- <form id="formulario" method="post" action="{{route('campaign.generar',$campaign->id) }}"> --}}
+                            <div class="">
+                                <p>Pulsar <span class="badge badge-primary">Nueva Campaña</span> para comenzar de 0.</p>
+                                <p>Pulsar <span class="badge badge-success">Añadir Elemento</span> para añadir nuevos elementos.</p>
+                                <p>Pulsar <span class="badge badge-secondary">Cerrar</span> para cancelar.</p>
                             </div>
                             <div class="modal-footer">
+                            @can('campaign.create')
+                                <form id="formularioNueva" method="post" action="{{route('campaign.generar',['0',$campaign->id]) }}">
+                                    @csrf
+                                    <button  type="button" onclick="generar('#formularioNueva')" title="Generar Nueva Campaña" class="btn btn-primary modalSubir" name="Generar">Nueva Campaña</a> 
+                                </form>
+                                <form id="formularioMas" method="post" action="{{route('campaign.generar',['1',$campaign->id]) }}">
+                                    @csrf
+                                    <button  type="button" onclick="generar('#formularioMas')" title="Añadir Elementos a la Campaña" class="btn btn-success modalSubir" name="Generar">Añadir Elementos</a> 
+                                </form>
+                            @endcan
                                 <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
-                                @can('campaign.create')
-                                <button  type="button" onclick="generar()" title="Generar" class="btn btn-primary  modalSubir" name="Generar">Generar</a> 
-                                {{-- <a  type="button" href="{{route('campaign.generar',$campaign->id) }}" title="Generar" class="btn btn-primary  modalSubir" name="Generar">Generar</a>  --}}
-                                @endcan
                             </div>
                         </form>
                     </div>
@@ -299,13 +293,11 @@
 
 @push('scriptchosen')
 <script>
-    $(document).ready( function () {
+    @include('_partials._errortemplate')
 
-    });
-
-    function generar(){
+    function generar(form){
         $('.modalSubir').attr('disabled',true);
-        $('#formulario').submit();
+        $(form).submit();
     }
 
     $('#menucampaign').addClass('active');

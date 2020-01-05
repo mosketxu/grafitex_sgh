@@ -79,7 +79,7 @@
                                     <tr data-id="{{$campaign->id}}">
                                         <form id="form{{$campaign->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
                                         @csrf
-                                            <input type="text" class="d-none" id="id" name="id" value="{{$campaign->id}}">
+                                            <input type="text" class="d-none" value="{{$campaign->id}}">
                                             <td>{{$campaign->id}}</td>
                                             <td>{{$campaign->campaign_name}}</td>
                                             <td>{{$campaign->campaign_initdate}}</td>

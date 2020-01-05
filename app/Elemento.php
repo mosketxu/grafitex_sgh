@@ -38,7 +38,8 @@ class Elemento extends Model
 
         public function scopeUbi($query,$ubi)
         {
-            return $query->where('ubicacion','LIKE',"%$ubi%");
+            if($ubi)
+                return $query->where('ubicacion','LIKE',"%$ubi%");
         }
         public function scopeMob($query,$mob)
         {
@@ -65,11 +66,38 @@ class Elemento extends Model
             if($propx)
                 return $query->where('propxelemento','LIKE',"%$propx%");
         }
+
+        public function scopeCampubi($query,$campaignId)
+        {
+            if (CampaignUbicacion::where('campaign_id',$campaignId)->count()>0){
+                return $query->whereIn('ubicacion',function($q) use($campaignId){
+                    $q->select('ubicacion')->from('campaign_ubicacions')->where('campaign_id',$campaignId);
+                });}
+        }
     
+        public function scopeCampmob($query,$campaignId)
+        {
+            if (CampaignMobiliario::where('campaign_id',$campaignId)->count()>0){
+                return $query->whereIn('mobiliario',function($q) use($campaignId){
+                    $q->select('mobiliario')->from('campaign_mobiliarios')->where('campaign_id',$campaignId);
+                });}
+        }
+    
+        public function scopeCampmed($query,$campaignId)
+        {
+            if (CampaignMedida::where('campaign_id',$campaignId)->count()>0){
+                return $query->whereIn('medida',function($q) use($campaignId){
+                    $q->select('medida')->from('campaign_medidas')->where('campaign_id',$campaignId);
+                });}
+        }
+    
+
+
+
 
     public function storeelementos()  
     {
-        return $this->hasMany(StoreElemento::class);
+        return $this->hasMany(StoreElemento::class,'elemento_id');
     }
 
     public function ubica()  

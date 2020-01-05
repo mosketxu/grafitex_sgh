@@ -87,6 +87,10 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        {{ $areas->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                        <span class="badge">{{$areas->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tArea" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
@@ -177,6 +181,10 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        {{ $conceptos->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                        <span class="badge">{{$conceptos->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tStoreconcept" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
@@ -265,6 +273,11 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    {{-- links --}}
+                                    <div class="row">
+                                            {{ $mobiliarios->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                            <span class="badge">{{$mobiliarios->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tMobiliario" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
@@ -311,6 +324,10 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        {{ $propxelementos->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                        <span class="badge">{{$propxelementos->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tPropxelemento" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
@@ -355,6 +372,10 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        {{ $cartelerias->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                        <span class="badge">{{$cartelerias->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tCarteleria" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
@@ -399,6 +420,10 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        {{ $medidas->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                        <span class="badge">{{$medidas->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tMedida" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
@@ -445,6 +470,10 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        {{ $materiales->onEachSide(2)->links() }} &nbsp; &nbsp;
+                                        <span class="badge">{{$materiales->total()}}</span>
+                                    </div>
                                     <div class="table-responsive">
                                         <table id="tMaterial" class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>

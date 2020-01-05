@@ -81,7 +81,6 @@
                                     @foreach ($stores as $store)
                                     <tr data-id="{{$store->id}}">
                                         <form id="form{{$store->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
-                                        {{-- <form id="form{{$store->id}}" role="form" method="post" action="{{ route('store.updateimagenindex') }}" enctype="multipart/form-data"> --}}
                                             @csrf
                                             <input type="text" class="d-none" id="id" name="id" value="{{$store->id}}">
                                             <td>{{$store->id}}</td>
@@ -185,7 +184,7 @@
                                         <select class="form-control form-control-sm" id="segmento" name="segmento" >
                                             <option value="">Selecciona</option>
                                             @foreach($segmentos as $segmento )
-                                            <option value="{{$segmento->id}}" {{old('segmento')==$segmento->id ? 'selected' : ''}}>{{$segmento->segmento}}</option>
+                                            <option value="{{$segmento->segmento}}" {{old('segmento')==$segmento->segmento ? 'selected' : ''}}>{{$segmento->segmento}}</option>
                                             @endforeach
                                         </select>
                                     </div>
