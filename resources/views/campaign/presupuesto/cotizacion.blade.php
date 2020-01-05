@@ -184,17 +184,14 @@
                                           @if(count($extras)>0)
                                           <tbody>
                                              @foreach($extras as $extra)
-                                                <form id="form{{$extra->id}}" role="form" method="post"
-                                                         action="javascript:void(0)">
-                                                   <input type="hidden" name="_tokenExtra{{$extra->id}}"
-                                                      value="{{ csrf_token()}}" id="tokenExtra{{$extra->id}}">
+                                                <form id="form{{$extra->id}}" role="form" method="post" action="{{ route('campaign.presupuesto.extra.delete',$extra->id) }}">
+                                                   <input type="hidden" name="_tokenExtra{{$extra->id}}" value="{{ csrf_token()}}" id="tokenExtra{{$extra->id}}">
                                                    @csrf
-                                                   <tr class="editarTr" id="{{$extra->id}}"><span class="d-none"
-                                                         id="sum{{$extra->id}}">sumTotExtra</span>
-                                                      <input type="hidden" name="presupuesto_id"
-                                                         value="{{$extra->presupuesto_id}}" readonly="readonly">
+                                                   @method('DELETE')
+                                                   <tr class="editarTr" id="{{$extra->id}}"><span class="d-none" id="sum{{$extra->id}}">sumTotExtra</span>
+                                                      <input type="hidden" name="presupuesto_id" value="{{$extra->presupuesto_id}}" readonly="readonly">
                                                       <input type="hidden" name="tipo" value="2" readonly="readonly">
-                                                         <input type="checkbox" id="check{{$extra->id}}" style="display:none">
+                                                      <input type="checkbox" id="check{{$extra->id}}" style="display:none">
                                                       {{-- concepto --}}
                                                       <td class="my-0 py-1">
                                                          <input type="text" id="concepto{{$extra->id}}"
@@ -248,9 +245,9 @@
                                                          </a>
                                                          @endcan
                                                          @can('presupuesto.destroy')
-                                                         <a href="{{ route('campaign.presupuesto.extra.delete',$extra->id) }}" title="Eliminar">
+                                                         <button type="submit" class="enlace" title="Eliminar">
                                                             <i class="far fa-trash-alt text-danger fa-2x ml-1"></i>
-                                                         </a>
+                                                         </button>
                                                          @endcan
                                                       </td>
                                                    </tr>

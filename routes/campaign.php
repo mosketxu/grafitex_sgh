@@ -101,16 +101,16 @@ Route::group(['prefix' => 'campaign'], function () {
             ->middleware('can:presupuesto.destroy');
 
         //presupuesto detalles
-        Route::group(['prefix' => 'detalle'], function () {
-            Route::post('/update/{campaignpresupuestodetalle}', 'CampaignPresupuestoDetalleController@update')->name('campaign.presupuesto.detalle.update')
-                ->middleware('can:campaign.edit');
+        // Route::group(['prefix' => 'detalle'], function () {
+        //     Route::post('/update/{campaignpresupuestodetalle}', 'CampaignPresupuestoDetalleController@update')->name('campaign.presupuesto.detalle.update')
+        //         ->middleware('can:campaign.edit');
             
-            Route::post('/store', 'CampaignPresupuestoDetalleController@store')->name('campaign.presupuesto.detalle.store')
-                ->middleware('can:campaign.create');
+        //     Route::post('/store', 'CampaignPresupuestoDetalleController@store')->name('campaign.presupuesto.detalle.store')
+        //         ->middleware('can:campaign.create');
 
-            Route::get('/delete/{campaignpresupuestodetalle}', 'CampaignPresupuestoDetalleController@destroy')->name('campaign.presupuesto.detalle.delete')
-                ->middleware('can:campaign.destroy');
-        });
+        //     Route::get('/delete/{campaignpresupuestodetalle}', 'CampaignPresupuestoDetalleController@destroy')->name('campaign.presupuesto.detalle.delete')
+        //         ->middleware('can:campaign.destroy');
+        // });
 
         //presupuesto extras
         Route::group(['prefix' => 'extra'], function () {
@@ -120,7 +120,7 @@ Route::group(['prefix' => 'campaign'], function () {
             Route::post('/store', 'CampaignPresupuestoExtraController@store')->name('campaign.presupuesto.extra.store')
                 ->middleware('can:campaign.store');
 
-            Route::get('/delete/{campaignpresupuestoextra}', 'CampaignPresupuestoExtraController@destroy')->name('campaign.presupuesto.extra.delete')
+            Route::delete('/delete/{campaignpresupuestoextra}', 'CampaignPresupuestoExtraController@destroy')->name('campaign.presupuesto.extra.delete') 
                 ->middleware('can:campaign.destroy');
         });
     });
