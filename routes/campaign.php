@@ -57,7 +57,10 @@ Route::group(['prefix' => 'campaign'], function () {
         Route::post('/updateimagenindex', 'CampaignElementoController@updateimagenindex')->name('campaign.elementos.updateimagenindex')
             ->middleware('can:campaign.edit');
 
-        Route::get('/export/{campaign}', 'CampaignElementoController@export')
+        Route::get('/export/conteoidimatmedmob/{campaign}', 'CampaignElementoController@exportConteoIdiomaMatMedMob')->name('campaign.conteo.export')
+            ->middleware('can:campaign.index');
+
+        Route::get('/export/campaignelementos/{campaign}', 'CampaignElementoController@exportCampaignElementos')->name('campaign.elementos.export')
             ->middleware('can:campaign.index');
     });
     // galeria

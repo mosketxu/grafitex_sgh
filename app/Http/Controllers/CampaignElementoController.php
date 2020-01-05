@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\{Campaign,CampaignElemento};
 use Illuminate\Http\Request;
-use App\Exports\CampaignElemenIdiMatMedMobExport;
+use App\Exports\{CampaignElemenIdiMatMedMobExport, CampaignElementosExport};
 use Maatwebsite\Excel\Facades\Excel;
 
 use Image;
@@ -191,9 +191,14 @@ class CampaignElementoController extends Controller
         return Response()->json($campElem);
     }
 
-    public function export($campaignId) 
+    public function exportConteoIdiomaMatMedMob($campaignId)
     {
-            return Excel::download(new CampaignElemenIdiMatMedMobExport($campaignId), 'estadistica.xlsx');
+        return Excel::download(new CampaignElemenIdiMatMedMobExport($campaignId), 'estadistica.xlsx');
+    }
+
+    public function exportCampaignElementos($campaignId)
+    {
+        return Excel::download(new CampaignElementosExport($campaignId), 'campaignelementos.xlsx');
     }
     
 

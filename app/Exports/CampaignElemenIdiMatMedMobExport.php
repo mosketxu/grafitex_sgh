@@ -16,7 +16,7 @@ class CampaignElemenIdiMatMedMobExport implements FromCollection,WithHeadings
             $this->id = $id;
     }
     /**
-    * @return \Illuminate\Support\Collection
+    * @return \Illuminate\Support\Collection 
     */
 
     public function headings(): array

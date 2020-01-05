@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content --> 
     <div class="content-wrapper">
         {{-- content header --}}
         <div class="content-header">
@@ -70,8 +70,8 @@
                         <div class="row">
                             <div class="col-10 row">
                                 {{ $elementos->links() }} &nbsp; &nbsp;
-                                Hay {{$elementos->total()}} elementos
-                                
+                                Hay {{$elementos->total()}} elementos. &nbsp;&nbsp;
+                                <a href="{{route('campaign.elementos.export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                             </div>
                             <div class="col-2 float-right mb-2">
                                 <form method="GET" action="{{route('campaign.elementos',$campaign) }}">
