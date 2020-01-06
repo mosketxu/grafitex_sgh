@@ -26,7 +26,6 @@ class CreateStoresTable extends Migration
             $table->string('concepto',50)->index();
             $table->string('observaciones',50)->nullable();
             $table->string('imagen',100)->default('SGH.jpg');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

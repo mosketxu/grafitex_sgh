@@ -23,13 +23,19 @@ class StoreElemento extends Model
 
     public function scopeSearch($query, $busca)
     {
-      return $query->where('ubicacion', 'LIKE', "%$busca%")
+      return $query->where('store_id', 'LIKE', "%$busca%")
+      ->orWhere('name', 'LIKE', "%$busca%")
+      ->orWhere('country', 'LIKE', "%$busca%")
+      ->orWhere('zona', 'LIKE', "%$busca%")
+      ->orWhere('area', 'LIKE', "%$busca%")
+      ->orWhere('segmento', 'LIKE', "%$busca%")
+      ->orWhere('concepto', 'LIKE', "%$busca%")
+      ->orWhere('ubicacion', 'LIKE', "%$busca%")
       ->orWhere('mobiliario', 'LIKE', "%$busca%")
       ->orWhere('carteleria', 'LIKE', "%$busca%")
       ->orWhere('medida', 'LIKE', "%$busca%")
       ->orWhere('material', 'LIKE', "%$busca%")
       ->orWhere('propxelemento', 'LIKE', "%$busca%")
-      ->orWhere('observaciones', 'LIKE', "%$busca%")
       ;
     }
 

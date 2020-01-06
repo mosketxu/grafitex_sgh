@@ -6,7 +6,7 @@
 @section('title','Grafitex-Maestro')
 @section('titlePag','Maestro')
 @section('navbar')
-    @include('maestro._navbarmaestro')
+    @include('_partials._navbar')
 @endsection
 
 
@@ -28,6 +28,10 @@
                         @can('maestro.create')
                         <a href="" role="button" data-toggle="modal" data-target="#importMaestro" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="" role="button" data-toggle="modal" data-target="#actualizaTablas" data-backdrop="static" data-keyboard="false">
+                            <i class="fas fa-sync-alt fa-2x text-success mt-2"></i>
                         </a>
                         @endcan
                     </div>
@@ -125,7 +129,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal -->
+            <!-- Modal Maestro-->
             <div class="modal fade" id="importMaestro" tabindex="-1" role="dialog" aria-labelledby="importMaestroLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
@@ -152,6 +156,34 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Actuliza tablas-->
+            <div class="modal fade" id="actualizaTablas" tabindex="-1" role="dialog" aria-labelledby="actualizaTablasLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importMaestroLabel">Actualiza las tablas principales del sistema</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="campaign_initdate">Pulse actualizar para continuar</label>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                @can('maestro.create')
+                                <form id="formularioAct" role="form" method="get" action="{{ route('maestro.actualizatablas') }}">
+                                    @csrf
+                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="actualizaTablas()">Actualizar</button>
+                                </form>
+                                @endcan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>
 @endsection
@@ -185,6 +217,10 @@
         $('.modalSubir').attr('disabled',true);
         $('#formulario').submit();
     }
+    function actualizaTablas(){
+        $('.modalSubir').attr('disabled',true);
+        $('#formularioAct').submit();
+    }
 
     function borrarFiltros(){
             $("#sto").val('');   
@@ -203,7 +239,7 @@
 
     $(document).ready( function () {
         $('#menumaestro').toggleClass('activo');
-        $('#navmaestro').toggleClass('activo');
+        // $('#navmaestro').toggleClass('activo');
     });
 </script>
 @endpush

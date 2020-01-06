@@ -8,7 +8,6 @@ use Image;
 
 class Store extends Model
 {
-    use SoftDeletes;
     protected $fillable=[
         'id','name','country',
         'zona','area_id','area','segmento',

@@ -25,7 +25,6 @@ class ElementoController extends Controller
         $elementos=Elemento::search($request->busca)
         ->paginate()->onEachSide(1);
 
-        $totalelementos=Elemento::count();
         $ubicaciones=Ubicacion::orderBy('ubicacion')->get();
         $mobiliarios=Mobiliario::orderBy('mobiliario')->get();
         $propxelementos=Propxelemento::orderBy('propxelemento')->get();
@@ -33,7 +32,7 @@ class ElementoController extends Controller
         $medidas=Medida::orderBy('medida')->get();
         $familias=Tarifa::orderBy('familia')->get();
         $materiales=Material::orderBy('material')->get();
-        return view('elementos.index',compact('elementos','totalelementos','busqueda',
+        return view('elementos.index',compact('elementos','busqueda',
             'ubicaciones','mobiliarios','propxelementos','cartelerias','medidas','familias','materiales'));
     }
 

@@ -137,7 +137,7 @@ class CampaignController extends Controller
         ->campstomed($campaign->id)
         ->groupBy('store','name')
         ->get();
-        
+
         $storesAsociadas = CampaignStore::select('store_id as store','store as name')->where('campaign_id', '=', $id)->get();
         
         // segmentos
@@ -205,11 +205,28 @@ class CampaignController extends Controller
         
         $mobiliariosAsociadas = CampaignMobiliario::where('campaign_id', '=', $id)->get();
         
+        if ($request->busca) {
+            $busqueda = $request->busca;
+        } else {
+            $busqueda = '';
+        } 
+
+        $elementos=StoreElemento::join('stores','stores.id','store_id')
+        ->join('elementos','elementos.id','elemento_id')
+        ->search($request->busca)
+        ->campstosto($campaign->id)
+        ->campstoseg($campaign->id)
+        ->campstoubi($campaign->id)
+        ->campstomob($campaign->id)
+        ->campstomed($campaign->id)
+        ->paginate(10);
+
+        
         return view('campaign.filtrar', compact(
             'campaign',
             'storesDisponibles','storesAsociadas','medidasDisponibles','medidasAsociadas',
             'mobiliariosDisponibles','mobiliariosAsociadas','ubicacionesDisponibles','ubicacionesAsociadas','segmentosDisponibles',
-            'segmentosAsociadas'
+            'segmentosAsociadas','elementos','busqueda'
         ));
     }
 
@@ -299,7 +316,6 @@ class CampaignController extends Controller
     public function generarcampaign($tipo,$id)
     {
         $campaign = Campaign::find($id);
-
         //Si empiezo de 0 borrar todo lo generado y regenerar
         if($tipo=="0"){
             if(CampaignElemento::where('campaign_id','=',$id)->count()>0){
@@ -315,9 +331,9 @@ class CampaignController extends Controller
             }
         }
         
-
+        
         //Filtros
-
+        
         // Si no se ha seleccionado ningun Area entiendo que los quiero todos
         if(CampaignArea::where('campaign_id','=',$id)->count()==0){
             $areas=Area::select('area')->get();
@@ -343,10 +359,10 @@ class CampaignController extends Controller
             $ubicacions=Ubicacion::select('ubicacion')->get();
             Campaign::inserta('campaign_ubicacions',$ubicacions,'ubicacion',$id);
         }
-
+        
         // Si no se ha seleccionado ningun store entiendo que los quiero todos
         if(CampaignStore::where('campaign_id','=',$id)->count()==0){
-            Store::select('store','name')->chunk(100, function ($stores) {
+            Store::select('id as store','name')->chunk(100, function ($stores) use($id){
                 foreach ($stores as $store) {
                     $existe=CampaignStore::where('store_id',$store['store'])->where('campaign_id',$id)->count();
                     if($existe==0){
@@ -354,30 +370,27 @@ class CampaignController extends Controller
                             'campaign_id'  => $id,
                             'store_id'  => $store['store'],
                             'store'  => $store['name'],
-                        ]);
-                    };
-                }
-            });
-        }
-
+                            ]);
+                        };
+                    }
+                });
+            }
+            
         // Separo en una tabla los stores y en otra todo los elementos de la store
-       
+            
         // $tiendas=Maestro::CampaignTiendas($id)->get();
         $tiendas=StoreElemento::join('stores','stores.id','store_id')
-        ->join('elementos','elementos.id','elemento_id')
-        ->select('store_id as store')
-        ->campstosto($campaign->id)
-        ->campstoseg($campaign->id)
-        ->campstoubi($campaign->id)
-        ->campstomob($campaign->id)
-        ->campstomed($campaign->id)
-        ->groupBy('store','name')
-        ->get();
+            ->join('elementos','elementos.id','elemento_id')
+            ->select('store_id as store')
+            ->campstosto($campaign->id)
+            ->campstoseg($campaign->id)
+            ->campstoubi($campaign->id)
+            ->campstomob($campaign->id)
+            ->campstomed($campaign->id)
+            ->groupBy('store','name')
+            ->get();
         
-
-
         foreach ($tiendas as $tienda) {
-            
             if(CampaignTienda::where('campaign_id',$id)->where('store_id',$tienda->store)->count()==0){
                 $tiendaId = CampaignTienda::insertGetId(["campaign_id"=>$id,"store_id"=>$tienda->store]);
             }

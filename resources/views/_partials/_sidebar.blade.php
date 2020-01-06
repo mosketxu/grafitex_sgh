@@ -52,14 +52,14 @@
                     </a>
                 </li>
                 @endcan
-                @can('direcciones.index')
+                {{-- @can('direcciones.index')
                 <li class="nav-item">
                     <a href="" id="menudirecciones" class="nav-link">
                         <i class="nav-icon fas fa-map-marker"></i>
                         <p>Direcciones</p>
                     </a>
                 </li>
-                @endcan
+                @endcan --}}
                 @can('maestro.index')
                 <li class="nav-item">
                     <a href="{{route('maestro.index') }}" id="menumaestro" class="nav-link">

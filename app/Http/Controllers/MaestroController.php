@@ -112,12 +112,12 @@ class MaestroController extends Controller
         Maestro::insertStoreElementos();
 
         dd('finalizado');
-        // $notification = array(
-        //     'message' => '¡Tablas principales actualizadas satisfactoriamente!',
-        //     'alert-type' => 'success'
-        // );
+        $notification = array(
+            'message' => '¡Tablas principales actualizadas satisfactoriamente!',
+            'alert-type' => 'success'
+        );
         
-        // return view('home')->with($notification);
+        return view('home')->with($notification);
         
     }
 }

@@ -42,7 +42,7 @@
                 </div>
                 <form id="formstore" role="form" method="post" action="{{ route('store.update',$store->id) }}" enctype="multipart/form-data">
                     @csrf
-                    @method('PATCH')
+                    @method('PUT')
                     <div class="card-body">
                         <div class="row">
                             <div class="col-8">
