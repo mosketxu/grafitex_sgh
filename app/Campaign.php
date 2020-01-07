@@ -53,16 +53,20 @@ class Campaign extends Model
             DB::table($tabla)->insert($dataSet);
         }
     }
-    public function campTiendas(){
-        return $this->hasMany(CampaignTienda::class);
+    public function tiendas(){
+        return $this->hasMany(CampaignTienda::class,'campaign_id');
+    }
+
+    public function tiendaselementos(){
+        return $this->hasMany(CampaignTienda::class,'campaign_id')->with('elementos');
     }
 
     // public function campaignStores(){
     //     return $this->hasMany(CampaignStore::class);
     // }
-    public function campaignElementos(){
-        return $this->hasMany(CampaignElemento::class);
-    }
+    // public function campaignElementos(){
+    //     return $this->hasMany(CampaignElemento::class);
+    // }
 
     public function campaignPresupuestos(){
         return $this->hasMany(CampaignPresupuesto::class);

@@ -32,7 +32,8 @@ class CampaignElemenIdiMatMedMobExport implements FromCollection,WithHeadings
     }
     public function collection()
     {
-        return CampaignElemento::where('campaign_id',$this->id)
+        return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+        ->where('campaign_id',$this->id)
         ->select('country','material','medida','mobiliario', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
         ->groupBy('country','material','medida','mobiliario')
         ->get();

@@ -1,10 +1,8 @@
 .activo{
-   /* background-color: #17a2b8; */
-   background-color: #92c6ce;
-   padding: 3px;
-   color:#fff !important;
-   /* border: 1px solid transparent; */
-   border-radius: 0.25rem;
+    background-color: #92c6ce;
+    padding: 3px;
+    color:#fff !important;
+    border-radius: 0.25rem;
 }
 
 .image-upload > input
@@ -33,11 +31,11 @@
         cursor:pointer;
     }
 
-/* para los label de los permisos quitar la negrita */*
-    .labelpermiso{
-        font-weight: 400 !important;
-        font-size: 0.9rem;
-    }
+/* para los label de los permisos quitar la negrita */
+.labelpermiso{
+    font-weight: 400 !important;
+    font-size: 0.9rem;
+}
 
 /* Para el plugin de ordenacion */
 /* table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 

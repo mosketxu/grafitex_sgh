@@ -58,12 +58,11 @@ class CampaignPresupuestoController extends Controller
             'fecha' => 'required|date',
             'estado' => 'required',
             ]);
-            
+
         // recupero la lista de elementos creada y asigno el precio en función de cuántos hay
         // calculo el total actual de los elementos para insertarlo y mostrarlo en el indice de prepuestos
         // Lo hago cada vez que genero un presupuesto para tener siempre el último precio
         $totalpresupuestoMat= CampaignElemento::asignElementosPrecio($request->campaign_id);
-
         $campPresu=CampaignPresupuesto::create($request->all());
         $campPresu->total=$totalpresupuestoMat->total;
         $campPresu->save();
@@ -210,6 +209,7 @@ class CampaignPresupuestoController extends Controller
                 'fecha' => 'required|date',
                 'estado' => 'required',
                 ]);
+            
             CampaignPresupuesto::find($id)->update($request->all());
             $campaign=Campaign::find($request->campaign_id);
                 

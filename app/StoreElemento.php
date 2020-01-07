@@ -9,17 +9,17 @@ class StoreElemento extends Model
 
     protected $fillable=['id','elemento_id','store_id','elementificador'];
 
-    protected $with=['elemen'];
+    // protected $with=['elemen'];
 
-    public function elemen()
-    {
-        return $this->belongsTo(Elemento::class,'elemento_id');
-    }
+    // public function elemen()
+    // {
+    //     return $this->belongsTo(Elemento::class,'elemento_id');
+    // }
     
-    public function store()
-    {
-        return $this->belongsTo(Store::class,'store_id');
-    }
+    // public function store()
+    // {
+    //     return $this->belongsTo(Store::class,'store_id');
+    // }
 
     public function scopeSearch($query, $busca)
     {
@@ -78,6 +78,4 @@ class StoreElemento extends Model
                 $q->select('medida')->from('campaign_medidas')->where('campaign_id',$campaignId);
             });}
     }
-
-
 }

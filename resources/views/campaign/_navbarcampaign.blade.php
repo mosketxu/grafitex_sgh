@@ -43,7 +43,7 @@
     @can('campaign.index')
     <li class="nav-item d-none d-sm-inline-block">
         <a  href="{{route('campaign.etiquetas.index',$campaign->id) }}" class="nav-link" title="Etiquetas HTML"><span id="navetiquetas" class="px-1"><i class="fas fa-code text-indigo fa-lg"></i></span></a>
-    </li>
+    </li> 
     @endcan
   </ul>
   <!-- Right Side Of Navbar --> 

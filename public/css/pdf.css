@@ -1,11 +1,7 @@
 body {
-   font-family: DejaVu Sans;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    font-size: xx-small;
    text-align: center;
-}
-
-@page {
-   margin: 100px 25px;
 }
 
 header {
@@ -42,7 +38,7 @@ footer {
 }
 
 .celda{
-   font-family: DejaVu Sans;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    border: rgb(0, 0, 0) 1px solid;
    text-align: center;
    font-size: 8px;
@@ -63,35 +59,35 @@ footer {
  }
 
  .platinum{
-   font-family: DejaVu Sans;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    text-align: center; 
    background-color: #E5E4E2; 
    font-size:medium;
  }
  .gold{
-   font-family: DejaVu Sans;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    text-align: center; 
    background-color:#D4AF37; 
    font-size:medium;
  }
  .outlet{
-   font-family: DejaVu Sans;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    text-align: center; 
    background-color:#DEA5A4; 
    font-size:medium;
  }
  .silver{
-   font-family: DejaVu Sans;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    text-align: center; 
    background-color:#C0C0C0; 
    font-size:medium;
  }
 
  .idioma{
-   font-family: DejaVu Sans;
+   margin-top: 3px;
+   margin-bottom: 3px;
+   background-color: #8bd3f5;
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
    text-align: center; 
    font-size: large;
  }
-
-
-

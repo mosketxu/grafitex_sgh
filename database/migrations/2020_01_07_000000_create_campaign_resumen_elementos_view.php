@@ -22,6 +22,8 @@ class CreateCampaignResumenElementosView extends Migration
                     SUM(unitxprop) as unidades,
                     SUM(unitxprop * precio) as tot
                 from campaign_elementos 
+                join campaign_tiendas
+                on campaign_elementos.tienda_id=campaign_tiendas.id
                 group by 
                     campaign_id, 
                     familia,

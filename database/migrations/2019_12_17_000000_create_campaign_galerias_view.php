@@ -14,7 +14,7 @@ class CreateCampaignGaleriasView extends Migration
     public function up()
     {
         DB::statement(
-            "CREATE VIEW v_campaign_galerias 
+            "CREATE VIEW v_campaign_galerias  
                 as select 
                     campaign_id,
                     mobiliario,
@@ -24,6 +24,8 @@ class CreateCampaignGaleriasView extends Migration
                     if(left(name,3)='ECI','ECI','') as ECI,
                     CONCAT(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(concat(mobiliario,carteleria,medida),' ',''),'.',''),'(',''),')',''),'+',''),'/',''),if(left(name,3)='ECI','ECI',''),'.jpg') AS imagen
                 from campaign_elementos 
+                join campaign_tiendas
+                on campaign_elementos.tienda_id=campaign_tiendas.id
                 group by 
                     campaign_id, 
                     mobiliario,

@@ -14,6 +14,7 @@ class CampaignReportingController extends Controller
     public function index($campaignId)
     {
         $today=Carbon::now()->format('d/m/Y');
+        
         $etiquetas=Campaign::where('id',$campaignId)
         ->first();
 
@@ -21,16 +22,19 @@ class CampaignReportingController extends Controller
     }
 
     public function pdf($campaignId){
+
         $today=Carbon::now()->format('d/m/Y');
+        
         $etiquetas=Campaign::where('id',$campaignId)
         ->first();
 
-        $pdf = \PDF::loadView('reporting.etiquetas',compact('etiquetas','today'));
+
+        $pdf = \PDF::loadView('reporting.etiquetasHTML',compact('etiquetas','today'));
         // $pdf->setPaper('a4','landscape');
         $pdf->setPaper('a4','portrait');
 
         return $pdf->download('etiquetas.pdf'); //así lo descarga
-        //return $pdf->stream(); // así lo muestra en pantalla
+        // return $pdf->stream(); // así lo muestra en pantalla
    }
 
    public function pdfPresupuesto($presupuestoId){

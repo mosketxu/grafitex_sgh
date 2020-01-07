@@ -10,31 +10,16 @@ class CampaignElemento extends Model
 {
     public $timestamps = true;
     
-    protected $with=['campatiendas'];
+    // protected $with=['camptiendas'];
 
     protected $fillable=['campaign_id','tienda_id', 'store_id','country','name','area','segmento','storeconcept','ubicacion','mobiliario',
         'propxlemento','carteleria','medida','material','unitxprop','imagen','observaciones','precio'
     ];
 
    
-    public function campaign()
-    {
-        return $this->belongsTo(Campaign::class,'campaign_id'); //no hace falta porque ya busca este campo, pero asi me acuerdo como es
-    }
-
-    // public function campaignstore()
+    // public function camptiendas()
     // {
-    //     return $this->belongsTo(CampaignStore::class,'store_id');
-    // }
-
-    public function campatiendas()
-    {
-        return $this->belongsTo(CampaignTienda::class);
-    }
-
-    // public function tienda()
-    // {
-    //     return $this->belongsTo(Store::class,'store_id');
+    //     return $this->belongsTo(CampaignTienda::class,'tienda_id');
     // }
 
     public function tarifa()
@@ -44,7 +29,7 @@ class CampaignElemento extends Model
 
     public function scopeSearch($query, $busca)
     {
-      return $query->where('store_id', 'LIKE', "%$busca%")
+      return $query->where('campaign_elementos.store_id', 'LIKE', "%$busca%")
       ->orWhere('name', 'LIKE', "%$busca%")
       ->orWhere('country', 'LIKE', "%$busca%")
       ->orWhere('area', 'LIKE', "%$busca%")
@@ -60,20 +45,31 @@ class CampaignElemento extends Model
       ;
     }
 
+    public function scopeTienda($query, $campaignid)
+    {
+      return $query->join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+      ->where('campaign_id',$campaignid)
+      ;
+    }
+
     static function asignElementosPrecio($campaignId)
     {
 
-        $elementos=CampaignElemento::where('campaign_id',$campaignId)
+        // $elementos=CampaignElemento::where('campaign_id',$campaignId)
+        // ->get();
+        $elementos=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id') 
+        ->select('campaign_elementos.id as id','precio','familia')
+        ->where('campaign_id',$campaignId)
         ->get();
-    
-    
-        foreach ($elementos as $elemento){
-            $conteo=CampaignElemento::where('campaign_id',$campaignId)
-                ->where('familia',$elemento->familia)
-                ->count();
 
+        foreach ($elementos as $elemento){
+            $conteo=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+            ->where('campaign_id',$campaignId)
+            ->where('familia',$elemento->familia)
+            ->count();
+            
             $fam=Tarifa::where('id',$elemento->familia)->first();
-                
+            
             if($conteo<$fam->tramo2)
                 $elemento->precio=$fam->tarifa1;
             elseif($conteo>$fam->tramo3)
@@ -84,9 +80,10 @@ class CampaignElemento extends Model
             $elemento->save();
         }
 
-        return CampaignElemento::where('campaign_id',$campaignId)
-            ->select(DB::raw('SUM(unitxprop*precio) as total'))
-            ->first();
+        return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+        ->select(DB::raw('SUM(unitxprop*precio) as total'))
+        ->first();
+        
     }
 
 }

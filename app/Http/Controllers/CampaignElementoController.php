@@ -18,6 +18,7 @@ class CampaignElementoController extends Controller
      */
     public function index($campaignId, Request $request)
     {
+        
         if ($request->busca) {
             $busqueda = $request->busca;
         } else {
@@ -25,11 +26,11 @@ class CampaignElementoController extends Controller
         } 
 
         $campaign = Campaign::find($campaignId);
-
-
-        $elementos= CampaignElemento::search($request->busca)
+        
+        $elementos= CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+        ->search($request->busca)
         ->where('campaign_id',$campaignId)
-        ->select('id','store_id','name','country','area','segmento','storeconcept',
+        ->select('campaign_elementos.id as id','campaign_elementos.store_id as store_id','name','country','area','segmento','storeconcept',
             'ubicacion','mobiliario','propxelemento','carteleria','medida',
             'material','familia','precio','unitxprop','imagen','observaciones')
         ->orderBy('store_id')
@@ -112,7 +113,8 @@ class CampaignElementoController extends Controller
         $campaignelem->save();
 
         $campaign=Campaign::find($campaignelem->campaign_id);
-        $elementos=CampaignElemento::where('campaign_id',$campaignelem->campaign_id)
+        $elementos=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+        ->where('campaign_id',$campaignelem->campaign_id)
         ->orderBy('store_id')
         ->paginate('5');
 
