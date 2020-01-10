@@ -93,7 +93,12 @@
                     </table>
                 </div>
                 <div class="idioma">
-                    Idioma:{{$campaignstore->tienda->country}}
+                    Idioma:
+                    @if ($campaignstore->tienda->area=='Cataluña')
+                        CAT
+                    @else
+                        {{$campaignstore->tienda->country}}
+                    @endif    
                 </div>
                 <div style="page-break-after:always;"></div>
             @endforeach

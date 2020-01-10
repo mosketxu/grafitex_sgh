@@ -70,7 +70,7 @@
                         <div class="row">
                             <div class="col-10 row">
                                 {{ $elementos->links() }} &nbsp; &nbsp;
-                                Hay {{$elementos->total()}} elementos. &nbsp;&nbsp;
+                                Hay {{$elementos->total()}} elementos &nbsp;&nbsp;
                                 <a href="{{route('campaign.elementos.export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                             </div>
                             <div class="col-2 float-right mb-2">
@@ -105,6 +105,11 @@
                                         {{-- <th id="tTarifa">Tarifa</th> --}}
                                         {{-- <th id="tPrecio">€/ud</th> --}}
                                         <th id="tUnit" class="text-center">Unit x Prop</th>
+                                        {{-- <th id="tComb" class="text-center">
+                                            <label class="p-0 m-0 text-center" style="width: 30px;">X1</label>
+                                            <label class="p-0 m-0 text-center" style="width: 30px;">X2</label>
+                                            <label class="p-0 m-0 text-center" style="width: 30px;">X3</label>
+                                        </th> --}}
                                         <th id="tObservaciones">Observaciones</th>
                                         <th width="150px">Imagen </th>
                                         <th width="50px" class="text-center"><span class="ml-1">Acción</th>
@@ -136,6 +141,11 @@
                                         </td> --}}
                                         {{-- <td>{{$elemento->precio}}</td> --}}
                                         <td class="text-center">{{$elemento->unitxprop}}</td>
+                                        {{-- <td class="text-center">
+                                            <input type="number" name="" id="" style="width: 30px;">&nbsp;
+                                            <input type="number" name="" id="" style="width: 30px;">&nbsp;
+                                            <input type="number" name="" id="" style="width: 30px;">&nbsp;
+                                        </td> --}}
                                         <td>{{$elemento->observaciones}}</td>
                                         <td>
                                             <div class="row">
