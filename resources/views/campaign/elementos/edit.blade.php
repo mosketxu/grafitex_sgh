@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-auto ">
                     <span class="h3 m-0 text-dark">@yield('titlePag')</span>
-                    <span class="hidden" id="campaign_id"></span>
+                <span class="hidden" id="campaign_id"></span>
                 </div>
                 <div class="col-auto mr-auto">
                 </div>
@@ -41,6 +41,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="row">
+                            <input type="hidden" id="campaignID" value='{{$campaign->id}}'>
                                 <div class="form-group col">
                                     <label for="campaign_name">Campaña</label>
                                     <input type="text" class="form-control form-control-sm" id="campaign_name"
@@ -192,6 +193,7 @@
                             @can('campaign.edit')
                             <button type="submit" class="btn btn-primary">Submit</button>
                             @endcan
+                            <a class="btn btn-default" href="{{route('campaign.elementos',$campaign->id)}}" title="Ir la página anterior">Volver</a>
                         </div>
                     </form>
                 </div>
@@ -236,6 +238,7 @@
 
     function subirImagen(formulario,elementoId){
         var token= $('#token').val();
+        var campaignID=$('#campaignID').val();
         let timestamp = Math.floor( Date.now() );
         $.ajaxSetup({
             headers: { "X-CSRF-TOKEN": $('#token').val() },
@@ -254,7 +257,7 @@
             processData: false,
             success:function(data){
                 // $('#'+formulario +' img').remove();
-                $('#original').attr('src', '/storage/galeria/'+ data.campaign_id+'/'+ data.imagen+'?ver=' + timestamp);
+                $('#original').attr('src', '/storage/galeria/'+ campaignID+'/'+ data.imagen+'?ver=' + timestamp);
                 toastr.info('Imagen actualizada con éxito','Imagen',{
                     "progressBar":true,
                     "positionClass":"toast-top-center"
