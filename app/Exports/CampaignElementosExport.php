@@ -44,12 +44,13 @@ class CampaignElementosExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
+        
         return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
         ->where('campaign_id',$this->id)
-        ->select('store_id','name','country','area','zona','segmento',
+        ->select('campaign_elementos.store_id','name','country','area','zona','segmento',
                 'storeconcept','ubicacion','mobiliario','propxelemento',
                 'carteleria','medida','material','unitxprop','imagen',
-                'observaciones','precio','created_at','updated_at')
+                'observaciones','precio','campaign_elementos.created_at','campaign_elementos.updated_at')
         ->orderBy('store_id')
         ->get();
     }

@@ -24,6 +24,7 @@ class StoreElementosController extends Controller
         
         $store=Store::find($storeId);
         $storeelementos=StoreElemento::search($request->busca)
+        ->join('stores','store_elementos.store_id','stores.id')
         ->join('elementos','store_elementos.elemento_id','elementos.id')
         ->where('store_elementos.store_id',$storeId)
         ->paginate('10')->onEachSide(1);
@@ -36,7 +37,7 @@ class StoreElementosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() 
     {
         //
     }

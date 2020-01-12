@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Campaign,CampaignElemento};
+use App\{Campaign,CampaignElemento, CampaignTienda};
 use Illuminate\Http\Request;
 use App\Exports\{CampaignElemenIdiMatMedMobExport, CampaignElementosExport};
 use Maatwebsite\Excel\Facades\Excel;
@@ -135,12 +135,14 @@ class CampaignElementoController extends Controller
 
     public function updateimagenindex(Request $request)
     {
+
         $request->validate([
             'photo' => 'required|image|mimes:pdf,jpeg,png,jpg,gif,svg|max:12288',
             ]);
-        
-            $campElem=CampaignElemento::find($request->elementoId);
-            // dd($campElem);
+        $campElem=CampaignElemento::find($request->elementoId);
+        $tienda=CampaignTienda::find($campElem->tienda_id);
+        $campaignId=$tienda->campaign_id;
+
         // json_decode($request->campaigngaleria);
         
         //Por si me interesa estos datos de la imagen
@@ -153,12 +155,13 @@ class CampaignElementoController extends Controller
         $file_name=$nombre; 
         
         // Si no existe la carpeta la creo
-        $ruta = public_path().'/storage/galeria/'.$campElem->campaign_id;
+        $ruta = public_path().'/storage/galeria/'.$campaignId;
         if (!file_exists($ruta)) {
             mkdir($ruta, 0777, true);
             mkdir($ruta.'/thumbnails', 0777, true);
         }
-        
+
+
         // verifico si existe la imagen y la borro si existe. Busco el nombre que debería tener.
         $mi_imagen = $ruta.'/'.$file_name;
         $mi_imagenthumb = $ruta.'/thumbails/'.$file_name;
@@ -174,7 +177,7 @@ class CampaignElementoController extends Controller
         if($files=$request->file('photo')){
             // for save the original image
             $imageUpload=Image::make($files)->encode('jpg');
-            $originalPath='storage/galeria/'.$campElem->campaign_id.'/';
+            $originalPath='storage/galeria/'.$campaignId.'/';
             $imageUpload->save($originalPath.$file_name);
             $campElem->imagen=$nombre;
             $campElem->save();
@@ -182,7 +185,7 @@ class CampaignElementoController extends Controller
             Image::make($request->file('photo'))
                 ->resize(144,144)
                 ->encode('jpg')
-                ->save('storage/galeria/'.$campElem->campaign_id.'/thumbnails/thumb-'.$file_name);
+                ->save('storage/galeria/'.$campaignId.'/thumbnails/thumb-'.$file_name);
         }
 
         // grabo el nuevo nombre de la imagen en 
@@ -190,7 +193,7 @@ class CampaignElementoController extends Controller
         $campElem->imagen = $file_name;
         $campElem->save();
 
-        return Response()->json($campElem);
+        return response()->json($campElem);
     }
 
     public function exportConteoIdiomaMatMedMob($campaignId)

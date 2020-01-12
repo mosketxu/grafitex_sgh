@@ -119,6 +119,7 @@
                                    @foreach ($elementos as $elemento)
                                    <tr>
                                     <form id="form{{$elemento->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
+                                    {{-- <form id="form{{$elemento->id}}" role="form" method="post" action="{{route('campaign.elementos.updateimagenindex')}}" enctype="multipart/form-data"> --}}
                                         @csrf
                                         <input type="text" class="d-none" name="elementoId" value="{{$elemento->id}}">
                                         <td class="d-none">{{$elemento->id}}</td>
@@ -167,7 +168,7 @@
                                                 </div>
                                                 <div>
                                                     @can('campaign.edit')
-                                                    <a href="#" name="Upload" onclick="subirImagenIndex('form{{$elemento->id}}','{{$elemento->id}}')"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
+                                                    <a href="#" name="Upload" onclick="subirImagenIndex('form{{$elemento->id}}','{{$elemento->id}}','{{$campaign->id}}')"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
                                                     @endcan
                                                 </div>
                                             </div>
@@ -199,7 +200,7 @@
     $(document).ready(function() {
    
     });
-   function subirImagenIndex(formulario,elementoId){
+   function subirImagenIndex(formulario,elementoId,campaignId){
         var token= $('#token').val();
         let timestamp = Math.floor( Date.now() );
         $.ajaxSetup({
@@ -212,14 +213,14 @@
         
         $.ajax({
             type:'POST',
-            url: "{{ route('campaign.elementos.updateimagenindex') }}",
+            url: "{{ route('campaign.elementos.updateimagenindex') }}", 
             data:formData,
             cache:false,
             contentType: false,
             processData: false,
             success:function(data){
                 $('#'+formulario +' img').remove();
-                $('#original'+elementoId).attr('src', '/storage/galeria/'+ data.campaign_id+'/'+ data.imagen+'?ver=' + timestamp);
+                $('#original'+elementoId).attr('src', '/storage/galeria/'+ campaignId+'/'+ data.imagen+'?ver=' + timestamp);
                 toastr.info('Imagen actualizada con éxito','Imagen',{
                     "progressBar":true,
                     "positionClass":"toast-top-center"

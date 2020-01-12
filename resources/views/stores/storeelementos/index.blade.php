@@ -112,14 +112,14 @@
                                 <tbody>
                                    @foreach ($storeelementos as $elemento)
                                    <tr>
-                                        <td>{{$elemento->elemen->ubica->ubicacion}}</td>
-                                        <td>{{$elemento->elemen->mobi->mobiliario}}</td>
-                                        <td>{{$elemento->elemen->propx->propxelemento}}</td>
-                                        <td>{{$elemento->elemen->carte->carteleria}}</td>
-                                        <td>{{$elemento->elemen->medi->medida}}</td>
-                                        <td>{{$elemento->elemen->mater->material}}</td>
-                                        <td>{{$elemento->elemen->unitxprop}}</td>
-                                        <td>{{$elemento->elemen->observaciones}}</td>
+                                        <td>{{$elemento->ubicacion}}</td>
+                                        <td>{{$elemento->mobiliario}}</td>
+                                        <td>{{$elemento->propxelemento}}</td>
+                                        <td>{{$elemento->carteleria}}</td>
+                                        <td>{{$elemento->medida}}</td>
+                                        <td>{{$elemento->material}}</td>
+                                        <td>{{$elemento->unitxprop}}</td>
+                                        <td>{{$elemento->observaciones}}</td>
                                         <td  width="100px">
                                             <form id="formDelete" action="{{route('storeelementos.destroy',[$store->id,$elemento->id])}}" method="POST" style="display:inline">
                                                 <input type="hidden" name="_method" value="DELETE" />
