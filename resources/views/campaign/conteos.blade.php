@@ -76,7 +76,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-10 row">
-                                    {{ $conteodetallado->links() }}
+                                    {{ $conteodetallado->appends(request()->except('page'))->links() }}
                                 </div>
                                 <div class="col-2 float-right mb-2">
                                     <form method="GET" action="{{route('campaign.conteo',$campaign) }}">
@@ -481,7 +481,7 @@
                                             <tbody>
                                                 @foreach ($idiomamatmobmedidas as $idiomamatmobmedida)
                                                 <tr>
-                                                    <td>{{$idiomamatmobmedida->country}}</td>
+                                                    <td>{{$idiomamatmobmedida->idioma}}</td>
                                                     <td>{{$idiomamatmobmedida->material}}</td>
                                                     <td>{{$idiomamatmobmedida->medida}}</td>
                                                     <td>{{$idiomamatmobmedida->mobiliario}}</td>

@@ -36,8 +36,8 @@ Route::group(['prefix' => 'campaign'], function () {
     Route::get('/{campaign}/filtro', 'CampaignController@filtrar')->name('campaign.filtrar')
         ->middleware('can:campaign.edit');
 
-    Route::delete('/{campaign}/eliminar', 'CampaignController@destroy')->name('campaign.eliminar')
-        ->middleware('can:campaign.destroy');
+    Route::delete('/delete/{campaign}', 'CampaignController@destroy')->name('campaign.delete')
+        ->middleware('can:campaign.destroy');        
 
     // Estadisticas campaña
     Route::get('/{campaign}/conteo', 'CampaignController@conteo')->name('campaign.conteo')

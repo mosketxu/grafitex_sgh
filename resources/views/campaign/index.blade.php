@@ -48,7 +48,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $campaigns->links() }} &nbsp; &nbsp;
+                                {{ $campaigns->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$campaigns->total()}} campañas.
                             </div>
                             <div class="col-2 float-right mb-2">
@@ -76,16 +76,18 @@
                                 </thead>
                                 <tbody class="">
                                     @foreach ($campaigns as $campaign)
-                                    <tr data-id="{{$campaign->id}}">
-                                        <form id="form{{$campaign->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
-                                        @csrf
-                                            <input type="text" class="d-none" value="{{$campaign->id}}">
-                                            <td>{{$campaign->id}}</td>
-                                            <td>{{$campaign->campaign_name}}</td>
-                                            <td>{{$campaign->campaign_initdate}}</td>
-                                            <td>{{$campaign->campaign_enddate}}</td>
-                                            <td>{{$campaign->campaign_state}}</td>
-                                            <td>
+                                    <tr id="t{{$campaign->id}}">
+                                        <td>{{$campaign->id}}</td>
+                                        <td>{{$campaign->campaign_name}}</td>
+                                        <td>{{$campaign->campaign_initdate}}</td>
+                                        <td>{{$campaign->campaign_enddate}}</td>
+                                        <td>{{$campaign->campaign_state}}</td>
+                                        <td>
+                                            {{-- <form  action="#" method="post"> --}}
+                                            <form  action="{{route('campaign.delete',$campaign->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="_tokenCampaign" value="{{ csrf_token()}}" id="tokenCampaign">    
                                                 @can('campaign.edit')
                                                 <a href="{{route('campaign.filtrar', $campaign->id) }}" title="Filtrar"><i class="fas fa-filter text-navy fa-2x mx-1"></i></a>
                                                 @endcan
@@ -111,10 +113,10 @@
                                                 <a href="{{route('campaign.edit', $campaign->id )}}" title="Edit"><i class="far fa-edit text-primary fa-2x ml-3"></i></a>
                                                 @endcan
                                                 @can('campaign.destroy')
-                                                <a href="#!" class="btn-delete " title="Eliminar"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
+                                                <button type="submit" class="enlace"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>
                                                 @endcan
-                                            </td>
-                                        </form>
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
 
@@ -177,68 +179,11 @@
 
 <script>
     $(document).ready( function () {
-        $('.btn-delete ').click(function(){
-           
-           $confirmacion=confirm('¿Seguro que lo quieres eliminar?');
-
-           if($confirmacion){
-               var row= $(this).parents('tr');
-               var id=row.data('id');
-               var form=$('#formDelete');
-               var url=form.attr('action').replace(':ELEMENTO_ID',id);
-               var data=form.serialize();
-
-               $.post(url,data,function(result){
-                   toastr.options={
-                       progressBar:true,
-                       positionClass:"toast-top-center"
-                   };
-                   toastr.success(result.notificacion.message);
-                   row.fadeOut();
-               }).fail(function(){
-                   toastr.options={
-                       closeButton: true,
-                       progressBar:true,
-                       positionClass:"toast-top-center",
-                       showDuration: "300",
-                       hideDuration: "1000",
-                       timeOut: 0,
-                   };
-                   toastr.error("No se puede eliminar.");
-               });
-           }
-       });
-
-        // $('#tCampaigns').DataTable({
-        //     'ajax': "{{ route('api.campaigns.index') }}",
-        //     'columns': [
-        //         { 'data': 'id' },
-        //         { 'data': 'campaign_name' },
-        //         { 'data': 'campaign_initdate' },
-        //         { 'data': 'campaign_enddate' },
-        //         { 'data': 'campaign_state' },
-        //         { 'data': 'btn' },
-        //     ],
-        //     'processing': true,
-        //     'serverSide': true,
-        //     'paging':true,
-        //     'orderMulti': true,
-        //     'keys': false,
-        //     'stateSave': false,
-        //     'blurable': false,
-        //     'responsive': true,
-        //     'colReorder': true,
-        //     'dom': 'lfrtip',
-        //     'language': {'url': '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json'}
-        // });
-        // $('.select2').select2({
-        //     theme: 'bootstrap4'
-        // });
-
         $('#menucampaign').addClass('active');
         $('#navcampaigns').toggleClass('activo');
     });
 </script>
+
 
 @endpush
 

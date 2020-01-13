@@ -427,6 +427,7 @@ class CampaignController extends Controller
                         'store_id'  => $gen['store_id'],
                         'name'  => $gen['name'],
                         'country'  => $gen['country'],
+                        'idioma'  => $gen['idioma'],
                         'area'  => $gen['area'],
                         'zona'  => $zona,
                         'segmento'  => $gen['segmento'],
@@ -530,10 +531,10 @@ class CampaignController extends Controller
         ->get();
         
         $idiomamatmobmedidas=CampaignElemento::tienda($campaignId)
-        ->select('country','material','medida','mobiliario', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
-        ->groupBy('country','material','medida','mobiliario')
+        ->select('idioma','material','medida','mobiliario', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('idioma','material','medida','mobiliario')
         ->get();
-        
+
         return view('campaign.conteos', 
             compact('campaign','conteodetallado','tiendaszonas','materiales','segmentos',
                 'conceptos','mobiliarios','propxelementos','cartelerias','medidas',

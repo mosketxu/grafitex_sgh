@@ -295,7 +295,7 @@
                 <div class="card-body pt-0">
                     <div class="row">
                         <div class="col-10 row">
-                            {{ $elementos->links() }} &nbsp; &nbsp;
+                            {{ $elementos->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                             Hay {{$elementos->total()}} elementos disponibles.
                         </div>
                         <div class="col-2 float-right mb-2">

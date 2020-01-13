@@ -75,7 +75,7 @@
                         <div class="row">
                             <div class="col-10 row">
                                 {{-- {{ $elementos->links() }} &nbsp; &nbsp; --}}
-                                Hay {{$elementosDisp->total()}} elementos diponibles
+                                Hay {{$elementosDisp->appends(request()->except('page'))->total()}} elementos diponibles
                                 
                             </div>
                             <div class="col-2 float-right mb-2">

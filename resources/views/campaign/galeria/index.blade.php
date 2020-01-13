@@ -69,7 +69,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $campaigngaleria->links() }} &nbsp; &nbsp;
+                                {{ $campaigngaleria->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$totalGaleria}} imágenes
                                 
                             </div>

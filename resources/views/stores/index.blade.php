@@ -48,7 +48,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $stores->links() }} &nbsp; &nbsp;
+                                {{ $stores->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$stores->total()}} stores.
                             </div>
                             <div class="col-2 float-right mb-2">
@@ -69,9 +69,13 @@
                                         <th>Store</th>
                                         <th>Nombre</th>
                                         <th>Country</th>
+                                        <th>Idioma</th>
                                         <th>Area</th>
                                         <th>Segmento</th>
+                                        <th>Channel</th>
+                                        <th>Cluster</th>
                                         <th>Concepto</th>
+                                        <th>Furniture Type</th>
                                         <th>Observaciones</th>
                                         <th width="200px"></th>
                                         <th width="150px">&nbsp;</th>
@@ -86,9 +90,13 @@
                                             <td>{{$store->id}}</td>
                                             <td>{{$store->name}}</td>
                                             <td>{{$store->country}}</td>
+                                            <td>{{$store->idioma}}</td>
                                             <td>{{$store->are->area}}</td>
                                             <td>{{$store->segmento}}</td>
+                                            <td>{{$store->channel}}</td>
+                                            <td>{{$store->store_cluster}}</td>
                                             <td>{{$store->concep->storeconcept}}</td>
+                                            <td>{{$store->furniture_type}}</td>
                                             <td>{{$store->observaciones}}</td>
                                             <td>
                                                 <div class="row">

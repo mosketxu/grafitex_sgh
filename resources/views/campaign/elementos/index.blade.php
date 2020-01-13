@@ -69,7 +69,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $elementos->links() }} &nbsp; &nbsp;
+                                {{ $elementos->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$elementos->total()}} elementos &nbsp;&nbsp;
                                 <a href="{{route('campaign.elementos.export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                             </div>
@@ -94,6 +94,7 @@
                                         <th id="tName">Name</th>
                                         <th id="tCountry" class="text-center">Country</th>
                                         <th id="tArea">Area</th>
+                                        <th id="tCountry" class="text-center">Idioma</th>
                                         <th id="tSegmento">Segmento</th>
                                         <th id="tStore">Store Concept</th>
                                         <th id="tUbicación">Ubicación</th>
@@ -127,6 +128,7 @@
                                         <td>{{$elemento->name}}</td>
                                         <td class="text-center">{{$elemento->country}}</td>
                                         <td>{{$elemento->area}}</td>
+                                        <td class="text-center">{{$elemento->idioma}}</td>
                                         <td>{{$elemento->segmento}}</td>
                                         <td>{{$elemento->storeconcept}}</td>
                                         <td>{{$elemento->ubicacion}}</td>

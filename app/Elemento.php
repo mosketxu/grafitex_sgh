@@ -18,7 +18,8 @@ class Elemento extends Model
         'familia_id',
         'material_id',
         'unitxprop',
-        'observaciones'
+        'observaciones',
+        'l_mm','a_mm','m2','m2xuni',
         ];
 
         protected $with=['ubica','mobi','propx','carte','medi','mater','famil'];

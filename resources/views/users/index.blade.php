@@ -48,7 +48,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $users->links() }} &nbsp; &nbsp;
+                                {{ $users->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$users->total()}} usuarios.
                             </div>
                             <div class="col-2 float-right mb-2">

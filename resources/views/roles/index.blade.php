@@ -48,7 +48,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $roles->links() }} &nbsp; &nbsp;
+                                {{ $roles->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$roles->total()}} roles.
                             </div>
                             <div class="col-2 float-right mb-2">

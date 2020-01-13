@@ -77,7 +77,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{ $storeelementos->links() }} &nbsp; &nbsp;
+                                {{ $storeelementos->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$storeelementos->total()}} elementos
                                 
                             </div>

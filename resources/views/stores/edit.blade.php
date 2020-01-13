@@ -38,7 +38,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h5>Edición <span class="text-primary">{{$store->id}} {{$store->name}} </span></h5>
+                    <h5 class="text-primary">{{$store->id}} {{$store->name}} </h5>
                 </div>
                 <form id="formstore" role="form" method="post" action="{{ route('store.update',$store->id) }}" enctype="multipart/form-data">
                     @csrf
@@ -76,7 +76,28 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-2">
+                                        <label for="channel">Channel</label>
+                                        <select class="form-control form-control-sm" id="channel" name="channel" >
+                                            <option value="{{$store->channel}}" selected>{{$store->channel}}</option>
+                                            <option value="Airport">Airport</option>
+                                            <option value="Dpt.Store">Dpt.Store</option>
+                                            <option value="Mall">Mall</option>
+                                            <option value="Outlet">Outlet</option>
+                                            <option value="Street">Street</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="store_cluster">Cluster</label>
+                                        <select class="form-control form-control-sm" id="store_cluster" name="store_cluster" >
+                                            <option value="{{$store->store_cluster}}" selected>{{$store->store_cluster}}</option>
+                                            <option value="Basic">Basic</option>
+                                            <option value="ECI">ECI</option>
+                                            <option value="INLINE">INLINE</option>
+                                            <option value="OPEN AIR">OPEN AIR</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2">
                                         <label for="concepto">Concepto</label>
                                         <select class="form-control form-control-sm" id="concepto_id" name="concepto_id" >
                                             @foreach($conceptos as $concepto )
@@ -84,19 +105,28 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-2">
+                                        <label for="concepto">Furniture Type</label>
+                                        <select class="form-control form-control-sm" id="furniture_type" name="furniture_type" >
+                                            @foreach($furnitures as $furniture )
+                                            <option value="{{$furniture->furniture_type}}" {{old('furniture_type',$furniture->furniture_type==$store->furniture_type) ? 'selected' : ''}}>{{$furniture->furniture_type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-4">
                                         <label for="observaciones">Observaciones</label>
                                         <input  type="text" class="form-control form-control-sm" id="observaciones" name="observaciones" value="{{old('observaciones',$store->observaciones)}}">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-4">
+                                <img src="{{asset('storage/store/'.$store->imagen)}}" alt={{$store->imagen}} title={{$store->imagen}} 
+                                class="img-fluid img-thumbnail" style="max-height: 250px; max-width: 350px;">
                                 <input type="hidden" name="imagen" value="{{$store->imagen}}" readonly>  
                                 @can('store.edit')
                                 <input type="file" name="photo" value="">  
                                 @endcan
-                            </div>
-                            <div class="col-4">
-                            <img src="{{asset('storage/store/'.$store->imagen)}}" alt={{$store->imagen}} title={{$store->imagen}} 
-                                class="img-fluid img-thumbnail" style="max-height: 250px; max-width: 350px;">
+
                             </div>
                         </div>
                     </div>

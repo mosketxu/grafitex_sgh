@@ -11,7 +11,10 @@ class Maestro extends Model
 {
     use SoftDeletes;
 
-    protected $fillable=['store','country','name','area','segmento','storeconcept','elementificador','ubicacion','mobiliario','propxelemento','carteleria','medida','material','unitxprop','observaciones'];
+    protected $fillable=['store','country','name','area','segmento','storeconcept','elementificador',
+                        'ubicacion','mobiliario','propxelemento','carteleria','medida','material','unitxprop','observaciones',
+                        'channel','store_cluster','furniture_type','blank','l_mm','a_mm','m2','m2xuni',
+                    ];
 
     // protected $guarded = [];
 
@@ -35,9 +38,21 @@ class Maestro extends Model
     {
         return $query->where('segmento','LIKE',"%$seg%");
     }
+    public function scopeCha($query,$cha)
+    {
+        return $query->where('channel','LIKE',"%$cha%");
+    }
+    public function scopeClu($query,$clu)
+    {
+        return $query->where('store_cluster','LIKE',"%$clu%");
+    }
     public function scopeConce($query,$conce)
     {
         return $query->where('storeconcept','LIKE',"%$conce%");
+    }
+    public function scopeFur($query,$fur)
+    {
+        return $query->where('furniture_type','LIKE',"%$fur%");
     }
     public function scopeUbi($query,$ubi)
     {
@@ -120,6 +135,8 @@ class Maestro extends Model
                     else
                         $zona='ES';
                 }
+
+                $idioma=$store['area']=='Cataluña' ? 'CAT' : $store['country'];
                 $conceptoId=Storeconcept::where('storeconcept',$store['storeconcept'])->first();
                 $areaId=Area::where('area',$store['area'])->first();
                 
@@ -131,6 +148,7 @@ class Maestro extends Model
                     'zona'=>$zona,
                     'area_id'=>$areaId->id,
                     'area'=>$store['area'],
+                    'idioma'=>$idioma,
                     'segmento'=>$store['segmento'],
                     'concepto_id'=>$conceptoId->id,
                     'concepto'=>$store['storeconcept']
@@ -175,6 +193,90 @@ class Maestro extends Model
         return true;
     }
 
+    static function insertStoresSGH()
+    {
+        $stores=Maestro::select('store','name','country','area','segmento','storeconcept','channel','store_cluster','furniture_type')
+        ->groupBy('store','name','country','area','segmento','storeconcept','channel','store_cluster','furniture_type')
+        ->get();
+
+        foreach (array_chunk($stores->toArray(),100) as $t){
+            $dataSet = [];
+            foreach ($t as $store) {
+                if ($store['country']=='PT'){
+                    $zona='PT';
+                }
+                else{
+                    if($store['area']=='Canarias')
+                        $zona='CA';
+                    else
+                        $zona='ES';
+                }
+
+                $idioma=$store['area']=='Cataluña' ? 'CAT' : $store['country'];
+                
+                $conceptoId=Storeconcept::where('storeconcept',$store['storeconcept'])->first();
+                $areaId=Area::where('area',$store['area'])->first();
+                
+                Store::firstOrCreate([
+                    'id' => $store['store']
+                ], [
+                    'name'=>$store['name'],
+                    'country'=>$store['country'],
+                    'zona'=>$zona,
+                    'area_id'=>$areaId->id,
+                    'area'=>$store['area'],
+                    'idioma'=>$idioma,
+                    'segmento'=>$store['segmento'],
+                    'concepto_id'=>$conceptoId->id,
+                    'concepto'=>$store['storeconcept'],
+                    'channel'=>$store['channel'],
+                    'store_cluster'=>$store['store_cluster'],
+                    'furniture_type'=>$store['furniture_type']
+                ]);
+            }
+        }
+        return true;
+    }
+
+    static function insertElementosSGH()
+    {
+        $elementos=Maestro::select(
+            'elementificador','ubicacion','mobiliario',
+            'propxelemento','carteleria','medida','material',
+            'unitxprop','observaciones','l_mm','a_mm','m2','m2xuni')
+            ->distinct('elementificador')
+            ->get();
+
+        foreach (array_chunk($elementos->toArray(),100) as $t){
+            $dataSet = [];
+            foreach ($t as $elemento) {
+                $dataSet[] = [
+                    'elementificador'=>$elemento['elementificador'],
+                    'ubicacion_id'=>Ubicacion::where('ubicacion',$elemento['ubicacion'])->first()['id'],
+                    'ubicacion'=>$elemento['ubicacion'],
+                    'mobiliario_id'=>Mobiliario::where('mobiliario',$elemento['mobiliario'])->first()['id'],
+                    'mobiliario'=>$elemento['mobiliario'],
+                    'propxelemento_id'=>Propxelemento::where('propxelemento',$elemento['propxelemento'])->first()['id'],
+                    'propxelemento'=>$elemento['propxelemento'],
+                    'carteleria_id'=>Carteleria::where('carteleria',$elemento['carteleria'])->first()['id'],
+                    'carteleria'=>$elemento['carteleria'],
+                    'medida_id'=>Medida::where('medida',$elemento['medida'])->first()['id'],
+                    'medida'=>$elemento['medida'],
+                    'material_id'=>Material::where('material',$elemento['material'])->first()['id'],
+                    'material'=>$elemento['material'],
+                    'unitxprop'=>$elemento['unitxprop'],
+                    'observaciones'=>$elemento['observaciones'],
+                    'l_mm'=>$elemento['l_mm'],
+                    'a_mm'=>$elemento['a_mm'],
+                    'm2'=>$elemento['m2'],
+                    'm2xuni'=>$elemento['m2xuni'],
+                ];
+            }
+            DB::table('elementos')->insert($dataSet);
+        }
+        return true;
+    }
+    
     static function insertStoreElementos()
     {
         Maestro::chunk(100, function ($maestros) {

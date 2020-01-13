@@ -10,8 +10,10 @@ class Store extends Model
 {
     protected $fillable=[
         'id','name','country',
-        'zona','area_id','area','segmento',
-        'concepto_id','concepto','observaciones','imagen'];
+        'zona','area_id','area','idioma','segmento',
+        'concepto_id','concepto','observaciones','imagen',
+        'channel','store_cluster','furniture_type'
+    ];
 
     protected $with=['are','concep','storeelementos'];
 
@@ -48,10 +50,14 @@ class Store extends Model
         return $query->where('id', 'LIKE', "%$busca%")
         ->orWhere('name', 'LIKE', "%$busca%")
         ->orWhere('country', 'LIKE', "%$busca%")
+        ->orWhere('idioma', 'LIKE', "%$busca%")
         ->orWhere('zona', 'LIKE', "%$busca%")
         ->orWhere('area', 'LIKE', "%$busca%")
         ->orWhere('segmento', 'LIKE', "%$busca%")
+        ->orWhere('channel', 'LIKE', "%$busca%")
+        ->orWhere('store_cluster', 'LIKE', "%$busca%")
         ->orWhere('concepto', 'LIKE', "%$busca%")
+        ->orWhere('furniture_type', 'LIKE', "%$busca%")
         ->orWhere('observaciones', 'LIKE', "%$busca%")
         ->orWhere('imagen', 'LIKE', "%$busca%")
         ;

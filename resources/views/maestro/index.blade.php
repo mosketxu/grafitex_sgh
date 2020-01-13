@@ -28,11 +28,23 @@
                         @can('maestro.create')
                         <a href="" role="button" data-toggle="modal" data-target="#importMaestro" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
+                            <span class="badge badge-primary">Fichero Grafitex</span>
                         </a>
                         &nbsp;&nbsp;
                         <a href="" role="button" data-toggle="modal" data-target="#actualizaTablas" data-backdrop="static" data-keyboard="false">
-                            <i class="fas fa-sync-alt fa-2x text-success mt-2"></i>
+                            <i class="fas fa-sync-alt fa-2x text-info mt-2"></i>
+                            <span class="badge badge-info">Actualizar tablas Grafitex</span>
                         </a>
+                        &nbsp;&nbsp;
+                        <a href="" role="button" data-toggle="modal" data-target="#importMaestroSHG" data-backdrop="static" data-keyboard="false">
+                            <i class="fas fa-plus-circle fa-2x text-success mt-2"></i>
+                            <span class="badge badge-success">Fichero SGH</span>
+                        </a>
+                        <a href="" role="button" data-toggle="modal" data-target="#actualizaTablasSGH" data-backdrop="static" data-keyboard="false">
+                            <i class="fas fa-sync-alt fa-2x text-info mt-2"></i>
+                            <span class="badge badge-info">Actualizar tablas SGH</span>
+                        </a>
+                        &nbsp;&nbsp;
                         @endcan
                     </div>
                     <div class="col-sm-6">
@@ -51,7 +63,7 @@
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
                             <div class="col-10 row">
-                                {{$maestros->links() }} &nbsp; &nbsp;
+                                {{$maestros->appends(request()->except('page'))->links() }} &nbsp; &nbsp;
                                 Hay {{$maestros->total()}} registros
                             </div>
                             <div class="col-2 float-right mb-2">
@@ -67,7 +79,10 @@
                                             <th><input id="coun" name="coun" type="text" class="form-control form-control-sm" value='{{$coun}}' placeholder="Filtro country"/></th>
                                             <th><input id="are" name="are" type="text" class="form-control form-control-sm" value='{{$are}}' placeholder="Filtro Area"/></th>
                                             <th><input id="seg" name="seg" type="text" class="form-control form-control-sm" value='{{$seg}}' placeholder="Filtro Segmento"/></th>
+                                            <th><input id="cha" name="cha" type="text" class="form-control form-control-sm" value='{{$cha}}' placeholder="Filtro Channel"/></th>
+                                            <th><input id="clu" name="clu" type="text" class="form-control form-control-sm" value='{{$clu}}' placeholder="Filtro Cluster"/></th>
                                             <th><input id="conce" name="conce" type="text" class="form-control form-control-sm" value='{{$conce}}' placeholder="Filtro Concept"/></th>
+                                            <th><input id="fur" name="fur" type="text" class="form-control form-control-sm" value='{{$fur}}' placeholder="Filtro Furniture"/></th>
                                             <th><input id="ubi" name="ubi" type="text" class="form-control form-control-sm" value='{{$ubi}}' placeholder="Filtro Ubicación"/></th>
                                             <th><input id="mob" name="mob" type="text" class="form-control  form-control-sm" value='{{$mob}}'  placeholder="Filtro Mobiliario"/></th>
                                             <th><input id="propx" name="propx" type="text" class="form-control  form-control-sm" value='{{$propx}}'  placeholder="Filtro Prop x Elem"/></th>
@@ -93,7 +108,10 @@
                                         <th>Country</th>
                                         <th>Area</th>
                                         <th>Segmento</th>
+                                        <th>Channel</th>
+                                        <th>Cluster</th>
                                         <th>Storeconcept</th>
+                                        <th>Furniture Type</th>
                                         <th>Ubicacion</th>
                                         <th>Mobiliario</th>
                                         <th>Propxelemento</th>
@@ -111,7 +129,10 @@
                                         <td>{{$maestro->country}}</td>
                                         <td>{{$maestro->area}}</td>
                                         <td>{{$maestro->segmento}}</td>
+                                        <td>{{$maestro->channel}}</td>
+                                        <td>{{$maestro->store_cluster}}</td>
                                         <td>{{$maestro->storeconcept}}</td>
+                                        <td>{{$maestro->furniture_type}}</td>
                                         <td>{{$maestro->ubicacion}}</td>
                                         <td>{{$maestro->mobiliario}}</td>
                                         <td>{{$maestro->propxmaestro}}</td>
@@ -129,15 +150,15 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal Maestro-->
+            <!-- Modal Maestro Grafitex-->
             <div class="modal fade" id="importMaestro" tabindex="-1" role="dialog" aria-labelledby="importMaestroLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="importMaestroLabel">Nueva importacion de maestro</h5>
+                            <h5 class="modal-title" id="importMaestroLabel">Nueva importacion de maestro modificado Grafitex</h5>
                         </div>
                         <div class="modal-body">
-                            <form id="formulario" role="form" method="post" action="{{ route('maestro.import') }}" enctype="multipart/form-data" >
+                            <form id="formulario" role="form" method="post" action="{{ route('maestro.import','Grafitex') }}" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col">
@@ -148,7 +169,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
                                     @can('maestro.create')
-                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="subirfichero()">Subir</button>
+                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="subirfichero('#formulario')">Subir Maestro Grafitex</button>
                                     @endcan
                                 </div>
                             </form>
@@ -156,12 +177,41 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal Actuliza tablas-->
+
+            <!-- Modal Maestro SGH-->
+            <div class="modal fade" id="importMaestroSHG" tabindex="-1" role="dialog" aria-labelledby="importMaestroSHGLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importMaestroSHGLabel">Nueva importacion de maestro original SGH</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formularioSGH" role="form" method="post" action="{{ route('maestro.import','SGH') }}" enctype="multipart/form-data" >
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="campaign_initdate">Fichero</label>
+                                        <input type="file" class="form-control form-control-sm" id="maestro" name="maestro" value=""/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                    @can('maestro.create')
+                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="subirfichero('#formularioSGH')">Subir Maestro SGH</button>
+                                    @endcan
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Actualiza tablas-->
             <div class="modal fade" id="actualizaTablas" tabindex="-1" role="dialog" aria-labelledby="actualizaTablasLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="importMaestroLabel">Actualiza las tablas principales del sistema</h5>
+                            <h5 class="modal-title" id="importMaestroLabel">Actualiza las tablas principales con fichero Grafitex</h5>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -173,9 +223,37 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
                                 @can('maestro.create')
-                                <form id="formularioAct" role="form" method="get" action="{{ route('maestro.actualizatablas') }}">
+                                <form id="formularioAct" role="form" method="get" action="{{ route('maestro.actualizatablas','Grafitex') }}">
                                     @csrf
-                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="actualizaTablas()">Actualizar</button>
+                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="actualizaTablas('#formularioAct')">Actualizar con fichero Grafitex</button>
+                                </form>
+                                @endcan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Actualiza tablas SGH-->
+            <div class="modal fade" id="actualizaTablasSGH" tabindex="-1" role="dialog" aria-labelledby="actualizaTablasSGHLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importMaestroSGHLabel">Actualiza las tablas principales con fichero SGH</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="campaign_initdate">Pulse actualizar para continuar</label>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                @can('maestro.create')
+                                <form id="formularioActSGH" role="form" method="get" action="{{ route('maestro.actualizatablas','SGH') }}">
+                                    @csrf
+                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="actualizaTablas('#formularioActSGH')">Actualizar con fichero SGH</button>
                                 </form>
                                 @endcan
                             </div>
@@ -213,14 +291,25 @@
 </script>
         
 <script>
-    function subirfichero(){
+    function subirfichero(form){
         $('.modalSubir').attr('disabled',true);
-        $('#formulario').submit();
+        $(form).submit();
     }
-    function actualizaTablas(){
+
+    // function subirficheroSGH(){
+    //     $('.modalSubir').attr('disabled',true);
+    //     $('#formularioSGH').submit();
+    // }
+
+    function actualizaTablas(form){
         $('.modalSubir').attr('disabled',true);
-        $('#formularioAct').submit();
+        $(form).submit();
     }
+
+    // function actualizaTablasSGH(){
+    //     $('.modalSubir').attr('disabled',true);
+    //     $('#formularioActSGH').submit();
+    // }
 
     function borrarFiltros(){
             $("#sto").val('');   

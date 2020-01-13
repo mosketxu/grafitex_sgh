@@ -9,7 +9,7 @@
       {{-- links  y cuadro busqueda --}}
       <div class="row">
          <div class="col-7 row">
-            {{ $tarifasPicking->links() }}
+            {{ $tarifasPicking->appends(request()->except('page'))->links() }}
          </div>
          <div class="col-5 float-right mb-2"> 
          </div>

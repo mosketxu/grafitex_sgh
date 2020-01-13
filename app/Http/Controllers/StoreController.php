@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Area,Country,Segmento, Store, StoreElemento, Elemento, Storeconcept};
+use App\{Area,Country,Segmento, Store, StoreElemento, Elemento, Furniture, Storeconcept};
 use Illuminate\Support\Facades\DB;
 
 use Image;
@@ -32,7 +32,7 @@ class StoreController extends Controller
         $areas=Area::orderBy('area')->get();
         $segmentos=Segmento::orderBy('segmento')->get();
         $conceptos=Storeconcept::orderBy('storeconcept')->get();
-
+        
         return view('stores.index',compact('stores','busqueda','countries','areas','segmentos','conceptos'));
     }
 
@@ -123,8 +123,10 @@ class StoreController extends Controller
         $areas=Area::orderBy('area')->get();
         $segmentos=Segmento::orderBy('segmento')->get();
         $conceptos=Storeconcept::orderBy('storeconcept')->get();
+        $furnitures=Furniture::orderBy('furniture_type')->get();
+        // dd($furnitures);
 
-        return view('stores.edit', compact('store','countries','areas','segmentos','conceptos'));
+        return view('stores.edit', compact('store','countries','areas','segmentos','conceptos','furnitures'));
     }
 
     /**
@@ -166,8 +168,13 @@ class StoreController extends Controller
             'area_id'=>$request->area_id,
             'area'=>$a,
             'segmento'=>$request->segmento,
+            'channel'=>$request->channel,
+            'channel'=>$request->channel,
+            'store_cluster'=>$request->store_cluster,
+            'store_cluster'=>$request->store_cluster,
             'concepto_id'=>$request->concepto_id,
             'concepto'=>$c,
+            'furniture_type'=>$request->furniture_type,
             'imagen'=>$imagen,
             'observaciones'=>$request->observaciones,
              ]

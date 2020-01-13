@@ -12,7 +12,7 @@ class CampaignElemento extends Model
     
     // protected $with=['camptiendas'];
 
-    protected $fillable=['campaign_id','tienda_id', 'store_id','country','name','area','segmento','storeconcept','ubicacion','mobiliario',
+    protected $fillable=['campaign_id','tienda_id', 'store_id','country','idioma','name','area','segmento','storeconcept','ubicacion','mobiliario',
         'propxlemento','carteleria','medida','material','unitxprop','imagen','observaciones','precio'
     ];
 
@@ -32,6 +32,7 @@ class CampaignElemento extends Model
       return $query->where('campaign_elementos.store_id', 'LIKE', "%$busca%")
       ->orWhere('name', 'LIKE', "%$busca%")
       ->orWhere('country', 'LIKE', "%$busca%")
+      ->orWhere('idioma', 'LIKE', "%$busca%")
       ->orWhere('area', 'LIKE', "%$busca%")
       ->orWhere('segmento', 'LIKE', "%$busca%")
       ->orWhere('storeconcept', 'LIKE', "%$busca%")

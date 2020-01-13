@@ -169,6 +169,51 @@
                         </div>
                     </div>
                     <div class="row">
+                        {{-- Furniture Type --}}
+                        <div class="col-4">
+                            <div class="card collapsed-card mx-1">
+                                <div class="card-header text-white bg-warning p-0" data-card-widget="collapse" style="cursor: pointer">
+                                    <h3 class="card-title pl-3">Furniture Type</h3>
+                                    <div class="card-tools pr-3">
+                                        @can('auxiliares.create')
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                                        @endcan
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="tfurniture" class="table table-hover table-sm small" cellspacing="0" width=100%>
+                                            <thead>
+                                                <tr> 
+                                                    <th>Furniture Type</th>
+                                                    <th class="text-right"><a href="{{route('furniture.create') }}" title="Nuevo"><i class="fas fa-plus-circle text-warning fa-2x mx-3"></i></a></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($furnitures as $furniture)
+                                                <tr>
+                                                    <td>{{$furniture->furniture_type}}</td>
+                                                    <td class="text-right">
+                                                        @can('auxiliares.edit')
+                                                        <a href="{{route('furniture.edit',$furniture->id)}}" title="Editar"><i class="far fa-edit text-primary fa-2x ml-1"></i></a>
+                                                        @endcan
+                                                        <form action="{{route('furniture.destroy',$furniture->id)}}" method="POST" style="display:inline">
+                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                                            @can('auxiliares.destroy')
+                                                            <button id="furniture{{$furniture->id}}" type="submit" class="enlace"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>
+                                                            @endcan
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- Store Concept --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
@@ -261,6 +306,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         {{-- Mobiliario --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
@@ -310,8 +357,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         {{-- Propxelemento --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
@@ -408,6 +453,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         {{-- Medida --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">
@@ -456,8 +503,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         {{-- Material --}}
                         <div class="col-4">
                             <div class="card collapsed-card mx-1">

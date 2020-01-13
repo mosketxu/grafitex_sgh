@@ -7,6 +7,7 @@ Route::group(['prefix'=>'auxiliares'],function(){
         require __DIR__ .'/country.php';
         require __DIR__ .'/area.php';
         require __DIR__ .'/segmento.php';
+        require __DIR__ .'/furniture.php';
         require __DIR__ .'/storeconcept.php';
         require __DIR__ .'/ubicacion.php';
         require __DIR__ .'/mobiliario.php';

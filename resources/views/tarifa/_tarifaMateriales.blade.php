@@ -9,7 +9,7 @@
       {{-- links  y cuadro busqueda --}}
       <div class="row">
          <div class="col-10 row">
-            {{ $tarifasMateriales->links() }}
+            {{ $tarifasMateriales->appends(request()->except('page'))->links() }}
          </div>
          <div class="col-2 float-right mb-2">
             <form method="GET" action="{{route('tarifa.index') }}">

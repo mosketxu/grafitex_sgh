@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <form id="formelemento" role="form" method="POST" action="{{ route($route,$datos->id) }}">
                             @csrf
-                            @method('PATCH')
+                            @method('PUT')
                             <div class="card-body">
                                 <input type="text" class="d-none" id="id" name="id"
                                     value="{{$datos->id}}">

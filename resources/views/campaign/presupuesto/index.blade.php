@@ -219,46 +219,46 @@
 
 <script>
     function borrarPresupuesto(presupuestoId,ruta,tok) { 
-   var token = $(tok).val();
-   var route = ruta;
-   route= '/campaign/presupuesto/delete/'+presupuestoId;
+        var token = $(tok).val();
+        var route = ruta;
+        route= '/campaign/presupuesto/delete/'+presupuestoId;
 
-   var mensaje;
-   var opcion = confirm("¿Estás seguro?");
+        var mensaje;
+        var opcion = confirm("¿Estás seguro?");
 
-    if (opcion == true) {
-        $.ajax({
-            url: route,
-            headers: { "X-CSRF-TOKEN": token },
-            type: "DELETE",
-            dataType: "json",
-            data: { 
-                "presupuestoId": presupuestoId,
-                "_method":'DELETE',
-            },
-            success: function(data) {
-                $('#t'+presupuestoId).remove();
-                // toastr.success("{{ Session::get('message') }}")
-                toastr.success('Presupuesto borrado con éxito',{
-                    "progressBar":true,
-                    "positionClass":"toast-top-center"
-                });
-            },
-            error:function(msj){
-                    console.log(msj.responseJSON.errors);
-                    toastr.error("Ha habido un error. <br />No se ha podido borrar. <br />"+ msj.responseJSON.message,{
-                    "closeButton": true,
-                    "progressBar":true,
-                    "positionClass":"toast-top-center",
-                    "options.escapeHtml" : true,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": 0,
+        if (opcion == true) {
+            $.ajax({
+                url: route,
+                headers: { "X-CSRF-TOKEN": token },
+                type: "DELETE",
+                dataType: "json",
+                data: { 
+                    "presupuestoId": presupuestoId,
+                    "_method":'DELETE',
+                },
+                success: function(data) {
+                    $('#t'+presupuestoId).remove();
+                    // toastr.success("{{ Session::get('message') }}")
+                    toastr.success('Presupuesto borrado con éxito',{
+                        "progressBar":true,
+                        "positionClass":"toast-top-center"
                     });
-            }
-        });
+                },
+                error:function(msj){
+                        console.log(msj.responseJSON.errors);
+                        toastr.error("Ha habido un error. <br />No se ha podido borrar. <br />"+ msj.responseJSON.message,{
+                        "closeButton": true,
+                        "progressBar":true,
+                        "positionClass":"toast-top-center",
+                        "options.escapeHtml" : true,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": 0,
+                        });
+                }
+            });
+        }
     }
-}
 
 </script>
 @endpush

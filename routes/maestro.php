@@ -23,8 +23,9 @@ Route::delete('maestro/{maestro}','MaestroController@destroy')->name('maestro.de
 Route::get('maestro/{maestro}/edit','MaestroController@edit')->name('maestro.edit')
 ->middleware('can:maestro.edit');
 
-Route::post('/maestro/import', 'MaestroController@import')->name('maestro.import')
+Route::post('/maestro/import/{origen}', 'MaestroController@import')->name('maestro.import')
 ->middleware('can:maestro.create');
 
-Route::get('maestros/actualizatablas','MaestroController@actualizartablas')->name('maestro.actualizatablas')
+Route::get('maestro/actualizatablas/{origen}','MaestroController@actualizartablas')->name('maestro.actualizatablas')
 ->middleware('can:maestro.edit');;
+
