@@ -80,6 +80,7 @@ class StoreController extends Controller
             'id'=>$request->id,
             'name'=>$request->name,
             'country'=>$request->country,
+            'idioma'=>$request->idioma,
             'zona'=>$z,
             'area_id'=>$request->area_id,
             'area'=>$a,
@@ -164,6 +165,7 @@ class StoreController extends Controller
         DB::table('stores')->where('id',$id)->update([
             'name'=>$request->name,
             'country'=>$request->country,
+            'idioma'=>$request->idioma,
             'zona'=>$z,
             'area_id'=>$request->area_id,
             'area'=>$a,

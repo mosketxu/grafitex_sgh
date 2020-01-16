@@ -52,13 +52,21 @@
                                         <input  type="text" class="form-control form-control-sm" id="name" name="name" value="{{old('name',$store->name)}}">
                                     </div>
                                     <div class="form-group col-2">
-                                        <label for="country">Country {{$store->country}}</label>
+                                        <label for="country">Country</label>
                                         <select class="form-control form-control-sm" id="country" name="country" >
                                             <option value="ES" {{old('country','ES'==$store->country) ? 'selected' : ''}}>ES</option>
                                             <option value="PT" {{old('country','PT'==$store->country) ? 'selected' : ''}}>PT</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-3">
+                                    <div class="form-group col-2">
+                                        <label for="country">Idioma</label>
+                                        <select class="form-control form-control-sm" id="idioma" name="idioma" >
+                                            <option value="ES" {{old('idioma','ES'==$store->idioma) ? 'selected' : ''}}>ES</option>
+                                            <option value="CAT" {{old('idioma','CAT'==$store->idioma) ? 'selected' : ''}}>CAT</option>
+                                            <option value="PT" {{old('idioma','PT'==$store->idioma) ? 'selected' : ''}}>PT</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2">
                                         <label for="area">Area</label>
                                         <select class="form-control form-control-sm" id="area_id" name="area_id" >
                                             @foreach($areas as $area )
@@ -66,7 +74,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group  col-3">
+                                    <div class="form-group  col-2">
                                         <label for="segmento">Segmento</label>
                                         <select class="form-control form-control-sm" id="segmento" name="segmento" >
                                             @foreach($segmentos as $segmento )

@@ -99,6 +99,10 @@ class ElementoController extends Controller
             'material_id'=>$request->material_id,
             'material'=>$ma,
             'unitxprop'=>$request->unitxprop,
+            'l_mm'=>$request->l_mm,
+            'a_mm'=>$request->a_mm,
+            'm2'=>$request->m2,
+            'm2xuni'=>$request->m2xuni,
             'observaciones'=>$request->observaciones,
              ]
         );
@@ -153,8 +157,7 @@ class ElementoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
-
+        
         $request->validate([
             'ubicacion_id'=>'required',
             'mobiliario_id'=>'required',
@@ -164,16 +167,16 @@ class ElementoController extends Controller
             'material_id'=>'required',
             'familia_id'=>'required',
             'unitxprop'=>'required|numeric',
-         ]);
-
-         $u=Ubicacion::find($request->ubicacion_id)->ubicacion;
-         $m=Mobiliario::find($request->mobiliario_id)->mobiliario;
-         $p=Propxelemento::find($request->propxelemento_id)->propxelemento;
-         $c=Carteleria::find($request->carteleria_id)->carteleria;
-         $me=Medida::find($request->medida_id)->medida;
-         $ma=Material::find($request->material_id)->material;
-         $uxp=$request->unitxprop;
-         $e= str_replace(" ","",$u.$m.$c.$me.$ma.$uxp);
+            ]);
+            
+        $u=Ubicacion::find($request->ubicacion_id)->ubicacion;
+        $m=Mobiliario::find($request->mobiliario_id)->mobiliario;
+        $p=Propxelemento::find($request->propxelemento_id)->propxelemento;
+        $c=Carteleria::find($request->carteleria_id)->carteleria;
+        $me=Medida::find($request->medida_id)->medida;
+        $ma=Material::find($request->material_id)->material;
+        $uxp=$request->unitxprop;
+        $e= str_replace(" ","",$u.$m.$c.$me.$ma.$uxp);
         $controlElementificador=Elemento::where('elementificador',$e)->count();
 
         if ($controlElementificador>0){
@@ -184,7 +187,6 @@ class ElementoController extends Controller
             return redirect()->back()->withErrors($notification);
         }
 
-       
          DB::table('elementos')
          ->where('id',$id)
          ->update([
@@ -202,6 +204,10 @@ class ElementoController extends Controller
             'material_id'=>$request->material_id,
             'material'=>$ma,
             'unitxprop'=>$request->unitxprop,
+            'l_mm'=>$request->l_mm,
+            'a_mm'=>$request->a_mm,
+            'm2'=>$request->m2,
+            'm2xuni'=>$request->m2xuni,
             'observaciones'=>$request->observaciones,
              ]
         );

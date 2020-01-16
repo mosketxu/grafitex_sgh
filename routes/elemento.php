@@ -2,22 +2,22 @@
 // Route::resource('elemento', 'ElementoController');
 
 Route::post('elemento/store','ElementoController@store')->name('elemento.store')
-->middleware('can:auxiliares.create');
+->middleware('can:elemento.create');
 
 Route::get('elemento','ElementoController@index')->name('elemento.index')
-->middleware('can:auxiliares.index');
+->middleware('can:elemento.index');
 
 Route::get('elemento/create','ElementoController@create')->name('elemento.create')
-->middleware('can:auxiliares.create');
+->middleware('can:elemento.create');
 
 Route::put('elemento/{elemento}','ElementoController@update')->name('elemento.update')
-->middleware('can:auxiliares.edit');
+->middleware('can:elemento.edit');
 
 Route::get('elemento/{elemento}','ElementoController@show')->name('elemento.show')
-->middleware('can:auxiliares.show');
+->middleware('can:elemento.show');
 
 Route::delete('elemento/{elemento}','ElementoController@destroy')->name('elemento.destroy')
-->middleware('can:auxiliares.destroy');
+->middleware('can:elemento.destroy');
 
 Route::get('elemento/{elemento}/edit','ElementoController@edit')->name('elemento.edit')
-->middleware('can:auxiliares.edit');
+->middleware('can:elemento.edit');

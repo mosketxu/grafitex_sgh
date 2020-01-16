@@ -43,7 +43,7 @@
                     </div>
                     <form role="form" method="POST" action="{{ route('elemento.update',$elemento->id) }}">
                         @csrf
-                        @method('PATCH')
+                        @method('PUT')
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-2">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-4">
+                                <div class="form-group col-2">
                                     <label for="medida_id">Medida</label>
                                     <select class="form-control form-control-sm" id="medida_id" name="medida_id" >
                                         @foreach($medidas as $medida )
@@ -88,7 +88,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group  col-4">
+                                <div class="form-group  col-3">
                                     <label for="material_id">Material</label>
                                     <select class="form-control form-control-sm" id="material_id" name="material_id" >
                                         @foreach($materiales as $material )
@@ -104,13 +104,29 @@
                                         @endfor
                                     </select>
                                 </div>
-                                <div class="form-group  col-3">
+                                <div class="form-group  col-2">
                                     <label for="material_id">Familia</label>
                                     <select class="form-control form-control-sm" id="familia_id" name="familia_id" >
                                         @foreach($familias as $familia )
                                         <option value="{{$familia->id}}" {{old('familia_id',$familia->id)==$elemento->familia_id ? 'selected' : ''}}>{{$familia->familia}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group col-1">
+                                    <label for="l_mm">l_mm</label>
+                                    <input  type="text" class="form-control form-control-sm" id="l_mm" name="l_mm" value="{{old('l_mm',$elemento->l_mm)}}">
+                                </div>
+                                <div class="form-group col-1">
+                                    <label for="observaciones">a_mm</label>
+                                    <input  type="text" class="form-control form-control-sm" id="a_mm" name="a_mm" value="{{old('a_mm',$elemento->a_mm)}}">
+                                </div>
+                                <div class="form-group col-1">
+                                    <label for="observaciones">m2</label>
+                                    <input  type="text" class="form-control form-control-sm" id="m2" name="m2" value="{{old('m2',$elemento->m2)}}">
+                                </div>
+                                <div class="form-group col-1">
+                                    <label for="observaciones">m2xuni</label>
+                                    <input  type="text" class="form-control form-control-sm" id="m2xuni" name="m2xuni" value="{{old('m2xuni',$elemento->m2xuni)}}">
                                 </div>
                             </div>
                             <div class="form-group">
