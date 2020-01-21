@@ -77,11 +77,7 @@
                                         <th>Medida</th>
                                         <th>Material</th>
                                         <th>Familia</th>
-                                        <th>Unit x Prop</th>
-                                        <th>l_mm</th>
-                                        <th>a_mm</th>
-                                        <th>m2</th>
-                                        <th>m2xuni</th>
+                                        <th  class="text-center">Unit x Prop</th>
                                         <th>Observaciones</th>
                                         <th>&nbsp;</th>
                                     </tr>
@@ -97,11 +93,7 @@
                                             <td>{{$elemento->medi->medida}}</td>
                                             <td>{{$elemento->mater->material}}</td>
                                             <td>{{$elemento->famil->familia}}</td>
-                                            <td>{{$elemento->unitxprop}}</td>
-                                            <td>{{$elemento->l_mm}}</th>
-                                            <td>{{$elemento->a_mm}}</th>
-                                            <td>{{$elemento->m2}}</th>
-                                            <td>{{$elemento->m2xuni}}</th>
+                                            <td  class="text-center">{{$elemento->unitxprop}}</td>
                                             <td>{{$elemento->observaciones}}</td>
                                             <td  width="100px">
                                                 <div class="text-center">
@@ -174,7 +166,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-2">
+                                        <div class="form-group col-3">
                                             <label for="medida_id">Medida</label>
                                             <select class="form-control form-control-sm" id="medida_id" name="medida_id" >
                                                 <option value="">Selecciona</option>
@@ -192,7 +184,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group  col-1">
+                                        <div class="form-group  col-3">
                                             <label for="unitxprop">Uds</label>
                                             <select class="form-control form-control-sm" id="unitxprop" name="unitxprop" >
                                                 <option value="">Selecciona</option>
@@ -201,7 +193,7 @@
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div class="form-group  col-2">
+                                        <div class="form-group  col-3">
                                             <label for="material_id">Familia</label>
                                             <select class="form-control form-control-sm" id="familia_id" name="familia_id" >
                                                 <option value="">Selecciona</option>
@@ -210,23 +202,6 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-1">
-                                            <label for="l_mm">l_mm</label>
-                                            <input  type="text" class="form-control form-control-sm" id="l_mm" name="l_mm" value="{{old('l_mm')}}">
-                                        </div>
-                                        <div class="form-group col-1">
-                                            <label for="a_mm">a_mm</label>
-                                            <input  type="text" class="form-control form-control-sm" id="a_mm" name="a_mm" value="{{old('a_mm')}}">
-                                        </div>
-                                        <div class="form-group col-1">
-                                            <label for="m2">m2</label>
-                                            <input  type="text" class="form-control form-control-sm" id="m2" name="m2" value="{{old('m2')}}">
-                                        </div>
-                                        <div class="form-group col-1">
-                                            <label for="m2xuni">m2xuni</label>
-                                            <input  type="text" class="form-control form-control-sm" id="m2xuni" name="m2xuni" value="{{old('m2xuni')}}">
-                                        </div>
-                
                                     </div>
                                     <div class="form-group">
                                         <label for="observaciones">Observaciones</label>

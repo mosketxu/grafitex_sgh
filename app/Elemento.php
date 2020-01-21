@@ -19,7 +19,6 @@ class Elemento extends Model
         'material_id',
         'unitxprop',
         'observaciones',
-        'l_mm','a_mm','m2','m2xuni',
         ];
 
         protected $with=['ubica','mobi','propx','carte','medi','mater','famil'];

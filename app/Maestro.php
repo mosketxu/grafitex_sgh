@@ -13,7 +13,7 @@ class Maestro extends Model
 
     protected $fillable=['store','country','name','area','segmento','storeconcept','elementificador',
                         'ubicacion','mobiliario','propxelemento','carteleria','medida','material','unitxprop','observaciones',
-                        'channel','store_cluster','furniture_type','blank','l_mm','a_mm','m2','m2xuni',
+                        'channel','store_cluster','furniture_type',
                     ];
 
     // protected $guarded = [];
@@ -243,7 +243,7 @@ class Maestro extends Model
         $elementos=Maestro::select(
             'elementificador','ubicacion','mobiliario',
             'propxelemento','carteleria','medida','material',
-            'unitxprop','observaciones','l_mm','a_mm','m2','m2xuni')
+            'unitxprop','observaciones')
             ->distinct('elementificador')
             ->get();
 
@@ -266,10 +266,6 @@ class Maestro extends Model
                     'material'=>$elemento['material'],
                     'unitxprop'=>$elemento['unitxprop'],
                     'observaciones'=>$elemento['observaciones'],
-                    'l_mm'=>$elemento['l_mm'],
-                    'a_mm'=>$elemento['a_mm'],
-                    'm2'=>$elemento['m2'],
-                    'm2xuni'=>$elemento['m2xuni'],
                 ];
             }
             DB::table('elementos')->insert($dataSet);

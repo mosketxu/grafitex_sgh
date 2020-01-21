@@ -118,7 +118,7 @@
                                         <td>{{$elemento->carteleria}}</td>
                                         <td>{{$elemento->medida}}</td>
                                         <td>{{$elemento->material}}</td>
-                                        <td>{{$elemento->unitxprop}}</td>
+                                        <td  class="text-center">{{$elemento->unitxprop}}</td>
                                         <td>{{$elemento->observaciones}}</td>
                                         <td  width="100px">
                                             <form id="formDelete" action="{{route('storeelementos.destroy',[$store->id,$elemento->id])}}" method="POST" style="display:inline">
@@ -156,7 +156,7 @@
         $(document).ready( function () {
         });
     
-        $('#menuelementos').addClass('active');
+        $('#menustores').addClass('active');
         $('#navcampaigns').toggleClass('activo');
     
     </script>

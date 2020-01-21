@@ -440,7 +440,8 @@ class CampaignController extends Controller
                         'material'  => $gen['material'],
                         'familia'=>$fam,
                         'unitxprop'  => $gen['unitxprop'],
-                        'imagen'  => str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida'])))))).'.jpg',
+                        // 'imagen'  => str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida'])))))).'.jpg',
+                        'imagen'  => str_replace('+','',str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida']))))))).'.jpg',
                     ]);
             }
         }

@@ -99,10 +99,6 @@ class ElementoController extends Controller
             'material_id'=>$request->material_id,
             'material'=>$ma,
             'unitxprop'=>$request->unitxprop,
-            'l_mm'=>$request->l_mm,
-            'a_mm'=>$request->a_mm,
-            'm2'=>$request->m2,
-            'm2xuni'=>$request->m2xuni,
             'observaciones'=>$request->observaciones,
              ]
         );
@@ -141,7 +137,10 @@ class ElementoController extends Controller
         $propxelementos=Propxelemento::orderBy('propxelemento')->get();
         $cartelerias=Carteleria::orderBy('carteleria')->get();
         $medidas=Medida::orderBy('medida')->get();
-        $familias=Tarifa::orderBy('familia')->get();
+        $familias=Tarifa::where('familia','<>','transporte')
+            ->where('familia','<>','picking')
+            ->orderBy('familia')->get();
+        // dd($familias);
         $materiales=Material::orderBy('material')->get();
 
         return view('elementos.edit',compact('elemento','ubicaciones','mobiliarios','propxelementos','cartelerias','medidas','familias','materiales'));
@@ -157,57 +156,14 @@ class ElementoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $request->validate([
-            'ubicacion_id'=>'required',
-            'mobiliario_id'=>'required',
-            'propxelemento_id'=>'required',
-            'carteleria_id'=>'required',
-            'medida_id'=>'required',
-            'material_id'=>'required',
             'familia_id'=>'required',
-            'unitxprop'=>'required|numeric',
             ]);
             
-        $u=Ubicacion::find($request->ubicacion_id)->ubicacion;
-        $m=Mobiliario::find($request->mobiliario_id)->mobiliario;
-        $p=Propxelemento::find($request->propxelemento_id)->propxelemento;
-        $c=Carteleria::find($request->carteleria_id)->carteleria;
-        $me=Medida::find($request->medida_id)->medida;
-        $ma=Material::find($request->material_id)->material;
-        $uxp=$request->unitxprop;
-        $e= str_replace(" ","",$u.$m.$c.$me.$ma.$uxp);
-        $controlElementificador=Elemento::where('elementificador',$e)->count();
-
-        if ($controlElementificador>0){
-            $notification = array(
-                'message' => 'Este Elemento ya existe.',
-                'alert-type' => 'error'
-            );
-            return redirect()->back()->withErrors($notification);
-        }
-
          DB::table('elementos')
          ->where('id',$id)
          ->update([
-            'elementificador'=>$e,
-            'ubicacion_id'=>$request->ubicacion_id,
-            'ubicacion'=>$u,
-            'mobiliario_id'=>$request->mobiliario_id,
-            'mobiliario'=>$m,
-            'propxelemento_id'=>$request->propxelemento_id,
-            'propxelemento'=>$p,
-            'carteleria_id'=>$request->carteleria_id,
-            'carteleria'=>$c,
-            'medida_id'=>$request->medida_id,
-            'medida'=>$me,
-            'material_id'=>$request->material_id,
-            'material'=>$ma,
-            'unitxprop'=>$request->unitxprop,
-            'l_mm'=>$request->l_mm,
-            'a_mm'=>$request->a_mm,
-            'm2'=>$request->m2,
-            'm2xuni'=>$request->m2xuni,
+            'familia_id'=>$request->familia_id,
             'observaciones'=>$request->observaciones,
              ]
         );

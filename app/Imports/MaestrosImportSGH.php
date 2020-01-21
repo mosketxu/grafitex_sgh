@@ -20,7 +20,6 @@ class MaestrosImportSGH implements ToModel, WithHeadingRow, WithChunkReading,Wit
     */
     public function model(array $row)
     {
-        // dd($row['l_mm']);
         $e= str_replace(" ","",$row['ubicacion'].$row['mobiliario'].$row['prop_elemento'].$row['carteleria'].$row['medida'].$row['material'].$row['unit_x_prop']);
         $e=str_replace("/","",$e);
         $observaciones="";
@@ -50,11 +49,6 @@ class MaestrosImportSGH implements ToModel, WithHeadingRow, WithChunkReading,Wit
             'channel'=>trim($row['channel']),
             'store_cluster'=>trim($row['store_cluster']),
             'furniture_type'=>trim($row['furniture_type']),
-            'blank'=>'',
-            'l_mm'=>$row['l_mm'],
-            'a_mm'=>$row['a_mm'],
-            'm2'=>$row['m2'],
-            'm2xuni'=>$row['m2xuni'],
         ]);
     }
 
