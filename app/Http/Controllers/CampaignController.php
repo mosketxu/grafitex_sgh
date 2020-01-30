@@ -3,34 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\{
-    Maestro,
-    Store,StoreElemento,Elemento, Country,Area,Mobiliario,
+    Store,StoreElemento,Area,Mobiliario,
     Campaign,
     CampaignStore,
     CampaignMedida,
-    CampaignCarteleria,
     CampaignMobiliario,
     CampaignUbicacion,
     CampaignSegmento,
-    CampaignStoreconcept,
     CampaignArea,
-    CampaignCountry,
     CampaignElemento,
     CampaignGaleria,
     CampaignTienda,
-    Carteleria,
     Medida,
     Segmento,
-    Storeconcept,
     VCampaignGaleria,
     TarifaFamilia,
     Ubicacion,
-};
+    };
+use App\Exports\CampaignStoresExport;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
-use function Complex\sec;
+// use function Complex\sec;
 
 class CampaignController extends Controller
 {
@@ -111,6 +108,23 @@ class CampaignController extends Controller
     {
         $campaign=Campaign::find($id);
         return view('campaign.edit',compact('campaign'));
+    }
+
+
+    public function addresses($id)
+    {
+        $campaign=Campaign::find($id);
+
+        $stores=CampaignStore::join('stores','stores.id','store_id')
+            ->where('campaign_id', '=', $id)
+            ->orderBy('stores.id')
+            ->paginate('10')->onEachSide(1);
+        return view('campaign.adresses',compact('stores','campaign'));
+    }
+
+    public function exportadresses($campaignId)
+    {
+        return Excel::download(new CampaignStoresExport($campaignId), 'direcciones.xlsx');
     }
 
 
@@ -405,6 +419,7 @@ class CampaignController extends Controller
                 ->campstomed($campaign->id)
                 ->where('store_id',$t)
                 ->get();
+            // dd($generar);
 
             foreach ($generar as $gen){
                 if ($gen['country']=='PT'){
@@ -420,7 +435,7 @@ class CampaignController extends Controller
 
                 if (is_null($fam))
                     $fam=1;
-                if (CampaignElemento::where('tienda_id',$tiendaId)->where('elemento_id',$gen['elemento_id'])->count()==0)
+                // if (CampaignElemento::where('tienda_id',$tiendaId)->where('elemento_id',$gen['elemento_id'])->count()==0)
                     CampaignElemento::insert([
                         'tienda_id'  => $tiendaId,
                         'elemento_id'  => $gen['elemento_id'],
@@ -440,7 +455,6 @@ class CampaignController extends Controller
                         'material'  => $gen['material'],
                         'familia'=>$fam,
                         'unitxprop'  => $gen['unitxprop'],
-                        // 'imagen'  => str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida'])))))).'.jpg',
                         'imagen'  => str_replace('+','',str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida']))))))).'.jpg',
                     ]);
             }

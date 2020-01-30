@@ -26,8 +26,14 @@
                     </div>
                     <div class="col-auto mr-auto">
                         @can('store.create')
-                        <a href="" role="button" data-toggle="modal" data-target="#storeCreateModal">
+                        <a href="" role="button" data-toggle="modal" data-target="#storeCreateModal" title="Crear tienda nueva">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        @endcan
+                        @can('store.index')
+                        <a href="{{route('store.adresses')}}" role="button" title="Direcciones de las tiendas">
+                            <i class="fas fa-map-marker-alt fa-2x text-success mt-2"></i>
                         </a>
                         @endcan
                     </div>
@@ -52,32 +58,108 @@
                                 Hay {{$stores->total()}} stores.
                             </div>
                             <div class="col-2 float-right mb-2">
-                                <form method="GET" action="{{route('store.index') }}">
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-search fa-sm text-primary"></i></span>
-                                        </div>
-                                        <input id="busca" name="busca"  type="text" class="form-control" name="search" value='{{$busqueda}}' placeholder="Search for..."/>
-                                    </div>
-                                </form>
                             </div>
                         </div>
+
                         <div class="table-responsive">
                             <table  class="table table-hover table-sm small" cellspacing="0" width=100%>
                                 <thead>
                                     <tr>
-                                        <th>Store</th>
+                                        <form id="formfiltro" method="GET" action="{{route('store.index') }}">
+                                        {{-- <form id="formfiltro" method="GET" action="{{route('store.export') }}"> --}}
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="lux" name="lux[]" data-placeholder="Luxotica" multiple>
+                                                    <option value="Oliver Peoples" {{ empty($lux) ? "" : (in_array("Oliver Peoples", $lux) ? "selected" : "")}}>Oliver Peoples</option> 
+                                                    <option value="Ray-Ban Store" {{ empty($lux) ? "" : (in_array("Ray-Ban Store", $lux) ? "selected" : "")}}>Ray-Ban Store</option> 
+                                                    <option value="Sunglass Hut" {{ empty($lux) ? "" : (in_array("Sunglass Hut", $lux) ? "selected" : "")}}>Sunglass Hut</option> 
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="sto" name="sto[]" data-placeholder="stores" multiple>
+                                                    @foreach ($stores as $store )
+                                                        <option value="{{$store->id}}" {{ empty($sto) ? "" : (in_array($store->id, $sto) ? "selected" : "")}}>{{$store->id}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="nam" name="nam[]" data-placeholder="name" multiple>
+                                                    @foreach ($stores as $store )
+                                                        <option value="{{$store->name}}" {{ empty($nam) ? "" : (in_array($store->name, $nam) ? "selected" : "")}}>{{$store->name}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="coun" name="coun[]" data-placeholder="country" multiple>
+                                                    <option value="ES" {{ empty($coun) ? "" : (in_array("ES", $coun) ? "selected" : "")}}>ES</option> 
+                                                    <option value="PT" {{ empty($coun) ? "" : (in_array("PT", $coun) ? "selected" : "")}}>PT</option> 
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="are" name="are[]" data-placeholder="area" multiple>
+                                                    @foreach ($areas as $area )
+                                                    <option value="{{$area->area}}" {{ empty($are) ? "" : (in_array($area->area, $are) ? "selected" : "")}}>{{$area->area}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="segmen" name="segmen[]" data-placeholder="segmento" multiple>
+                                                    @foreach ($segmentos as $segmento )
+                                                        <option value="{{$segmento->segmento}}" {{ empty($segmen) ? "" : (in_array($segmento->segmento, $segmen) ? "selected" : "")}}>{{$segmento->segmento}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="cha" name="cha[]" data-placeholder="channel" multiple>
+                                                    <option value="Airport" {{ empty($cha) ? "" : (in_array("Airport", $cha) ? "selected" : "")}}>Airport</option> 
+                                                    <option value="Dpt.Store" {{ empty($cha) ? "" : (in_array("Dpt.Store", $cha) ? "selected" : "")}}>Dpt.Store</option> 
+                                                    <option value="Mall" {{ empty($cha) ? "" : (in_array("Mall", $cha) ? "selected" : "")}}>Mall</option> 
+                                                    <option value="Outlet" {{ empty($cha) ? "" : (in_array("Outlet", $cha) ? "selected" : "")}}>Outlet</option> 
+                                                    <option value="Street" {{ empty($cha) ? "" : (in_array("Street", $cha) ? "selected" : "")}}>Street</option> 
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="clu" name="clu[]" data-placeholder="cluster" multiple>
+                                                    <option value="Basic">Basic</option>
+                                                    <option value="ECI">ECI</option>
+                                                    <option value="INLINE">INLINE</option>
+                                                    <option value="OPEN AIR">OPEN AIR</option>
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="conce" name="conce[]" data-placeholder="concepto" multiple>
+                                                    @foreach ($conceptos as $concepto )
+                                                        <option value="{{$concepto->storeconcept}}" {{ empty($conce) ? "" : (in_array($concepto->storeconcept, $conce) ? "selected" : "")}}>{{$concepto->storeconcept}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-control form-control-sm select2" id="fur" name="fur[]" data-placeholder="furniture_type" multiple>
+                                                    @foreach($furnitures as $furniture )
+                                                    <option value="{{$furniture->furniture_type}}" {{ empty($fur) ? "" : (in_array($furniture->furniture_type, $fur) ? "selected" : "")}}>{{$furniture->furniture_type}}</option> 
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                            <td width="100px">
+                                                <div class="text-center">
+                                                    <button type="submit" name="submit" class=" enlace" value="filtrar"><i class="fas fa-search fa-2x text-primary"></i></button>
+                                                    <a href="#!" class="btn-borrarfiltro " title="Borrar Filtros" onclick="borrarFiltros('formfiltro')"><i class="far fa-times-circle text-danger fa-2x ml-1"></i></a>
+                                                    &nbsp;&nbsp;
+                                                    <button type="submit" name="submit" class=" enlace" value="excel"><i class="far fa fa-file-excel text-success fa-2x mx-1"></i></button>
+                                                </div>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                    <tr>
+                                        <th>Luxotica</th>
+                                        <th>Store &nbsp; &nbsp;</th>
                                         <th>Nombre</th>
                                         <th>Country</th>
-                                        <th>Idioma</th>
                                         <th>Area</th>
                                         <th>Segmento</th>
                                         <th>Channel</th>
                                         <th>Cluster</th>
                                         <th>Concepto</th>
                                         <th>Furniture Type</th>
-                                        <th>Observaciones</th>
-                                        <th width="200px"></th>
                                         <th width="150px">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -86,19 +168,18 @@
                                     <tr data-id="{{$store->id}}">
                                         <form id="form{{$store->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="text" class="d-none" id="id" name="id" value="{{$store->id}}">
+                                            <input type="text" class="d-none" name="id" value="{{$store->id}}">
+                                            <td>{{$store->luxotica}}</td>
                                             <td>{{$store->id}}</td>
                                             <td>{{$store->name}}</td>
                                             <td>{{$store->country}}</td>
-                                            <td>{{$store->idioma}}</td>
                                             <td>{{$store->are->area}}</td>
                                             <td>{{$store->segmento}}</td>
                                             <td>{{$store->channel}}</td>
                                             <td>{{$store->store_cluster}}</td>
                                             <td>{{$store->concep->storeconcept}}</td>
                                             <td>{{$store->furniture_type}}</td>
-                                            <td>{{$store->observaciones}}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <div class="row">
                                                     <div>
                                                         <input type="file" id="inputFile{{$store->id}}" name="imagen" style="display:none">
@@ -119,23 +200,24 @@
                                                         @endif       
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td width="180px">
+                                            </td> --}}
+                                            <td width="100px">
                                                 <div class="text-center">
-                                                @can('store.create')
-                                                <a href="#" class="mr-4" name="Upload" onclick="subirImagenIndex('form{{$store->id}}','{{$store->id}}')"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
-                                                @endcan
+                                                    {{-- @can('store.create')
+                                                    <a href="#" class="mr-4" name="Upload" onclick="subirImagenIndex('form{{$store->id}}','{{$store->id}}')" title="Subir imagen"><i class="fas fa-upload text-info fa-2x mx-1"></i></a>
+                                                    @endcan --}}
 
-                                                @can('store.edit')
-                                                <a href="{{ route('store.edit',$store) }}" title="Edit"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
-                                                @endcan
-                                                @can('storeelementos.index')
-                                                <a href="{{ route('storeelementos.index',$store) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mx-1"></i></a>
-                                                @endcan
-                                                @can('store.destroy')
-                                                <a href="#!" class="btn-delete " title="Eliminar"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
-                                                @endcan
-                                            </div>
+                                                    @can('store.edit')
+                                                    <a href="{{ route('store.edit',$store) }}" title="Editar tienda"><i class="far fa-edit text-primary fa-2x mx-1"></i></a>
+                                                    @endcan
+                                                    @can('storeelementos.index')
+                                                    <a href="{{ route('storeelementos.index',$store) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mx-1"></i></a>
+                                                    @endcan
+                                                    @can('store.destroy')
+                                                    <a href="#!" class="btn-delete " title="Eliminar"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></a>
+                                                    @endcan
+                                                </div>
+                                            </td>
                                         </form>
                                     </tr>
                                     @endforeach
@@ -162,7 +244,7 @@
                                 <div class="row">
                                     <div class="form-group col-2">
                                         <label for="id">Store</label>
-                                        <input  type="text" class="form-control form-control-sm" id="id" name="id" value="{{old('id')}}">
+                                        <input  type="text" class="form-control form-control-sm" id="idstore" name="id" value="{{old('id')}}">
                                     </div>
                                     <div class="form-group  col-4">
                                         <label for="name">Nombre</label>
@@ -277,6 +359,20 @@
         });
     });
 
+    function borrarFiltros(form){
+        $("#lux").html('');   
+        $("#sto").html('');   
+        $("#nam").html('');   
+        $("#coun").html('');   
+        $("#idi").html('');   
+        $("#are").html('');   
+        $("#segmen").html('');   
+        $("#cha").html('');   
+        $("#clu").html('');   
+        $("#conce").html('');   
+        $("#fur").html('');   
+    }
+
     function subirImagenIndex(formulario,imagenId){
         var token= $('#token').val();
         let timestamp = Math.floor( Date.now() );
@@ -318,6 +414,8 @@
             }
         }); 
     }
+
+    $('.select2').select2();
 
 
     $('#menustores').addClass('active');

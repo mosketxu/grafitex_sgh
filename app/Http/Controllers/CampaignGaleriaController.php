@@ -152,7 +152,9 @@ class CampaignGaleriaController extends Controller
             $imageUpload->save($originalPath.$file_name);
             //redimensionando
             Image::make($request->file('photo'))
-            ->resize(144,144)
+            ->resize(null,144,function($constraint){
+                $constraint->aspectRatio();
+            })
             ->save('storage/galeria/thumbnails/thumb-'.$file_name);
         }
 
@@ -212,7 +214,9 @@ class CampaignGaleriaController extends Controller
         }
 
         Image::make($request->file('photo'))
-            ->resize(144,144)
+            ->resize(null,144,function($constraint){
+                $constraint->aspectRatio();
+            })
             ->encode('jpg')
             ->save('storage/galeria/'.$campGal->campaign_id.'/thumbnails/thumb-'.$file_name);
 

@@ -37,6 +37,11 @@
     @endcan
     @can('campaign.index')
     <li class="nav-item d-none d-sm-inline-block">
+        <a  href="{{route('campaign.addresses',$campaign->id) }}" class="nav-link" title="Direcciones"><span id="navdirecciones" class="px-1"><i class="fas fa-map-marker-alt text-info fa-lg"></i></span></a>
+    </li>
+    @endcan
+    @can('campaign.index')
+    <li class="nav-item d-none d-sm-inline-block">
         <a  href="{{route('campaign.etiquetas.pdf',$campaign->id) }}" class="nav-link" title="Etiquetas"><span id="navetiquetas" class="px-1"><i class="fas fa-tags text-maroon fa-lg"></i></span></a>
     </li>
     @endcan

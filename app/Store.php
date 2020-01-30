@@ -9,10 +9,11 @@ use Image;
 class Store extends Model
 {
     protected $fillable=[
-        'id','name','country',
-        'zona','area_id','area','idioma','segmento',
-        'concepto_id','concepto','observaciones','imagen',
-        'channel','store_cluster','furniture_type'
+        'id','luxotica','name','address','city','province','cp','phone','email',
+        'country','zona','area_id','area','idioma','segmento',
+        'concepto_id','concepto','imagen',
+        'channel','store_cluster','furniture_type','winterschedule','summerschedule',
+        'deliverytime','observaciones'
     ];
 
     protected $with=['are','concep','storeelementos'];
@@ -45,24 +46,7 @@ class Store extends Model
         return $this->belongsTo(Storeconcept::class,'concepto_id');
     }
 
-    public function scopeSearch($query, $busca)
-    {
-        return $query->where('id', 'LIKE', "%$busca%")
-        ->orWhere('name', 'LIKE', "%$busca%")
-        ->orWhere('country', 'LIKE', "%$busca%")
-        ->orWhere('idioma', 'LIKE', "%$busca%")
-        ->orWhere('zona', 'LIKE', "%$busca%")
-        ->orWhere('area', 'LIKE', "%$busca%")
-        ->orWhere('segmento', 'LIKE', "%$busca%")
-        ->orWhere('channel', 'LIKE', "%$busca%")
-        ->orWhere('store_cluster', 'LIKE', "%$busca%")
-        ->orWhere('concepto', 'LIKE', "%$busca%")
-        ->orWhere('furniture_type', 'LIKE', "%$busca%")
-        ->orWhere('observaciones', 'LIKE', "%$busca%")
-        ->orWhere('imagen', 'LIKE', "%$busca%")
-        ;
-    }
-
+    
     public function scopeSeg($query,$campaignId)
     {
         if (CampaignSegmento::where('campaign_id',$campaignId)->count()>0){
@@ -71,6 +55,75 @@ class Store extends Model
             });}
     }
 
+    public function scopeLux($query,$lux)
+    {
+        if (!empty($lux)){
+            return $query->whereIn('luxotica',$lux);
+        }
+    }
+
+    public function scopeSto($query,$sto)
+    {
+        if (!empty($sto)){
+            return $query->whereIn('id',$sto);
+        }
+    }
+
+    public function scopeNam($query,$nam)
+    {
+        if (!empty($nam)){
+            return $query->whereIn('name',$nam);
+        }
+    }
+
+    public function scopeCoun($query,$coun)
+    {
+        if (!empty($coun)){
+            return $query->whereIn('country',$coun);
+        }
+    }
+
+    public function scopeAre($query,$are)
+    {
+        if (!empty($are)){
+            return $query->whereIn('area',$are);
+        }
+    }
+
+    public function scopeSegmen($query,$segmen)
+    {
+        if (!empty($segmen)){
+            return $query->whereIn('segmento',$segmen);
+        }
+    }
+
+    public function scopeCha($query,$cha)
+    {
+        if (!empty($cha)){
+            return $query->whereIn('channel',$cha);
+        }
+    }
+
+    public function scopeClu($query,$clu)
+    {
+        if (!empty($clu)){
+            return $query->whereIn('cluster',$clu);
+        }
+    }
+
+    public function scopeConce($query,$conce)
+    {
+        if (!empty($conce)){
+            return $query->whereIn('concepto',$conce);
+        }
+    }
+
+    public function scopeFur($query,$fur)
+    {
+        if (!empty($fur)){
+            return $query->whereIn('furniture_type',$fur);
+        }
+    }
 
     static function subirImagen($storeId,$imagen)
     {
@@ -111,7 +164,9 @@ class Store extends Model
         }
 
         Image::make($imagen)
-            ->resize(144,144)
+            ->resize(null,144,function($constraint){
+                $constraint->aspectRatio();
+            })
             ->encode('jpg')
             ->save('storage/store/thumbnails/thumb-'.$file_name);
 

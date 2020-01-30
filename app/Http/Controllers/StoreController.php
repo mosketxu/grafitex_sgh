@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\{Area,Country,Segmento, Store, StoreElemento, Elemento, Furniture, Storeconcept};
+use App\Imports\StoreAdressesImport;
+use App\Exports\StoreExport;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
 use Image;
 use Illuminate\Http\Request;
 
@@ -18,22 +20,55 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->busca) {
-            $busqueda = $request->busca;
-        } else {
-            $busqueda = '';
-        } 
+        $lux=$request->get('lux');
+        $sto=$request->get('sto');
+        $nam=$request->get('nam');
+        $coun=$request->get('coun');
+        $are=$request->get('are');
+        $segmen=$request->get('segmen');
+        $cha=$request->get('cha');
+        $clu=$request->get('clu');
+        $conce=$request->get('conce');
+        $fur=$request->get('fur');
 
-        $stores=Store::search($request->busca)
-        ->orderBy('id')
-        ->paginate('10')->onEachSide(1);
-
+        $stores=Store::lux($lux)
+            ->sto($sto)
+            ->nam($nam)
+            ->coun($coun)
+            ->are($are)
+            ->segmen($segmen)
+            ->cha($cha)
+            ->clu($clu)
+            ->conce($conce)
+            ->fur($fur)
+            ->orderBy('id')
+            ->paginate('10')->onEachSide(1);
         $countries=Country::get();
         $areas=Area::orderBy('area')->get();
         $segmentos=Segmento::orderBy('segmento')->get();
         $conceptos=Storeconcept::orderBy('storeconcept')->get();
-        
-        return view('stores.index',compact('stores','busqueda','countries','areas','segmentos','conceptos'));
+        $furnitures=Furniture::orderBy('furniture_type')->get();
+
+        if($request->submit=="excel")
+            return Excel::download(new StoreExport($lux,$sto,$nam,$coun,$are,$segmen,$cha,$clu,$conce,$fur),'stores.xlsx');
+        else
+            return view('stores.index',
+                    compact('stores','countries','areas','segmentos','conceptos','furnitures',
+                    'lux','sto','nam','coun','idi','are','segmen','cha','clu','conce','fur'));
+
+    }
+
+    public function adresses(Request $request)
+    {
+        $sto=$request->get('sto');
+        $nam=$request->get('nam');
+
+        $stores=Store::sto($sto)
+            ->nam($nam)
+            ->orderBy('id')
+            ->paginate('10')->onEachSide(1);
+    
+        return view('stores.adresses',compact('stores','sto','nam'));
     }
 
     /**
@@ -139,13 +174,13 @@ class StoreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $request->validate([
             'name'=>'required',
             'country'=>'required',
             'area_id'=>'required',
             'segmento'=>'required',
-            'concepto_id'=>'required',
+            'concepto_id'=>'required', 
+            'email'=>'email', 
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:12288',
             ]);
 
@@ -163,6 +198,7 @@ class StoreController extends Controller
             $imagen = Store::subirImagen($request->id,$request->file('photo'));
 
         DB::table('stores')->where('id',$id)->update([
+            'luxotica'=>$request->luxotica,
             'name'=>$request->name,
             'country'=>$request->country,
             'idioma'=>$request->idioma,
@@ -177,6 +213,15 @@ class StoreController extends Controller
             'concepto_id'=>$request->concepto_id,
             'concepto'=>$c,
             'furniture_type'=>$request->furniture_type,
+            'address'=>$request->address,
+            'city'=>$request->city,
+            'province'=>$request->province,
+            'cp'=>$request->cp,
+            'phone'=>$request->phone,
+            'email'=>$request->email,
+            'winterschedule'=>$request->winterschedule,
+            'summerschedule'=>$request->summerschedule,
+            'deliverytime'=>$request->deliverytime,
             'imagen'=>$imagen,
             'observaciones'=>$request->observaciones,
              ]
@@ -186,7 +231,9 @@ class StoreController extends Controller
             'message' => 'Elemento actualizado satisfactoriamente!',
             'alert-type' => 'success'
         );
-        return redirect('store')->with($notification);
+
+
+        return redirect('store/index')->with($notification);
 
     }
 
@@ -203,7 +250,6 @@ class StoreController extends Controller
         return Response()->json($store);
 
     }
-
 
     /**
      * Remove the specified resource from storage.

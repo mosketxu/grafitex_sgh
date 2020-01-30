@@ -25,6 +25,7 @@ class CreateCampaignElementosTable extends Migration
             // $table->foreign('store_id')->references('id')->on('stores');
             $table->string('name',100)->index();
             $table->string('country',2)->index();
+            $table->string('idioma')->nullable();
             $table->string('area',20)->index();
             $table->string('zona',20)->index();
             $table->string('segmento',20)->index();

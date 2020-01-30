@@ -52,6 +52,14 @@
                                         <input  type="text" class="form-control form-control-sm" id="name" name="name" value="{{old('name',$store->name)}}">
                                     </div>
                                     <div class="form-group col-2">
+                                        <label for="country">Luxotica</label>
+                                        <select class="form-control form-control-sm" id="luxotica" name="luxotica" >
+                                            <option value="Oliver Peoples" {{old('luxotica','ES'==$store->luxotica) ? 'selected' : ''}}>Oliver Peoples</option>
+                                            <option value="Ray-Ban Store" {{old('country','PT'==$store->country) ? 'selected' : ''}}>Ray-Ban Store</option>
+                                            <option value="Sunglass Hut" {{old('country','PT'==$store->country) ? 'selected' : ''}}>Sunglass Hut</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-2">
                                         <label for="country">Country</label>
                                         <select class="form-control form-control-sm" id="country" name="country" >
                                             <option value="ES" {{old('country','ES'==$store->country) ? 'selected' : ''}}>ES</option>
@@ -74,6 +82,8 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="form-group  col-2">
                                         <label for="segmento">Segmento</label>
                                         <select class="form-control form-control-sm" id="segmento" name="segmento" >
@@ -82,8 +92,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="form-group col-2">
                                         <label for="channel">Channel</label>
                                         <select class="form-control form-control-sm" id="channel" name="channel" >
@@ -105,7 +113,7 @@
                                             <option value="OPEN AIR">OPEN AIR</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-2">
+                                    <div class="form-group col-4">
                                         <label for="concepto">Concepto</label>
                                         <select class="form-control form-control-sm" id="concepto_id" name="concepto_id" >
                                             @foreach($conceptos as $concepto )
@@ -121,20 +129,61 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control form-control-sm" name="address" id="address" value="{{old('address',$store->address)}}">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control form-control-sm" name="city" id="city" value="{{old('city',$store->city)}}">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="province">Province</label>
+                                        <input type="text" class="form-control form-control-sm" name="province" id="province" value="{{old('province',$store->province)}}">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="cp">Postal Code</label>
+                                        <input type="text" class="form-control form-control-sm" name="cp" id="cp" value="{{old('cp',$store->cp)}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-2">
+                                        <label for="phone">phone</label>
+                                        <input  type="text" class="form-control form-control-sm" id="phone" name="phone" value="{{old('phone',$store->phone)}}">
+                                    </div>
                                     <div class="form-group col-4">
-                                        <label for="observaciones">Observaciones</label>
+                                        <label for="email">email</label>
+                                        <input  type="email" class="form-control form-control-sm" id="email" name="email" value="{{old('email',$store->email)}}">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="winterschedule">Winter Schedule</label>
+                                        <input  type="text" class="form-control form-control-sm" id="winterschedule" name="winterschedule" value="{{old('winterschedule',$store->winterschedule)}}">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="summerschedule">Summer Schedule</label>
+                                        <input  type="text" class="form-control form-control-sm" id="summerschedule" name="summerschedule" value="{{old('summerschedule',$store->summerschedule)}}">
+                                    </div>
+                                    <div class="form-group col-2">
+                                        <label for="deliverytime">deliverytime</label>
+                                        <input  type="text" class="form-control form-control-sm" id="deliverytime" name="deliverytime" value="{{old('deliverytime',$store->deliverytime)}}">
+                                    </div>
+                                </div>
+                                <div class="row col-12">
+                                    <div class="form-group col">
+                                        <label for="observaciones">observaciones</label>
                                         <input  type="text" class="form-control form-control-sm" id="observaciones" name="observaciones" value="{{old('observaciones',$store->observaciones)}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <img src="{{asset('storage/store/'.$store->imagen)}}" alt={{$store->imagen}} title={{$store->imagen}} 
-                                class="img-fluid img-thumbnail" style="max-height: 250px; max-width: 350px;">
+                                class="img-fluid img-thumbnail" style="max-height: 400px; ">
                                 <input type="hidden" name="imagen" value="{{$store->imagen}}" readonly>  
                                 @can('store.edit')
                                 <input type="file" name="photo" value="">  
                                 @endcan
-
                             </div>
                         </div>
                     </div>

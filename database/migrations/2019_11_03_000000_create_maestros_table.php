@@ -21,7 +21,10 @@ class CreateMaestrosTable extends Migration
             $table->string('area',20);
             $table->string('segment2018',20)->nullable();
             $table->string('segmento',20)->index();
+            $table->string('channel')->nullable();
+            $table->string('store_cluster')->nullable();
             $table->string('storeconcept',50);
+            $table->string('furniture_type')->nullable();
             $table->string('elementificador',400);
             $table->string('ubicacion',20);
             $table->string('mobiliario',100)->index();
@@ -33,6 +36,7 @@ class CreateMaestrosTable extends Migration
             $table->string('observaciones')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
         });
     }
 

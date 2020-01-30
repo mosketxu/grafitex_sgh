@@ -32,17 +32,23 @@
                         </a>
                         &nbsp;&nbsp;
                         <a href="" role="button" data-toggle="modal" data-target="#actualizaTablas" data-backdrop="static" data-keyboard="false">
-                            <i class="fas fa-sync-alt fa-2x text-info mt-2"></i>
-                            <span class="badge badge-info">Actualizar tablas Grafitex</span>
+                            <i class="fas fa-sync-alt fa-2x text-primary mt-2"></i>
+                            <span class="badge badge-primary">Actualizar tablas Grafitex</span>
                         </a>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="" role="button" data-toggle="modal" data-target="#importMaestroSHG" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-plus-circle fa-2x text-success mt-2"></i>
                             <span class="badge badge-success">Fichero SGH</span>
                         </a>
+                        &nbsp;&nbsp;
                         <a href="" role="button" data-toggle="modal" data-target="#actualizaTablasSGH" data-backdrop="static" data-keyboard="false">
-                            <i class="fas fa-sync-alt fa-2x text-info mt-2"></i>
-                            <span class="badge badge-info">Actualizar tablas SGH</span>
+                            <i class="fas fa-sync-alt fa-2x text-success mt-2"></i>
+                            <span class="badge badge-success">Actualizar tablas SGH</span>
+                        </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="" role="button" data-toggle="modal" data-target="#actualizaTiendas" data-backdrop="static" data-keyboard="false">
+                            <i class="fas fa-sync-alt fa-2x text-warning mt-2"></i>
+                            <span class="badge badge-warning">Actualizar tiendas</span>
                         </a>
                         &nbsp;&nbsp;
                         @endcan
@@ -197,7 +203,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
                                     @can('maestro.create')
-                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="subirfichero('#formularioSGH')">Subir Maestro SGH</button>
+                                    <button type="button" class="btn btn-success modalSubir" name="Guardar" onclick="subirfichero('#formularioSGH')">Subir Maestro SGH</button>
                                     @endcan
                                 </div>
                             </form>
@@ -253,10 +259,38 @@
                                 @can('maestro.create')
                                 <form id="formularioActSGH" role="form" method="get" action="{{ route('maestro.actualizatablas','SGH') }}">
                                     @csrf
-                                    <button type="button" class="btn btn-primary modalSubir" name="Guardar" onclick="actualizaTablas('#formularioActSGH')">Actualizar con fichero SGH</button>
+                                    <button type="button" class="btn btn-success modalSubir" name="Guardar" onclick="actualizaTablas('#formularioActSGH')">Actualizar con fichero SGH</button>
                                 </form>
                                 @endcan
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Actualiza tiendas-->
+            <div class="modal fade" id="actualizaTiendas" tabindex="-1" role="dialog" aria-labelledby="actualizaTiendasLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="actualizaTiendasLabel">Actualiza datos de las tiendas: direcciones, email,...</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formActTienda" role="form" method="post" action="{{ route('store.updatetiendas') }}" enctype="multipart/form-data" >
+                                @csrf
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label for="campaign_initdate">Fichero</label>
+                                        <input type="file" class="form-control form-control-sm" id="maestro" name="maestro" value=""/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
+                                    @can('maestro.create')
+                                    <button type="button" class="btn btn-warning modalSubir" name="Guardar" onclick="subirfichero('#formActTienda')">Subir Datos Tiendas</button>
+                                    @endcan
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

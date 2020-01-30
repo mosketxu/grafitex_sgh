@@ -183,7 +183,9 @@ class CampaignElementoController extends Controller
             $campElem->save();
 
             Image::make($request->file('photo'))
-                ->resize(144,144)
+                ->resize(null,144,function($constraint){
+                    $constraint->aspectRatio();
+                })
                 ->encode('jpg')
                 ->save('storage/galeria/'.$campaignId.'/thumbnails/thumb-'.$file_name);
         }

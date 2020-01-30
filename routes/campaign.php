@@ -36,6 +36,12 @@ Route::group(['prefix' => 'campaign'], function () {
     Route::get('/{campaign}/filtro', 'CampaignController@filtrar')->name('campaign.filtrar')
         ->middleware('can:campaign.edit');
 
+    Route::get('/{campaign}/address', 'CampaignController@addresses')->name('campaign.addresses')
+        ->middleware('can:campaign.index');
+
+    Route::get('/{campaign}/exportaddresses', 'CampaignController@exportadresses')->name('campaign.exportaddresses')
+        ->middleware('can:campaign.index');
+
     Route::delete('/delete/{campaign}', 'CampaignController@destroy')->name('campaign.delete')
         ->middleware('can:campaign.destroy');        
 

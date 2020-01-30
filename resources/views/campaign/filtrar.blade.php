@@ -112,7 +112,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @can('campaign.create')
+                                            @can('campaign.edit')
                                             {{-- <button type="button" class="btn btn-default btn-block" name="Guardar"
                                                 onclick="asociar({{ $campaign->id}},'/campaign/asociarstore','#tokenStore','storesduallistbox[]','Stores','store','campaign_stores')">Asociar
                                             Stores</button> --}}
@@ -154,7 +154,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @can('campaign.create')
+                                            @can('campaign.edit')
                                             <button type="submit" class="btn btn-default btn-block"
                                                 name="Guardar">Asociar Segmentos</button>
                                             @endcan
@@ -201,7 +201,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @can('campaign.create')
+                                            @can('campaign.edit')
                                             <button type="submit" class="btn btn-default btn-block"
                                                 name="Guardar">Asociar Ubicacion</button>
                                             @endcan
@@ -240,7 +240,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @can('campaign.create')
+                                            @can('campaign.edit')
                                             <button type="submit" class="btn btn-default btn-block"
                                                 name="Guardar">Asociar Medida</button>
                                             @endcan
@@ -280,7 +280,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @can('campaign.create')
+                                            @can('campaign.edit')
                                             <button type="submit" class="btn btn-default btn-block"
                                                 name="Guardar">Asociar Mobiliario</button>
                                             @endcan

@@ -43,7 +43,7 @@
         {{-- main content  --}}
         <section class="content">
             <div class="container-fluid">
-                <div class="card">
+                <div class="card"> 
                     <div class="card-body">
                         {{-- links  y cuadro busqueda --}}
                         <div class="row">
@@ -102,6 +102,9 @@
                                                 @endcan
                                                 @can('campaign.index')
                                                 <a href="{{route('campaign.etiquetas.index',$campaign->id) }}" title="Etiquetas HTML"><i class="fas fa-code text-indigo fa-2x mr-1"></i></a>
+                                                @endcan
+                                                @can('campaign.index')
+                                                <a  href="{{route('campaign.addresses',$campaign->id) }}" title="Direcciones"><i class="fas fa-map-marker-alt text-info fa-2x mr-1"></i></a>
                                                 @endcan
                                                 @can('presupuesto.index')
                                                 <a href="{{route('campaign.presupuesto', $campaign->id ) }}" title="Presupuesto"><i class="fas fa-money-check-alt text-fuchsia fa-2x mr-1"></i></a>

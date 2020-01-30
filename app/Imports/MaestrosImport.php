@@ -23,7 +23,7 @@ class MaestrosImport implements ToModel, WithHeadingRow, WithChunkReading
         $e= str_replace(" ","",$row['ubicacion'].$row['mobiliario'].$row['prop_elemento'].$row['carteleria'].$row['medida'].$row['material'].$row['unit_x_prop']);
         $e=str_replace("/","",$e);
         $observaciones="";
-        $udxprop=trim($row['unit_x_prop']);
+        $udxprop=trim($row['unit_x_prop']); 
         if(!is_numeric($udxprop)){
             $observaciones=$udxprop;
             $udxprop=0;

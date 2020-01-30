@@ -21,12 +21,18 @@ class CreateStoresTable extends Migration
             $table->string('zona',2)->index();
             $table->bigInteger('area_id')->index();
             $table->string('area',20)->index();
+            $table->string('idioma')->nullable();
             $table->string('segmento',20)->index();
+            $table->string('channel')->nullable();
+            $table->string('store_cluster')->nullable();
             $table->bigInteger('concepto_id')->index();
             $table->string('concepto',50)->index();
+            $table->string('furniture_type')->nullable();
             $table->string('observaciones',50)->nullable();
             $table->string('imagen',100)->default('SGH.jpg');
             $table->timestamps();
+
+
         });
     }
 

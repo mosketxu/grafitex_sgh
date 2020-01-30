@@ -19,6 +19,7 @@ class CampaignReportingController extends Controller
         ->first();
 
         return view('reporting.etiquetasHTML',compact('etiquetas','today'));
+        // return view('reporting.etiquetasHTMLBootstrap',compact('etiquetas','today'));
     }
 
     public function pdf($campaignId){

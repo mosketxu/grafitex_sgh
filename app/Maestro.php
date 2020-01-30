@@ -151,7 +151,8 @@ class Maestro extends Model
                     'idioma'=>$idioma,
                     'segmento'=>$store['segmento'],
                     'concepto_id'=>$conceptoId->id,
-                    'concepto'=>$store['storeconcept']
+                    'concepto'=>$store['storeconcept'],
+                    'imagen'=>$store['store'].'.jpg'
                 ]);
             }
         }
@@ -231,7 +232,8 @@ class Maestro extends Model
                     'concepto'=>$store['storeconcept'],
                     'channel'=>$store['channel'],
                     'store_cluster'=>$store['store_cluster'],
-                    'furniture_type'=>$store['furniture_type']
+                    'furniture_type'=>$store['furniture_type'],
+                    'imagen'=>$store['store'].'.jpg'
                 ]);
             }
         }
