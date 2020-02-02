@@ -24,6 +24,15 @@ class CampaignTienda extends Model
     {
         return $this->hasMany(CampaignElemento::class,'tienda_id');
     }
+    
+    // SCOPES
+
+    public function scopeSearch($query, $busca)
+    {
+      return $query->join('campaigns','campaigns.id','campaign_tiendas.campaign_id')
+      ->where('campaign_name', 'LIKE', "%$busca%");
+    }
+    
     public function scopeStore($query, $campaignid)
     {
       return $query->join('stores','store.id','store_id')

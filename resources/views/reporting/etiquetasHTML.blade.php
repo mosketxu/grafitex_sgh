@@ -40,7 +40,7 @@
                 <div class="etiquetas">
                     <table width="100%" cellspacing="0" border="1">
                         <thead>
-                            <tr>
+                            <tr> 
                                 <th style="text-align: center;" width="25%">
                                     {{$campaignstore->store_id}} <br>
                                     {{$campaignstore->tienda->segmento}}

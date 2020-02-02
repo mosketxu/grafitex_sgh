@@ -15,11 +15,13 @@ class StoredataController extends Controller
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function import() 
+    public function import(Request $request) 
     {
+        if(request()->file('maestro')){
+            DB::table('storedatas')->delete();
+            Excel::import(new StoredataImport,request()->file('maestro'));
+        }
 
-        DB::table('storedatas')->delete();
-        Excel::import(new StoredataImport,request()->file('maestro'));
         $storedatas=Storedata::get();
         foreach ($storedatas as $storedata) {
             $store=Store::find($storedata->id);

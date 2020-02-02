@@ -287,7 +287,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary modalSubir" data-dismiss="modal">Cerrar</button>
                                     @can('maestro.create')
-                                    <button type="button" class="btn btn-warning modalSubir" name="Guardar" onclick="subirfichero('#formActTienda')">Subir Datos Tiendas</button>
+                                    <button type="button" class="btn btn-warning modalSubir" name="Guardar" onclick="subirfichero('#formActTienda')">Actualizar Datos Tiendas</button>
                                     @endcan
                                 </div>
                             </form>
@@ -330,20 +330,10 @@
         $(form).submit();
     }
 
-    // function subirficheroSGH(){
-    //     $('.modalSubir').attr('disabled',true);
-    //     $('#formularioSGH').submit();
-    // }
-
     function actualizaTablas(form){
         $('.modalSubir').attr('disabled',true);
         $(form).submit();
     }
-
-    // function actualizaTablasSGH(){
-    //     $('.modalSubir').attr('disabled',true);
-    //     $('#formularioActSGH').submit();
-    // }
 
     function borrarFiltros(){
             $("#sto").val('');   

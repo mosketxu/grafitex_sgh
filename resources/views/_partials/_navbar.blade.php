@@ -3,7 +3,15 @@
   <!-- Left navbar links -->
   <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        @if(!(auth()->user()->hasRole('tienda')))
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        @else
+        <a href="{{route('home')}}" class="brand-link">
+            <img src="{{asset('img/grafitexLogo.png')}}" alt="Grafitex Logo" class="brand-image elevation-3"
+                style="opacity: .8">
+            <span class="brand-text font-weight-light"></span>
+        </a>
+        @endif
     </li>
   </ul>
   <!-- Right Side Of Navbar --> 
@@ -24,6 +32,9 @@
                 {{ Auth::user()->name }} <span class="caret"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('user.show',Auth::user()) }}">
+                    Mi cuenta
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -32,9 +43,6 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-                <a class="dropdown-item" href="{{ route('user.show',Auth::user()) }}">
-                    Mi cuenta
-                </a>
             </div>
         </li>
       @endguest

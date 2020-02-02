@@ -36,10 +36,7 @@ class MaestroController extends Controller
         ->coun($request->coun)
         ->are($request->are)
         ->seg($request->seg)
-        // ->cha($request->cha)
-        // ->clu($request->clu)
         ->conce($request->conce)
-        // ->fur($request->clu)
         ->ubi($request->ubi)
         ->mob($request->mob)
         ->cart($request->cart)
@@ -50,19 +47,7 @@ class MaestroController extends Controller
 
         return view('maestro.index',compact('maestros','sto','nam','coun','are','seg','cha','clu','conce','fur','ubi','mob','cart','mat','med','propx'));
     }
-
-  /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-  
+ 
 
     public function import(Request $request,$origen)
     {
@@ -91,29 +76,6 @@ class MaestroController extends Controller
         return redirect('/maestro')->with($notification);
         
     }
-
-    // public function importSGH(Request $request)
-    // {
-    //     $request->validate([
-    //         'maestro' => 'required|mimes:xls,xlsx',
-    //         ]);
-            
-    //         DB::table('maestros')->delete();
-            
-    //     try{
-    //         (new MaestrosImportSGH)->import(request()->file('maestro'));   
-    //     }catch(\ErrorException $ex){
-    //         return back()->withError($ex->getMessage());
-    //     }
-
-    //     $notification = array(
-    //         'message' => '¡Maestro importado satisfactoriamente!',
-    //         'alert-type' => 'success'
-    //     );
-        
-    //     return redirect('/maestro')->with($notification);
-        
-    // }
 
     public function actualizarTablas($origen)
     {

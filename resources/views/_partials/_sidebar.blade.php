@@ -20,6 +20,14 @@
                     </a>
                 </li>
                 @endcan
+                @can('tiendas.index')
+                <li class="nav-item">
+                    <a href="{{route('tienda.control') }}" id="menutiendas" class="nav-link"> 
+                        <i class="nav-icon fas fa-glasses"></i>
+                        <p>Tiendas</p>
+                    </a>
+                </li>
+                @endcan
                 @can('elemento.index')
                 <li class="nav-item">
                     <a href="{{route('elemento.index') }}" id="menuelementos" class="nav-link">
@@ -52,14 +60,6 @@
                     </a>
                 </li>
                 @endcan
-                {{-- @can('direcciones.index')
-                <li class="nav-item">
-                    <a href="" id="menudirecciones" class="nav-link">
-                        <i class="nav-icon fas fa-map-marker"></i>
-                        <p>Direcciones</p>
-                    </a>
-                </li>
-                @endcan --}}
                 @can('maestro.index')
                 <li class="nav-item">
                     <a href="{{route('maestro.index') }}" id="menumaestro" class="nav-link">

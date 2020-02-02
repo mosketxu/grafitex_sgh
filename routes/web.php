@@ -21,9 +21,11 @@ Route::get('/', function () {
 });
 
 // Route::get('/home', 'CampaignController@index')->name('home');
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+// Route::get('/home', function () {
+//     return view('home');
+// })->name('home');
+
+Route::get('/home','HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
     //User
@@ -36,6 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     require __DIR__ .'/maestro.php';
     //Store
     require __DIR__ .'/store.php';
+    //Tienda
+    require __DIR__ .'/tienda.php';
     //Store elementos
     require __DIR__ .'/storeelementos.php';
     // Elementos

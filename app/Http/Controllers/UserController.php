@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'email' => 'required|email:rfc,dns|unique:users,email',
+            'email' => 'required|email:rfc|unique:users,email',
             'password'=>'required',
             ]);
             

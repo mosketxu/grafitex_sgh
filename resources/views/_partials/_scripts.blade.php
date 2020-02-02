@@ -21,10 +21,8 @@
         {{-- incluido pero no estilo bootstrap pq no queda del todo bien --}}
         <script type="text/javascript" src="{{ asset('plugins/datatables/datatables.min.js')}}"></script>
     
-        <script>
-            // defaults en todas las datatable
-
-        </script>
+        <!-- ekko-lightbox -->
+        <script type="text/javascript" src=https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js></script>
     
         <!-- Toastr -->
         <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script>

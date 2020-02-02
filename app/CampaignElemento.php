@@ -10,17 +10,10 @@ class CampaignElemento extends Model
 {
     public $timestamps = true;
     
-    // protected $with=['camptiendas'];
-
     protected $fillable=['campaign_id','tienda_id', 'store_id','country','idioma','name','area','segmento','storeconcept','ubicacion','mobiliario',
-        'propxlemento','carteleria','medida','material','unitxprop','imagen','observaciones','precio'
+        'propxlemento','carteleria','medida','material','unitxprop','imagen','observaciones','precio','validado','motivo','otros','updated_by'
     ];
 
-   
-    // public function camptiendas()
-    // {
-    //     return $this->belongsTo(CampaignTienda::class,'tienda_id');
-    // }
 
     public function tarifa()
     {
@@ -53,11 +46,19 @@ class CampaignElemento extends Model
       ;
     }
 
+    public function scopeOK($query, $busca)
+    {
+      if($busca=='OK')
+        return $query->where('estadorecepcion', '1');
+      elseif($busca=='KO')
+        return $query->where('estadorecepcion','>', '1');
+      elseif($busca=='nv')
+        return $query->where('estadorecepcion', '0');
+    }
+
+
     static function asignElementosPrecio($campaignId)
     {
-
-        // $elementos=CampaignElemento::where('campaign_id',$campaignId)
-        // ->get();
         $elementos=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id') 
         ->select('campaign_elementos.id as id','precio','familia')
         ->where('campaign_id',$campaignId)
@@ -84,7 +85,5 @@ class CampaignElemento extends Model
         return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
         ->select(DB::raw('SUM(unitxprop*precio) as total'))
         ->first();
-        
     }
-
 }

@@ -20,12 +20,13 @@
 
     </head>
 
-    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse">
+    {{-- <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse"> --}}
+    <body class="hold-transition  layout-fixed layout-navbar-fixed sidebar-collapse">
         <div class="wrapper">
             <!-- Navbar -->
             @yield('navbar')
             <!-- Main Sidebar Container -->
-            @include('_partials._sidebar')
+            {{-- @include('_partials._sidebar') --}}
             <!-- Content Wrapper. Contains page content -->
             {{-- @include('_partials._content') --}}
             @yield('content')
@@ -33,7 +34,7 @@
             @include('_partials._footer')
   
             <!-- Control Sidebar -->
-            @include('_partials._controlsidebar')
+            {{-- @include('_partials._controlsidebar') --}}
          </div>
         <!-- ./wrapper -->
 

@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class Campaign extends Model
 {
-    const CREADA = 0;
-    const INICIADA = 1;
-    const FINALIZADA = 2; 
-    const CANCELADA = 3;
-
     public $timestamps = false;
     protected $fillable=['campaign_name','campaign_initdate','campaign_enddate','campaign_state','slug'];
     protected $dates = ['deleted_at'];
@@ -60,13 +55,6 @@ class Campaign extends Model
     public function tiendaselementos(){
         return $this->hasMany(CampaignTienda::class,'campaign_id')->with('elementos');
     }
-
-    // public function campaignStores(){
-    //     return $this->hasMany(CampaignStore::class);
-    // }
-    // public function campaignElementos(){
-    //     return $this->hasMany(CampaignElemento::class);
-    // }
 
     public function campaignPresupuestos(){
         return $this->hasMany(CampaignPresupuesto::class);
