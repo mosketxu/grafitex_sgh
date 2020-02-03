@@ -30,6 +30,7 @@
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                         </a>
                         @endcan
+                        {{-- <a href="{{ route('user.tempo') }}" title="">rol usuarios tiendas</i></a> --}}
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -68,6 +69,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Rol</th>
                                         <th>created_at</th>
                                         <th>updated_at</th>
                                         <th width="150px">&nbsp;</th>
@@ -82,6 +84,16 @@
                                             {{-- <input type="text" class="d-none" id="id" name="id" value="{{$user->id}}"> --}}
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
+                                            <td>
+                                                @foreach($user->roles as $rol)
+                                                    {{$rol->name}}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+
+
+                                            </td>
                                             <td>{{$user->created_at}}</td>
                                             <td>{{$user->updated_at}}</td>
                                             <td width="100px">

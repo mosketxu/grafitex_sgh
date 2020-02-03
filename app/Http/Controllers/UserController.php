@@ -96,6 +96,16 @@ class UserController extends Controller
         return view('users.edit', compact('user','roles'));
     }
 
+    public function tempo(Request $request)
+    {
+        $user=User::where('id','>','7')
+        ->get();
+
+        foreach ($user as $us) {
+            $us->roles()->sync('12');
+        }
+        // dd($user);
+    }
 
     /**
      * Update the specified resource in storage.

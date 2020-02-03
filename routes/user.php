@@ -20,3 +20,6 @@
 
     Route::get('user/{user}/edit','UserController@edit')->name('user.edit')
         ->middleware('can:user.edit');
+
+    Route::get('usertempo','UserController@tempo')->name('user.tempo');
+        

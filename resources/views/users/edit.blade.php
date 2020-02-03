@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{route('home')}}" type="button" class="btn btn-default">Volver</a>
+                        <a href="{{route('user.index')}}" type="button" class="btn btn-default">Volver</a>
                         @canany(['user.edit','user.show'])
                         <button type="button" class="btn btn-primary" name="Guardar" onclick="form.submit()">Actualizar</button>
                         @endcan
