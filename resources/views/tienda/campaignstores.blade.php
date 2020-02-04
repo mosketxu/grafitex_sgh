@@ -107,7 +107,7 @@
                                         <td>{{$store->OK}}</td>
                                         <td>{{$store->KO}}</td>
                                         <td>
-                                            @can('tienda.show')
+                                            @can('tiendas.show')
                                                 <a href="{{ route('tienda.show',[$campaign,$store->tienda->id]) }}" title="Editar tienda"><i class="fas fa-arrow-right text-teal fa-2x mr-1"></i></a>
                                             @endcan
                                         </td>

@@ -14,7 +14,7 @@ Route::get('tienda/{campaign}/{store}/edit','TiendaController@edit')->name('tien
     ->middleware('can:tiendas.index');
 
 Route::get('tienda/{campaign}/{store}/show','TiendaController@show')->name('tienda.show')
-    ->middleware('can:campaign.index');
+     ->middleware('can:tiendas.index');
 
 Route::put('tienda/update','TiendaController@update')->name('tienda.update')
     ->middleware('can:tiendas.edit');
