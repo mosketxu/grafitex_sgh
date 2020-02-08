@@ -72,8 +72,10 @@ class TiendaController extends Controller
 
         $elementos= CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
         ->where('campaign_id',$camp)
+        ->where('campaign_elementos.store_id',$sto)
         ->select('campaign_elementos.id as id','estadorecepcion')
         ->get();
+
 
         $total=$elementos->count();
         $sinvalorar=$elementos->where('estadorecepcion','0')->count();

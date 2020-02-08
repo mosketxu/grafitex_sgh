@@ -24,7 +24,7 @@
                 <li class="nav-item">
                     <a href="{{route('tienda.control') }}" id="menutiendas" class="nav-link"> 
                         <i class="nav-icon fas fa-glasses"></i>
-                        <p>Tiendas</p>
+                        <p>Control recepcion</p>
                     </a>
                 </li>
                 @endcan

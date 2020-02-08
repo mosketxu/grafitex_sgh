@@ -4,7 +4,7 @@
 @endsection
 
 @section('title','Grafitex-Stores')
-@section('titlePag','Control de recepción de la campaña: '.$campaign->campaign_name)
+@section('titlePag','Control de recepción de la campaña: '.$campaign->campaign_name) 
 @section('navbar')
     @include('_partials._navbar')
 @endsection
