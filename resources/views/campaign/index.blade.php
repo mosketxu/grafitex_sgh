@@ -71,7 +71,7 @@
                                         <th>Fecha Inicio</th>
                                         <th>Fecha Fin Prevista</th>
                                         <th>Estado</th>
-                                        <th width="400px"></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="">
@@ -82,7 +82,7 @@
                                         <td>{{$campaign->campaign_initdate}}</td>
                                         <td>{{$campaign->campaign_enddate}}</td>
                                         <td>{{$campaign->campaign_state}}</td>
-                                        <td>
+                                        <td  class="text-right">
                                             {{-- <form  action="#" method="post"> --}}
                                             <form  action="{{route('campaign.delete',$campaign->id)}}" method="post">
                                                 @csrf
@@ -93,23 +93,11 @@
                                                 @endcan
                                                 @can('campaign.index')
                                                 <a href="{{route('campaign.elementos', $campaign->id ) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mr-1"></i></a>
-                                                @endcan
-                                                @can('campaign.index')
                                                 <a href="{{route('campaign.galeria', $campaign->id ) }}" title="Galeria"><i class="far fa-images text-purple fa-2x mr-1"></i></a>
-                                                @endcan
-                                                @can('campaign.index')
                                                 <a href="{{route('campaign.etiquetas.pdf', $campaign->id ) }}" title="Etiquetas"><i class="fas fa-tags text-maroon fa-2x mr-1"></i></a>
-                                                @endcan
-                                                @can('campaign.index')
                                                 <a href="{{route('campaign.etiquetas.index',$campaign->id) }}" title="Etiquetas HTML"><i class="fas fa-code text-indigo fa-2x mr-1"></i></a>
-                                                @endcan
-                                                @can('campaign.index')
                                                 <a  href="{{route('campaign.addresses',$campaign->id) }}" title="Direcciones"><i class="fas fa-map-marker-alt text-info fa-2x mr-1"></i></a>
-                                                @endcan
-                                                @can('presupuesto.index')
                                                 <a href="{{route('campaign.presupuesto', $campaign->id ) }}" title="Presupuesto"><i class="fas fa-money-check-alt text-fuchsia fa-2x mr-1"></i></a>
-                                                @endcan
-                                                @can('campaign.index')
                                                 <a href="{{route('campaign.conteo', $campaign->id ) }}" title="Estadísticas"><i class="fas fa-chart-bar text-orange fa-2x mr-3"></i></a>
                                                 @endcan
                                                 @can('campaign.edit')
@@ -122,7 +110,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>

@@ -76,7 +76,7 @@
                                         <td>{{$campaign->campaign_name}}</td>
                                         <td>{{$campaign->campaign_initdate}}</td>
                                         <td>{{$campaign->campaign_enddate}}</td>
-                                        <td>{{$campaign->campaign_state}} aldasldjaslkj</td>
+                                        <td>{{$campaign->campaign_state}}   </td>
                                         <td>
                                             {{-- @can('tiendas.index') --}}
                                             <a href="{{route('tienda.edit', [$campaign,$store->id] ) }}" title="Estado recepción"><i class="far fas fa-cubes text-teal fa-2x mr-1"></i><span class="text-teal h6">Recepción</span></a>

@@ -4,7 +4,7 @@
 @endsection
 
 @section('title','Grafitex-Elementos Campaña') 
-@section('titlePag',$store->id .'-'.$store->name.': Elementos de la Campaña') 
+@section('titlePag','Tienda: '.$store->id .'-'.$store->name.'. Control recepción de la campaña: '.$campaign->campaign_name) 
 @section('navbar')
     @include('_partials._navbar')
 @endsection
@@ -100,8 +100,10 @@
                                         <th width="5px"></th>
                                         <th class="text-center">
                                             Estado Recepción <br>
-                                            <span class="badge badge-success"><i class="far fa-thumbs-up  fa-lg"></i> {{$correctos}}</span> &nbsp;&nbsp;
-                                            <span class="badge badge-danger"><i class="far fa-thumbs-down  fa-lg"></i> {{$incidencias}}</span> &nbsp;&nbsp;
+                                            <a href="{{route('tienda.edit',[$campaign->id,$store->id])}}" class="text-primary"><i class="fas fa-sync-alt fa-lg"></i> &nbsp;&nbsp;</a>
+                                            <span class="badge badge-dark"><i class="fas fa-question fa-lg "></i> <span id="nv">{{$sinvalorar}}</span></span> &nbsp;&nbsp;
+                                            <span class="badge badge-success" ><i class="far fa-thumbs-up  fa-lg"></i> <span id="ok">{{$correctos}}</span></span> &nbsp;&nbsp;
+                                            <span class="badge badge-danger" ><i class="far fa-thumbs-down  fa-lg"></i> <span id="ko">{{$incidencias}}</span></span> &nbsp;&nbsp;
                                         </th>
                                         <th class="text-center">Observaciones</th>
                                         <th ></th>
@@ -201,9 +203,14 @@ function update(formulario,id){
             contentType: false,
             processData: false,
             success:function(data){
+                console.log(data);
                 if(valest==1){
+                    // $('#nv').text(parseInt($('#nv').text())-1);
+                    // $('#ok').text(parseInt($('#ok').text())+1);
                     $(estado).html('<i class="far fa-thumbs-up text-success fa-lg"></i>');
-                }else{
+                }else if(valest>1){
+                    // $('#nv').text(parseInt($('#nv').text())-1);
+                    // $('#ko').text(parseInt($('#ko').text())+1);
                     $(estado).html('<i class="far fa-thumbs-down text-danger fa-lg"></i>');
                 }
                 toastr.info('Recepción actualizada con éxito',{

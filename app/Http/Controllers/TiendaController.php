@@ -41,8 +41,10 @@ class TiendaController extends Controller
 
         $elementos= CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
         ->where('campaign_id',$camp)
+        ->where('campaign_elementos.store_id',$sto)
         ->select('campaign_elementos.id as id','estadorecepcion')
         ->get();
+        // dd($elementos);
 
         $total=$elementos->count();
         $sinvalorar=$elementos->where('estadorecepcion','0')->count();
@@ -52,6 +54,7 @@ class TiendaController extends Controller
         $elementos= CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
         ->search($request->busca)
         ->where('campaign_id',$camp)
+        ->where('campaign_elementos.store_id',$sto)
         ->select('campaign_elementos.id as id','campaign_elementos.store_id as store_id','ubicacion','mobiliario','propxelemento','carteleria','medida',
             'material','familia','unitxprop','imagen','observaciones','estadorecepcion','obsrecepcion')
         ->paginate(8);
@@ -154,11 +157,10 @@ class TiendaController extends Controller
              ]
             );
 
-        $notification = array(
+            $notification = array(
             'message' => 'Elemento actualizado satisfactoriamente!',
-            'alert-type' => 'success'
+            'alert-type' => 'success',
         );
-
         return redirect()->route('tienda.edit',[$request->campaignId,$request->storeId])->with($notification);
 
     }

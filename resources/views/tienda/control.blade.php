@@ -90,25 +90,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-
-                                    {{-- @foreach ($campaigns as $campaign)
-                                    <tr id="t{{$campaign->id}}">
-                                        <td>{{$campaign->id}}</td>
-                                        <td>{{$campaign->campaign_name}}</td>
-                                        <td>{{$campaign->campaign_initdate}}</td>
-                                        <td>{{$campaign->campaign_enddate}}</td>
-                                        <td>{{$campaign->campaign_state}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            @can('tiendas.index')
-                                            <a href="{{route('tienda.campaignstores',$campaign ) }}" title="campaña"><i class="fas fa-arrow-right text-teal fa-2x mr-1"></i></a>
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>

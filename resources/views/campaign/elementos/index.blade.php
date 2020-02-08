@@ -84,8 +84,7 @@
                                 </form>
                             </div>
                         </div>
-                        
-                        <div class="table-responsive" style="height: 700px">
+                        <div class="table-responsive">
                             <table id="tcampaignElementos" class="table table-hover table-sm small sortable" cellspacing="0" width=100%>
                                 <thead>
                                     <tr>
@@ -137,18 +136,7 @@
                                         <td>{{$elemento->carteleria}}</td>
                                         <td>{{$elemento->medida}}</td>
                                         <td>{{$elemento->material}}</td>
-                                        {{-- <td>{{$elemento->familia}}-
-                                            @isset({{$elemento->tarifa->familia}})
-                                                {{$elemento->tarifa->familia}}
-                                            @endisset
-                                        </td> --}}
-                                        {{-- <td>{{$elemento->precio}}</td> --}}
                                         <td class="text-center">{{$elemento->unitxprop}}</td>
-                                        {{-- <td class="text-center">
-                                            <input type="number" name="" id="" style="width: 30px;">&nbsp;
-                                            <input type="number" name="" id="" style="width: 30px;">&nbsp;
-                                            <input type="number" name="" id="" style="width: 30px;">&nbsp;
-                                        </td> --}}
                                         <td>{{$elemento->observaciones}}</td>
                                         <td>
                                             <div class="row">
@@ -189,6 +177,10 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <a class="btn btn-default" href="{{route('campaign.index')}}" title="Ir la página anterior">Volver</a>
+                    </div>
+
                 </div>
             </div>
         </section>
