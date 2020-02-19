@@ -113,7 +113,7 @@ class MaestroController extends Controller
             Maestro::insertStoresSGH();
             Maestro::insertElementosSGH();
         }
-        Maestro::insertStoreElementos();
+        Maestro::insertStoreElementos(); 
 
         dd('finalizado');
         $notification = array(

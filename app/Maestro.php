@@ -246,8 +246,8 @@ class Maestro extends Model
             'elementificador','ubicacion','mobiliario',
             'propxelemento','carteleria','medida','material',
             'unitxprop','observaciones')
-            ->distinct('elementificador')
             ->get();
+
 
         foreach (array_chunk($elementos->toArray(),100) as $t){
             $dataSet = [];
@@ -280,14 +280,14 @@ class Maestro extends Model
         Maestro::chunk(100, function ($maestros) {
             $dataSet = [];
             foreach ($maestros as $elemento) {
-                $existe=StoreElemento::where('store_id',$elemento['store'])->where('elementificador',$elemento['elementificador'])->count();
-                if($existe==0){
+                // $existe=StoreElemento::where('store_id',$elemento['store'])->where('elementificador',$elemento['elementificador'])->count();
+                // if($existe==0){
                     $dataSet[] = [
                     'store_id'=>$elemento['store'],
                     'elemento_id'=>Elemento::where('elementificador',$elemento['elementificador'])->first()['id'],
                     'elementificador'=>$elemento['elementificador'],
                     ];
-                };
+                // };
             }
             DB::table('store_elementos')->insertOrIgnore($dataSet);
         });
