@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-auto mr-auto">
                     <a href="" role="button" data-toggle="modal" data-target="#tarifaFamiliaCreateModal">
-                        <i class="fas fa-plus-circle fa-lg text-primary mt-2"></i>
+                        <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                     </a>
                 </div>
                 <div class="col-sm-6">
@@ -86,16 +86,18 @@
                                     </thead>
                                     <tbody>
                                     @foreach ($tarifafamilia->tarifafamilias as $familia)
-                                        <form action="{{ route('tarifafamilia.update',$familia->id) }}" method="post">
+                                        {{-- <form  action="{{ route('tarifafamilia.update',$familia->id) }}" method="post"> --}}
+                                        <form id="form{{$familia->id}}" role="form" method="post" action="{{ route('tarifafamilia.update') }}" >
+                                            @method('PUT')
                                             @csrf
-                                            @method('PATCH')
                                             <tr>
-                                                <input type="hidden" name="_token{{$familia->id}}" value="{{ csrf_token()}}" id="token{{$familia->id}}">
+                                                {{-- <input type="hidden" name="_token{{$familia->id}}" value="{{ csrf_token()}}" id="token{{$familia->id}}"> --}}
+                                                <input type="hidden" name="id" value="{{$familia->id}}" >
                                                 <td><span class="badge text-gray">{{$familia->id}}</span></td>
                                                 <td><input class="form-control-plaintext" type="text" name="material" value="{{$familia->material}}"/></td>
                                                 <td><input class="form-control-plaintext" type="text" name="medida" value="{{$familia->medida}}"/></td>
                                                 <td>
-                                                    <select name="tarifa_id" id="tarifa_id" class="form-control-plaintext my-0 py-0">
+                                                    <select name="tarifa_id" id="tarifa_id" onchange="update('form{{$familia->id}}',{{$familia->id}})" class="form-control-plaintext my-0 py-0">
                                                         <option value="{{$familia->tarifa_id}}" selected>{{$tarifafamilia->familia}}</option>
                                                         @foreach($familias as $tarifa)
                                                         <option value="{{$tarifa->id}}">{{$tarifa->familia}}</option>                                
@@ -183,33 +185,38 @@
     
 
 <script>
-   function actualizar(id,material,medida,tarifa_id,tok,ruta) {
-    var token = $(tok).val();
-    var route = ruta;
-  
+   function update(formulario,id) {
+    var token= $('#token').val();
+        $.ajaxSetup({
+            headers: { "X-CSRF-TOKEN": $('#token').val() },
+        });
+    var formElement = document.getElementById(formulario);
+    var formData = new FormData(formElement);
+
     $.ajax({
-        url: route,
-        headers: { "X-CSRF-TOKEN": token },
-        type: "PUT",
-        dataType: "json",
-        data:{ material:material,medida:medida,tarifa_id:tarifa_id},
+        type:'POST',
+            url: "{{ route('tarifafamilia.update') }}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
         success: function(data) {
             console.log(data);
-            toastr.info(data.notification,{
+            toastr.info('Asignacion actualizada con éxito',{
+                    "progressBar":true,
+                    "positionClass":"toast-top-center"
+                });
+            },
+        error: function(data){
+            console.log(data);
+            toastr.error("No se ha actualizado la asignacion",{
+                "closeButton": true,
                 "progressBar":true,
-                "positionClass":"toast-top-center"
-            });
-        },
-        error:function(msj){
-            console.log(msj.responseJSON.errors);
-            toastr.error("Ha habido un error. <br />No se ha podido grabar. <br />Si se repite contacte con el Administrador.<br>"+ msj.responseJSON.message,'Fitro ' + filtro,{
-               "closeButton": true,
-               "progressBar":true,
-               "positionClass":"toast-top-center",
-               "options.escapeHtml" : true,
-               "showDuration": "300",
-               "hideDuration": "1000",
-               "timeOut": 0,
+                "positionClass":"toast-top-center",
+                "options.escapeHtml" : true,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": 0,
             });
         }
     });

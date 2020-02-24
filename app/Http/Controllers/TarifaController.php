@@ -87,6 +87,7 @@ class TarifaController extends Controller
      */
     public function edit($id)
     {
+        
         $tarifa=Tarifa::find($id);
         return view('tarifa.edit',compact('tarifa'));
 

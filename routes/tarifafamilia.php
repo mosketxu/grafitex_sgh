@@ -11,7 +11,7 @@ Route::get('tarifa','TarifaFamiliaController@index')->name('tarifafamilia.index'
 Route::get('tarifafamilia/create','TarifaFamiliaController@create')->name('tarifafamilia.create')
 ->middleware('can:tarifafamilia.create');
 
-Route::put('tarifafamilia/{tarifa}','TarifaFamiliaController@update')->name('tarifafamilia.update')
+Route::put('tarifafamilia/update','TarifaFamiliaController@update')->name('tarifafamilia.update')
 ->middleware('can:tarifafamilia.edit');
 
 Route::get('tarifafamilia/{tarifa}','TarifaFamiliaController@show')->name('tarifafamilia.show')

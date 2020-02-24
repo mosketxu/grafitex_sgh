@@ -98,16 +98,16 @@ class TarifaFamiliaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        // dd($request);
+    //    dd($request);
         $request->validate([
             'material' => 'required',
             'medida' => 'required',
             'tarifa_id' => 'required',
         ]);
 
-        TarifaFamilia::find($id)->update($request->all());
+        TarifaFamilia::find($request->id)->update($request->all());
         // dd(TarifaFamilia::find($id));
 
         $notification = array(

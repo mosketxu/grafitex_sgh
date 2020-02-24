@@ -3,8 +3,8 @@
 @section('styles')
 @endsection
 
-@section('title','Editar Elemento')
-@section('titlePag','Editar Elemento')
+@section('title','Editar Tarifa')
+@section('titlePag','Editar Tarifa')
 @section('navbar')
     @include('_partials._navbar')
 @endsection
@@ -33,100 +33,75 @@
                 </div>
             </div>
         </div>
+        {{-- - /.content-header --}}
         {{-- main content  --}}
         <section class="content">
             <div class="container">
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <input type="hidden" name="id" value="{{ $tarifa->id }}"/>
+                                    <input type="hidden" name="tipo" value="0"/>
+                                    <div class="form-group col">
+                                        <label for="zona">Zona</label>
+                                        <input type="text" class="form-control form-control-sm" id="zona"
+                                            name="zona" value="{{ $tarifa->zona }}"
+                                            disabled />
+                                    </div>
+                                    <div class="form-group col">
+                                        <label for="zona">Familia</label>
+                                        <input type="text" class="form-control form-control-sm" id="familia"
+                                            name="familia" value="{{ $tarifa->familia }}"
+                                            disabled />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('elemento.store') }}">
+                        <form method="post" action="{{ route('tarifa.update',$tarifa->id) }}"> 
+                            @method("PUT")
                             @csrf
-                            <div class="row">
-                                <div class="form-group col-2">
-                                    <label for="ubicacion_id">Ubicación</label>
-                                    <select class="form-control form-control-sm" id="ubicacion_id" name="ubicacion_id">
-                                        <option value={{$elemento->ubicacion_id}}>{{$elemento->ubi->ubicacion}}</option>
-                                        @foreach($ubicaciones as $ubicacion )
-                                        <option value="{{$ubicacion->id}}" {{old('ubicacion_id')==$ubicacion->id ? 'selected' : ''}}>{{$ubicacion->ubicacion}}</option>
-                                        
-                                        @endforeach
-                                    </select>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"></label>
+                                <label for="tramo1" class="col-sm-1 col-form-label">Tramo1</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="tramo1" id="tramo1" value="{{$tarifa->tramo1}}">
                                 </div>
-                                <div class="form-group  col-4">
-                                    <label for="mobiliario_id">Mobiliario</label>
-                                    <select class="form-control form-control-sm" id="mobiliario_id" name="mobiliario_id" >
-                                        <option value="">Selecciona</option>
-                                        @foreach($mobiliarios as $mobiliario )
-                                        <option value="{{$mobiliario->id}}" {{old('mobiliario_id')==$mobiliario->id ? 'selected' : ''}}>{{$mobiliario->mobiliario}}</option>
-                                        @endforeach
-                                    </select>
+                                <label for="tarifa1" class="col-sm-1 col-form-label">Tarifa1</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control"  name="tarifa1" id="tarifa1" value="{{$tarifa->tarifa1}}">
                                 </div>
-                                <div class="form-group col-3">
-                                    <label for="propxelemento_id">Prop x Elemento</label>
-                                    <select class="form-control form-control-sm" id="propxelemento_id" name="propxelemento_id" >
-                                        <option value="">Selecciona</option>
-                                        @foreach($propxelementos as $propxelemento )
-                                        <option value="{{$propxelemento->id}}" {{old('propxelemento_id')==$propxelemento->id ? 'selected' : ''}}>{{$propxelemento->propxelemento}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group  col-3">
-                                    <label for="carteleria_id">Carteleria</label>
-                                    <select class="form-control form-control-sm" id="carteleria_id" name="carteleria_id" >
-                                        <option value="">Selecciona</option>
-                                        @foreach($cartelerias as $carteleria )
-                                        <option value="{{$carteleria->id}}" {{old('carteleria_id')==$carteleria->id ? 'selected' : ''}}>{{$carteleria->carteleria}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <label for="" class="col-sm-2 col-form-label"></label>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-4">
-                                    <label for="medida_id">Medida</label>
-                                    <select class="form-control form-control-sm" id="medida_id" name="medida_id" >
-                                        <option value="">Selecciona</option>
-                                        @foreach($medidas as $medida )
-                                        <option value="{{$medida->id}}" {{old('medida_id')==$medida->id ? 'selected' : ''}}>{{$medida->medida}}</option>
-                                        @endforeach
-                                    </select>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"></label>
+                                <label for="tramo2" class="col-sm-1 col-form-label">Tramo2</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="tramo2" id="tramo2" value="{{$tarifa->tramo2}}">
                                 </div>
-                                <div class="form-group  col-4">
-                                    <label for="material_id">Material</label>
-                                    <select class="form-control form-control-sm" id="material_id" name="material_id" >
-                                        <option value="">Selecciona</option>
-                                        @foreach($materiales as $material )
-                                        <option value="{{$material->id}}" {{old('material_id')==$material->id ? 'selected' : ''}}>{{$material->material}}</option>
-                                        @endforeach
-                                    </select>
+                                <label for="tarifa2" class="col-sm-1 col-form-label">Tarifa2</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control"  name="tarifa2" id="tarifa2" value="{{$tarifa->tarifa2}}">
                                 </div>
-                                <div class="form-group  col-1">
-                                    <label for="unitxprop">Uds</label>
-                                    <select class="form-control form-control-sm" id="unitxprop" name="unitxprop" >
-                                        <option value="">Selecciona</option>
-                                        @for($i = 1; $i<20; $i++)
-                                        <option value="{{$i}}" {{old('unitxprop')==$i ? 'selected' : ''}}>{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                                <div class="form-group  col-3">
-                                    <label for="material_id">Familia</label>
-                                    <select class="form-control form-control-sm" id="familia_id" name="familia_id" >
-                                        <option value="">Selecciona</option>
-                                        @foreach($familias as $familia )
-                                        <option value="{{$familia->id}}" {{old('familia_id')==$familia->id ? 'selected' : ''}}>{{$familia->familia}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <label for="" class="col-sm-2 col-form-label"></label>
                             </div>
-                            <div class="form-group">
-                                <label for="observaciones">Observaciones</label>
-                                <input  type="text" class="form-control form-control-sm" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label"></label>
+                                <label for="tramo3" class="col-sm-1 col-form-label">Tramo3</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="tramo3" id="tramo3" value="{{$tarifa->tramo3}}">
+                                </div>
+                                <label for="tarifa3" class="col-sm-1 col-form-label">Tarifa3</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control"  name="tarifa3" id="tarifa3" value="{{$tarifa->tarifa3}}">
+                                </div>
+                                <label for="" class="col-sm-2 col-form-label"></label>
                             </div>
-                            <div class="footer">
-                                <a type="button" class="btn btn-default" href="{{route('elemento.index')}}">Volver</a>
+                            <div class="footer text-center">
+                                <a type="button" class="btn btn-default" href="{{route('tarifa.index')}}">Volver</a>
                                 <input class="btn btn-primary" type="submit" value="Guardar">
                             </div>
                         </form>

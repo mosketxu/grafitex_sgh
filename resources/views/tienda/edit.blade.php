@@ -185,7 +185,7 @@
     @include('_partials._errortemplate')
 </script>
 <script>
-function update(formulario,id){
+    function update(formulario,id){
         var token= $('#token').val();
         $.ajaxSetup({
             headers: { "X-CSRF-TOKEN": $('#token').val() },
