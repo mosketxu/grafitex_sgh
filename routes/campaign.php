@@ -96,8 +96,14 @@ Route::group(['prefix' => 'campaign'], function () {
             
         Route::get('/cotizacion/{campaignpresupuesto}', 'CampaignPresupuestoController@cotizacion')->name('campaign.presupuesto.cotizacion')
             ->middleware('can:presupuesto.index');            
+
+        Route::get('/cotizacion/elementos/{campaignid}/{familiaid}/{presupuestoid}', 'CampaignPresupuestoController@elementosfamilia')->name('campaign.presupuesto.elementosfamilia')
+            ->middleware('can:presupuesto.index');            
             
         Route::post('/update/{campaignpresupuesto}', 'CampaignPresupuestoController@update')->name('campaign.presupuesto.update')
+            ->middleware('can:presupuesto.edit');
+
+        Route::put('/updateelemento', 'CampaignPresupuestoController@updateelemento')->name('campaign.presupuesto.updateelemento')
             ->middleware('can:presupuesto.edit');
     
         Route::get('/refresh/{campaign}/{campaignpresupuesto}', 'CampaignPresupuestoController@refresh')->name('campaign.presupuesto.refresh')

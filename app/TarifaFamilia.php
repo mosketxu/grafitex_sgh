@@ -34,11 +34,8 @@ class TarifaFamilia extends Model
       $tarifa=TarifaFamilia::where('material',$mat)
       ->where('medida',$med)
       ->first();
-      
       $familia=Tarifa::where('id',$tarifa['tarifa_id'])
       ->first();
-
-      // dd(is_null($familia));
 
       if (is_null($tarifa)) 
         $familia=Tarifa::where('id',0)->first();
@@ -46,10 +43,6 @@ class TarifaFamilia extends Model
         $familia=Tarifa::where('id',$tarifa['tarifa_id'])
         ->first();
       
-        // dd($familia);
-      // if(is_null($familia)){
-      //   dd('entro');
-      //   $familia=Tarifa::where('id',0)->first();}
     
       return $familia;
     }

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\{Campaign, CampaignElemento, 
         CampaignPresupuesto, CampaignPresupuestoDetalle, CampaignPresupuestoExtra,
-    CampaignPresupuestoPickingtransporte,
-    Tarifa, 
+        CampaignPresupuestoPickingtransporte, Elemento, Tarifa, TarifaFamilia,
         VCampaignPromedio, VCampaignResumenElemento};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -160,11 +159,6 @@ class CampaignPresupuestoController extends Controller
         $campaign=Campaign::find($campaignpresupuesto->campaign_id);
         
         // Info de promedios
-        // $promedios=VCampaignPromedio::where('campaign_id',$campaignpresupuesto->campaign_id)
-        // ->select('zona',DB::raw('SUM(tot) as total'),DB::raw('count(*) as stores'))
-        // ->groupBy('zona')
-        // ->get(); 
-
         $promedios=CampaignPresupuestoPickingtransporte::where('presupuesto_id',$id)
         ->get();
 
@@ -193,6 +187,21 @@ class CampaignPresupuestoController extends Controller
                 ));
     }
 
+    public function elementosfamilia($campaignId,$familiaId,$presupuesto)
+    {
+        $elementos=CampaignElemento::join('campaign_tiendas','campaign_elementos.tienda_id','campaign_tiendas.id')
+        ->where('campaign_id',$campaignId)
+        ->where('familia',$familiaId)
+        ->get();
+
+        $tarifas=Tarifa::where('tipo','0')
+        ->get();
+        $campaign=Campaign::find($campaignId);
+
+        return view('campaign.presupuesto.elementos',compact('campaign','elementos','presupuesto','tarifas'));
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -202,29 +211,58 @@ class CampaignPresupuestoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // if ($request->ajax()) {
-            $request->validate([
-                'referencia' => 'required',
-                'version' => 'required',
-                'fecha' => 'required|date',
-                'estado' => 'required',
-                ]);
+        $request->validate([
+            'referencia' => 'required',
+            'version' => 'required',
+            'fecha' => 'required|date',
+            'estado' => 'required',
+            ]);
             
-            CampaignPresupuesto::find($id)->update($request->all());
-            $campaign=Campaign::find($request->campaign_id);
+        CampaignPresupuesto::find($id)->update($request->all());
+        $campaign=Campaign::find($request->campaign_id);
                 
-            $notification = array(
-                'message' => '¡Presupuesto actualizado satisfactoriamente!',
-                'alert-type' => 'success'
-            );
+        $notification = array(
+            'message' => '¡Presupuesto actualizado satisfactoriamente!',
+            'alert-type' => 'success'
+        );
                 
-            return redirect()->back()->with($notification);
-        }
-    // }
+        return redirect()->back()->with($notification);
+    }
+
+    public function updateelemento(Request $request)
+    {
+        
+        $campaignelem=CampaignElemento::where('elemento_id',$request->elemento_id)
+        ->update(['familia'=>$request->familia]);
+
+        $campaignelem=CampaignElemento::where('elemento_id',$request->elemento_id)->first();
+
+        Elemento::where('material',$campaignelem->material)
+        ->where('medida',$campaignelem->medida)
+        ->update(['familia_id'=>$request->familia]);
+
+        // $t=TarifaFamilia::where('material',$campaignelem->material)
+        // ->where('medida',$campaignelem->medida)
+        // ->get();
+
+        TarifaFamilia::where('material',$campaignelem->material)
+        ->where('medida',$campaignelem->medida)
+        ->update(['tarifa_id'=>$request->familia]);
+
+        // $t=TarifaFamilia::where('material',$campaignelem->material)
+        // ->where('medida',$campaignelem->medida)
+        // ->first();
+        
+
+        $notification = array(
+            'message' => 'Tarifa actualizada satisfactoriamente!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
 
     public function refresh($campaignId,$presupuestoId)
     {
-        
         // elimino los detalles del presupuesto y de picking y trasnporte para poner nuevos precios
         $detallePresup=CampaignPresupuestoDetalle::where('presupuesto_id',$presupuestoId)->count();
         if ($detallePresup>0)
@@ -234,11 +272,25 @@ class CampaignPresupuestoController extends Controller
         if ($pickingtransp>0)
             CampaignPresupuestoPickingtransporte::where('presupuesto_id',$presupuestoId)->delete();
 
-            // $campaign = Campaign::find($campaignid);
-            
-            // recupero la lista de elementos creada y asigno el precio en función de cuántos hay
-            // calculo el total actual de los elementos para insertarlo y mostrarlo en el indice de prepuestos
-            // Lo hago cada vez que genero un presupuesto para tener siempre el último precio
+        //actualizo los valores de la familia en los elementos de la campaña
+
+        $elementos=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','campaign_elementos.tienda_id')
+            // ->select('campaign_tiendas.campaign_id','campaign_elementos.id as elemId','material','medida')
+            ->where('campaign_id',$campaignId)
+            ->get();
+
+        foreach ($elementos as $elemento){
+            $familia=TarifaFamilia::getFamilia($elemento['material'],$elemento['medida']);
+            $fam=$familia['id'];
+
+            if (is_null($fam))
+                $fam=1;
+
+                CampaignElemento::where('elemento_id',$elemento->elemento_id)
+            ->update([
+                'familia'=>$fam
+            ]);
+        }
         
         $totalpresupuestoMat= CampaignElemento::asignElementosPrecio($campaignId);
             

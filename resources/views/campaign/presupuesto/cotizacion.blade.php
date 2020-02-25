@@ -335,6 +335,7 @@
                                              <th class="text-right px-2">Uds x prop</th>
                                              <th class="text-right px-2">€ ud.</th>
                                              <th class="text-right px-2">Total</th>
+                                             <th class="text-right px-2"></th>
                                           </tr>
                                        </thead>
                                        @if(count($materiales)>0)
@@ -345,6 +346,9 @@
                                              <td class="text-right my-0 py-1">{{$material->unidades}}</td>
                                              <td class="text-right my-0 py-1">{{number_format($material->precio,2,',','.')}}</td>
                                              <td class="text-right my-0 py-1">{{number_format($material->tot,2,',','.')}}</td>
+                                             <td>
+                                                <a href="{{route('campaign.presupuesto.elementosfamilia', ['campaignid'=>$campaign->id,'familiaid'=>$material->tarifa,'presupuestoid'=>$campaignpresupuesto->id] ) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mr-1"></i></a>
+                                             </td>
                                           </tr>
                                           @endforeach
                                        </tbody>
@@ -354,8 +358,10 @@
                               </div>
                            </div>
                         </div>
-                        
                      </div>
+                  </div>
+                  <div class="card-footer">
+                     <a class="btn btn-default" href="{{route('auxiliares.index')}}" title="Ir la página anterior">Volver</a>
                   </div>
                </div>
             </div>
