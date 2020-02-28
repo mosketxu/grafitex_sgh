@@ -130,13 +130,13 @@ Route::group(['prefix' => 'campaign'], function () {
         //presupuesto extras
         Route::group(['prefix' => 'extra'], function () {
             Route::post('/update/{campaignpresupuestoextra}', 'CampaignPresupuestoExtraController@update')->name('campaign.presupuesto.extra.update')
-                ->middleware('can:campaign.edit');
+                ->middleware('can:prespuesto.edit');
             
             Route::post('/store', 'CampaignPresupuestoExtraController@store')->name('campaign.presupuesto.extra.store')
-                ->middleware('can:campaign.store');
+                ->middleware('can:presupuesto.create');
 
             Route::delete('/delete/{campaignpresupuestoextra}', 'CampaignPresupuestoExtraController@destroy')->name('campaign.presupuesto.extra.delete') 
-                ->middleware('can:campaign.destroy');
+                ->middleware('can:presupuesto.destroy');
         });
     });
     

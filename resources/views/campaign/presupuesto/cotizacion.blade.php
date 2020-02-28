@@ -297,8 +297,8 @@
                                                       value="">
                                                    </td>
                                                    <td class="text-center">
-                                                      @can('presupuesto.create')
-                                                      <a href="#" title="Validar" onclick="document.getElementById('formExtraNew').submit()">
+                                                      @can('presupuesto.create') 
+                                                      <a href="#" title="Validarsss" onclick="document.getElementById('formExtraNew').submit()">
                                                          <i class="fas fa-plus text-success fa-2x mx-1"></i>
                                                       </a>
                                                       @endcan
@@ -380,7 +380,6 @@
    });
 </script>
 
-<script src="{{ asset('js/sortTable.js')}}"></script>
 <script>
    @include('_partials._errortemplate')
 </script>
