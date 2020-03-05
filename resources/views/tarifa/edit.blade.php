@@ -76,7 +76,7 @@
                                 </div>
                                 <label for="" class="col-sm-2 col-form-label"></label>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"></label>
                                 <label for="tramo2" class="col-sm-1 col-form-label">Tramo2</label>
                                 <div class="col-sm-3">
@@ -99,7 +99,7 @@
                                     <input type="text" class="form-control"  name="tarifa3" id="tarifa3" value="{{$tarifa->tarifa3}}">
                                 </div>
                                 <label for="" class="col-sm-2 col-form-label"></label>
-                            </div>
+                            </div> --}}
                             <div class="footer text-center">
                                 <a type="button" class="btn btn-default" href="{{route('tarifa.index')}}">Volver</a>
                                 <input class="btn btn-primary" type="submit" value="Guardar">

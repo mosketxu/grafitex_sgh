@@ -31,10 +31,10 @@
                   <th>Familia</th>
                   <th class="text-center">Tramo 1</th>
                   <th class="bg-light text-center">Tarifa 1</th>
-                  <th class="text-center">Tramo 2</th>
+                  {{-- <th class="text-center">Tramo 2</th>
                   <th class="bg-light text-center">Tarifa 2</th>
                   <th class="text-center">Tramo 3</th>
-                  <th class="bg-light text-center">Tarifa 3</th>
+                  <th class="bg-light text-center">Tarifa 3</th> --}}
                   <th width="150px" class="text-center"><span class="ml-1">Acción</th>
                </tr>
             </thead>
@@ -46,10 +46,10 @@
                   <td>{{$tarifaMaterial->familia}}</td>
                   <td class="text-center">{{$tarifaMaterial->tramo1}} </td>
                   <td class="bg-light text-center">{{$tarifaMaterial->tarifa1}} €</td>
-                  <td class="text-center">{{$tarifaMaterial->tramo2}} </td>
+                  {{-- <td class="text-center">{{$tarifaMaterial->tramo2}} </td>
                   <td class="bg-light text-center">{{$tarifaMaterial->tarifa2}} €</td>
                   <td class="text-center">{{$tarifaMaterial->tramo3}} </td>
-                  <td class="bg-light text-center">{{$tarifaMaterial->tarifa3}} €</td>
+                  <td class="bg-light text-center">{{$tarifaMaterial->tarifa3}} €</td> --}}
                   <td width="100px">
                      <form id="form_id" role="form" method="post"
                         action="{{ route('tarifa.destroy',$tarifaMaterial->id) }}">

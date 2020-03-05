@@ -51,11 +51,11 @@ class TarifaController extends Controller
         $request->validate([
             'familia'=>'required',
             'tramo1'=>'required|numeric',
-            'tramo2'=>'required|numeric',
-            'tramo3'=>'required|numeric',
+            // 'tramo2'=>'required|numeric',
+            // 'tramo3'=>'required|numeric',
             'tarifa1'=>'required|numeric',
-            'tarifa2'=>'required|numeric',
-            'tarifa3'=>'required|numeric',
+            // 'tarifa2'=>'required|numeric',
+            // 'tarifa3'=>'required|numeric',
         ]);
 
         $tarifa = Tarifa::create($request->all());
@@ -107,10 +107,10 @@ class TarifaController extends Controller
                 'familia' => 'required',
                 'tramo1' => 'required|numeric',
                 'tarifa1' => 'required|numeric',
-                'tramo2' => 'required|numeric',
-                'tarifa2' => 'required|numeric',
-                'tramo3' => 'required|numeric',
-                'tarifa3' => 'required|numeric',
+                // 'tramo2' => 'required|numeric',
+                // 'tarifa2' => 'required|numeric',
+                // 'tramo3' => 'required|numeric',
+                // 'tarifa3' => 'required|numeric',
             ]);
         else
             $request->validate([

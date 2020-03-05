@@ -64,26 +64,35 @@ class CampaignElemento extends Model
         ->where('campaign_id',$campaignId)
         ->get();
 
+        $total=0;
+
         foreach ($elementos as $elemento){
-            $conteo=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
-            ->where('campaign_id',$campaignId)
-            ->where('familia',$elemento->familia)
-            ->count();
-            
+            // $conteo=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+            // ->where('campaign_id',$campaignId)
+            // ->where('familia',$elemento->familia)
+            // ->count();
+          
             $fam=Tarifa::where('id',$elemento->familia)->first();
             
-            if($conteo<$fam->tramo2)
+            //anulo los tramos 2 y 3
+            // if($conteo<$fam->tramo2)
                 $elemento->precio=$fam->tarifa1;
-            elseif($conteo>$fam->tramo3)
-                $elemento->precio=$fam->tarifa3;
-            else
-                $elemento->precio=$fam->tarifa2;
+            // elseif($conteo>$fam->tramo3)
+                // $elemento->precio=$fam->tarifa3;
+            // else
+                // $elemento->precio=$fam->tarifa2;
             
+            $total=$total+$elemento->precio;
+
             $elemento->save();
         }
 
-        return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
-        ->select(DB::raw('SUM(unitxprop*precio) as total'))
-        ->first();
+        // return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
+        // ->select(DB::raw('SUM(unitxprop*precio) as total'))
+        // ->first();
+
+        return $total;
+
+
     }
 }

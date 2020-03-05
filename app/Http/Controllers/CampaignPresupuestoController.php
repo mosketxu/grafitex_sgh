@@ -61,9 +61,14 @@ class CampaignPresupuestoController extends Controller
         // recupero la lista de elementos creada y asigno el precio en función de cuántos hay
         // calculo el total actual de los elementos para insertarlo y mostrarlo en el indice de prepuestos
         // Lo hago cada vez que genero un presupuesto para tener siempre el último precio
+
+        //cambio el 5/3/2020 Como solo se va a usar un tramo, asigno el precio del tramo 1.
+
         $totalpresupuestoMat= CampaignElemento::asignElementosPrecio($request->campaign_id);
+
         $campPresu=CampaignPresupuesto::create($request->all());
-        $campPresu->total=$totalpresupuestoMat->total;
+        // $campPresu->total=$totalpresupuestoMat->total;
+        $campPresu->total=$totalpresupuestoMat;
         $campPresu->save();
 
         // guardo los materiales en campaign_presupuestos_detalle para tener historico si se cambian los precios en una segunda versión del presupuesto
@@ -112,7 +117,8 @@ class CampaignPresupuestoController extends Controller
                 'stores'=>$store['tiendas'],
                 'totalstores'=>$totalStores,
                 'totalzona'=>$store['total'],
-                'total'=>$totalpresupuestoMat->total
+                'total'=>$totalpresupuestoMat
+                // 'total'=>$totalpresupuestoMat->total
             ];
         }
         DB::table('campaign_presupuesto_pickingtransportes')->insert($dataSet);
@@ -342,7 +348,8 @@ class CampaignPresupuestoController extends Controller
                 'stores'=>$store['tiendas'],
                 'totalstores'=>$totalStores,
                 'totalzona'=>$store['total'],
-                'total'=>$totalpresupuestoMat->total
+                'total'=>$totalpresupuestoMat
+                // 'total'=>$totalpresupuestoMat->total
             ];
             // print_r($dataSet);die();
         }
