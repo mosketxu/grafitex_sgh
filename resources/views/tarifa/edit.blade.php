@@ -66,10 +66,11 @@
                             @csrf
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"></label>
-                                <label for="tramo1" class="col-sm-1 col-form-label">Tramo1</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="tramo1" id="tramo1" value="{{$tarifa->tramo1}}">
-                                </div>
+                                {{-- <label for="tramo1" class="col-sm-1 col-form-label">Tramo1</label> --}}
+                                {{-- <div class="col-sm-3"> --}}
+                                    {{-- <input type="text" class="form-control" name="tramo1" id="tramo1" value="{{$tarifa->tramo1}}"> --}}
+                                    <input type="hidden" class="form-control" name="tramo1" id="tramo1" value="1">
+                                {{-- </div> --}}
                                 <label for="tarifa1" class="col-sm-1 col-form-label">Tarifa1</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control"  name="tarifa1" id="tarifa1" value="{{$tarifa->tarifa1}}">

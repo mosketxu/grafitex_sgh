@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-auto mr-auto">
                     <a href="" role="button" data-toggle="modal" data-target="#tarifaCreateModal">
-                        <i class="fas fa-plus-circle fa-lg text-primary mt-2"></i>
+                        <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                     </a>
                 </div>
                 <div class="col-sm-6">
@@ -78,15 +78,9 @@
                                     <input type="text" class="form-control form-control-sm" id="familia" name="familia"
                                         value="{{ old('familia') }}" />
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="form-group col">
-                                    <label for="tramo1">Tramo 1</label>
-                                    <input type="number" class="form-control form-control-sm" id="tramo1" name="tramo1"
-                                        value="{{ old('tramo1') }}" />
-                                </div>
-                                <div class="form-group col">
-                                    <label for="tarifa1">Tarifa 1</label>
+                                    <input type="hidden" name="tramo1" value="1" />
+                                    <label for="tarifa1">Tarifa</label>
                                     <input type="number" step="0.01" class="form-control form-control-sm" id="tarifa1"
                                         name="tarifa1" value="{{ old('tarifa1') }}" />
                                 </div>

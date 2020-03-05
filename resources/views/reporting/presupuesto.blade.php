@@ -14,11 +14,13 @@
 </head>
 
 <body>
-    @if($totalMaterialesEs>0)
+    @if($totalStoresEs>0)
         @include('reporting._presupNacional')
+    @endif
+    @if($totalStoresEs>0 && $totalStoresPt>0)
         <div style="page-break-after:always;"></div>
     @endif
-    @if($totalMaterialesEs>0)
+    @if($totalStoresPt>0)
         @include('reporting._presupPortugal')
     @endif
 

@@ -203,7 +203,7 @@
             @foreach($promedios as $picking)
                @if($picking->zona=="PT")
                <tr>
-                     <td style="text-align: left;padding-left:10px;border:1px solid">{{$picking->zona=="ES"?"Nacional":"Canarias"}}</td>
+                     <td style="text-align: left;padding-left:10px;border:1px solid">{{"Portugal"}}</td>
                      <td style="text-align: right;padding-right:10px;border:1px solid">{{$picking->stores}}</td>
                      <td style="text-align: right;padding-right:10px;border:1px solid">{{number_format($picking->picking,2,',','.')}} <span style="font-family: sans-serif;">€</span></td>
                      <td style="text-align: right;padding-right:10px;border:1px solid">{{number_format($picking->transporte,2,',','.')}} <span style="font-family: sans-serif;">€</span></td>

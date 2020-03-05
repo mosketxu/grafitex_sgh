@@ -21,6 +21,7 @@ class TarifaController extends Controller
         } 
         $tarifasMateriales = Tarifa::search($request->busca)
             ->where('tipo',0)
+            ->orderBy('familia')
             ->paginate(8);
         $tarifasPicking = Tarifa::where('tipo',1)
             ->paginate(8);

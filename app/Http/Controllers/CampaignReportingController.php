@@ -59,19 +59,20 @@ class CampaignReportingController extends Controller
     ->select(DB::raw('SUM(picking * stores) as picking'),DB::raw('SUM(transporte * stores) as transporte'))
     ->first();
 
+    $stores=CampaignTienda::join('stores','stores.id','store_id')
+    ->select('zona')
+    ->where('campaign_id',$presupuesto->campaign_id)
+    ->get();
 
-    $totalStores=VCampaignPromedio::where('campaign_id',$presupuesto->campaign_id)
+    $totalStores=$stores->count();
+
+    $totalStoresEs=$stores->where('zona','ES')->count();
+    $totalStoresCA=$stores->where('zona','CA')->count();
+    $totalStoresEs=$totalStoresEs+$totalStoresCA;
+
+    $totalStoresPt=$stores->where('zona','PT')
     ->count();
 
-    $totalStoresEs=CampaignPresupuestoPickingtransporte::where('presupuesto_id',$presupuesto->id)
-    ->where('zona','ES')
-    ->orWhere('zona','CA')
-    ->sum('stores');
-
-    $totalStoresPt=CampaignPresupuestoPickingtransporte::where('presupuesto_id',$presupuesto->id)
-    ->where('zona','PT')
-    ->sum('stores');
-    
     // Info de materiales
     $totalMateriales=CampaignPresupuestoDetalle::where('presupuesto_id',$presupuesto->id)
     ->sum('total');
