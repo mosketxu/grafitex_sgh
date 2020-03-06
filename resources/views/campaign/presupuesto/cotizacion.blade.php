@@ -86,8 +86,8 @@
                         </div>
                         <div class="form-group col-2">
                            <label class="form-label-sm" for="fecha">Fecha</label>
-                           <input type="date" class="form-control-sm form-control" id="fecha" name="fecha"
-                              value="{{$campaignpresupuesto->fecha}}" readonly>
+                           <input type="text" class="form-control-sm form-control" id="fecha" name="fecha"
+                              value="{{date('d/m/Y', strtotime($campaignpresupuesto->fecha))}}" readonly>
                         </div>
                         <div class="form-group col-1">
                            <label class="form-label-sm float-right mr-3" for="total">Total</label>
@@ -361,7 +361,7 @@
                      </div>
                   </div>
                   <div class="card-footer">
-                     <a class="btn btn-default" href="{{route('auxiliares.index')}}" title="Ir la página anterior">Volver</a>
+                     <a class="btn btn-default" href="{{route('campaign.presupuesto',$campaign->id)}}" title="Ir la página anterior">Volver</a>
                   </div>
                </div>
             </div>

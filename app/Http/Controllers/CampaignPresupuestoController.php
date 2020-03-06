@@ -220,7 +220,7 @@ class CampaignPresupuestoController extends Controller
         $request->validate([
             'referencia' => 'required',
             'version' => 'required',
-            'fecha' => 'required|date',
+            // 'fecha' => 'required|date',
             'estado' => 'required',
             ]);
             

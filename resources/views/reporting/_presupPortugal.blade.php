@@ -238,7 +238,7 @@
       <tbody>
          <tr>
             <td width="49%"></th>
-            <td width="51%" style="text-align: right;padding-right:10px;"> <span style="font-size:xx-small">(IVA no incluido)</span></td>
+            <td width="51%" style="text-align: right;padding-right:10px;"> <span style="font-size:xx-small">(IVA exento)</span></td>
          </tr>
       </tbody>
    </table>

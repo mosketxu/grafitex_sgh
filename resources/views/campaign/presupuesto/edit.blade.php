@@ -79,9 +79,10 @@
                                     </div>
                                     <div class="form-group col">
                                         <label class="form-label-sm" for="fecha">Fecha</label>
-                                        <input type="date" class="form-control-sm form-control" id="fecha" name="fecha"
-                                        value="{{$campaignpresupuesto->fecha}}">
+                                        <input type="text" class="form-control-sm form-control" id="fecha" name="fecha" disabled
+                                        value="{{date('d/m/Y', strtotime($campaignpresupuesto->fecha))}}">
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-5">

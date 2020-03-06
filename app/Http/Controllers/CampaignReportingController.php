@@ -49,8 +49,7 @@ class CampaignReportingController extends Controller
     ->get();
 
     $totalPickingEs=CampaignPresupuestoPickingtransporte::where('presupuesto_id',$presupuestoId)
-    ->where('zona','ES')
-    ->orWhere('zona','CA')
+    ->where('zona','!=','PT')
     ->select(DB::raw('SUM(picking * stores) as picking'),DB::raw('SUM(transporte * stores) as transporte'))
     ->first();
 
@@ -78,8 +77,7 @@ class CampaignReportingController extends Controller
     ->sum('total');
 
     $totalMaterialesEs=CampaignPresupuestoPickingtransporte::where('presupuesto_id',$presupuesto->id)
-    ->where('zona','ES')
-    ->orWhere('zona','CA')
+    ->where('zona','!=','PT')
     ->sum('totalzona');
 
     $totalMaterialesPt=CampaignPresupuestoPickingtransporte::where('presupuesto_id',$presupuesto->id)
@@ -96,8 +94,7 @@ class CampaignReportingController extends Controller
     ->sum('total');
 
     $totalExtrasEs=CampaignPresupuestoExtra::where('presupuesto_id',$presupuesto->id)
-    ->where('zona','ES')
-    ->orWhere('zona','CA')
+    ->where('zona','!=','PT')
     ->sum('total');
 
     $totalExtrasPt=CampaignPresupuestoExtra::where('presupuesto_id',$presupuesto->id)
