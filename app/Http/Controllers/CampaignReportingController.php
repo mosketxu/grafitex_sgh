@@ -66,7 +66,7 @@ class CampaignReportingController extends Controller
     $totalStores=$stores->count();
 
     $totalStoresEs=$stores->where('zona','ES')->count();
-    $totalStoresCA=$stores->where('zona','CA')->count();
+    $totalStoresCA=$stores->where('zona','CN')->count();
     $totalStoresEs=$totalStoresEs+$totalStoresCA;
 
     $totalStoresPt=$stores->where('zona','PT')

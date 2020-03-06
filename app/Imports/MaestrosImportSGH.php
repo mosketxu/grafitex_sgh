@@ -28,13 +28,12 @@ class MaestrosImportSGH implements ToModel, WithHeadingRow, WithChunkReading,Wit
             $observaciones=$udxprop;
             $udxprop=0;
         }
-        // dd('llego');
+
         return new Maestro([
             'store' => trim($row['store_code']),
             'country' => trim($row['country']), 
             'name' => trim($row['store_name']), 
             'area' => trim($row['area']), 
-            // 'segment2018' => is_null($row['segment2018'] ? '' : trim($row['segment2018']) ), 
             'segmento' => trim($row['segment_2019']), 
             'storeconcept' => trim($row['store_concept']), 
             'elementificador'=>$e,

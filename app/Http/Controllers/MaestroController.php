@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\{MaestrosImport, MaestrosImportSGH};
-use App\{Maestro,Ubicacion,Area, Carteleria, Country, Furniture, Material, Medida, Mobiliario, Segmento, Storeconcept,Propxelemento};
+use App\{Maestro,Ubicacion,Area, Carteleria, Country, Furniture, Material, Medida, Mobiliario, Segmento, Storeconcept,Propxelemento, TarifaFamilia};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,40 +79,112 @@ class MaestroController extends Controller
 
     public function actualizarTablas($origen)
     {
+        // $tarifafamilias=TarifaFamilia::get();
+        // foreach ($tarifafamilias as $tf){
+        //     $mat=!is_null($tf->material)?$tf->material:'';
+        //     $med=!is_null($tf->medida)?$tf->medida:'';
+        //     $e=$mat . $med;
+        //     $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+        //     $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+        //     $e=str_replace($sust, $por, $e);
+        //     $e=strtolower($e);
+        //     TarifaFamilia::where('id',$tf->id)->update[
+        //         'matmed'=$e
+        //         ]
+        //     );
+        // }
+
+        //elimino los elementos de las stores para volver a añadirlos
         DB::table('store_elementos')->delete();
-        DB::table('elementos')->delete();
-        DB::table('stores')->delete();
-        DB::table('ubicacions')->delete();
-        DB::table('areas')->delete();
-        DB::table('cartelerias')->delete();
-        DB::table('medidas')->delete();
-        DB::table('mobiliarios')->delete();
-        DB::table('segmentos')->delete();
-        if($origen=="SGH")
-            DB::table('furnitures')->delete();
-        DB::table('propxelementos')->delete();
-        DB::table('storeconcepts')->delete();
-        DB::table('materiales')->delete();
+        DB::table('elementos')->delete(); // si no los elimino es muy lento y salta
 
-        Ubicacion::insert(Maestro::select('ubicacion')->distinct('ubicacion')->get()->toArray());
-        Area::insert(Maestro::select('area')->distinct('area')->get()->toArray());
-        Carteleria::insert(Maestro::select('carteleria')->distinct('carteleria')->get()->toArray());
-        Medida::insert(Maestro::select('medida')->distinct('medida')->get()->toArray());
-        Mobiliario::insert(Maestro::select('mobiliario')->distinct('mobiliario')->get()->toArray());
-        Propxelemento::insert(Maestro::select('propxelemento')->distinct('propxelemento')->get()->toArray());
-        Segmento::insert(Maestro::select('segmento')->distinct('segmento')->get()->toArray());
-        if($origen=="SGH")
-            Furniture::insert(Maestro::select('furniture_type')->distinct('furniture_type')->get()->toArray());
-        Storeconcept::insert(Maestro::select('storeconcept')->distinct('storeconcept')->get()->toArray());
-        Material::insert(Maestro::select('material')->distinct('material')->get()->toArray());
+        //No elimino nada más. Intento actualizar sin mas.
+        // DB::table('stores')->delete();
+        // DB::table('ubicacions')->delete();
+        // DB::table('areas')->delete();
+        // DB::table('cartelerias')->delete();
+        // DB::table('medidas')->delete();
+        // DB::table('mobiliarios')->delete();
+        // DB::table('segmentos')->delete();
+        // if($origen=="SGH")
+        //     DB::table('furnitures')->delete();
+        // DB::table('propxelementos')->delete();
+        // DB::table('storeconcepts')->delete();
+        // DB::table('materiales')->delete();
 
-        if($origen=="Grafitex"){
-            Maestro::insertStores();
-            Maestro::insertElementos();
-        }else{
-            Maestro::insertStoresSGH();
-            Maestro::insertElementosSGH();
+        //Inserto actualizo Ubicaciones
+        $ubicaciones=Maestro::select('ubicacion')->distinct('ubicacion')->get()->toArray();
+        foreach ($ubicaciones as $ubicacion){
+            Ubicacion::firstOrCreate($ubicacion);
         }
+        // Ubicacion::insert(Maestro::select('ubicacion')->distinct('ubicacion')->get()->toArray());
+        $areas=Maestro::select('area')->distinct('area')->get()->toArray();
+        foreach ($areas as $area){
+            Area::firstOrCreate($area);
+        }
+        // Area::insert(Maestro::select('area')->distinct('area')->get()->toArray());
+        $cartelerias=Maestro::select('carteleria')->distinct('carteleria')->get()->toArray();
+        foreach ($cartelerias as $carteleria){
+            Carteleria::firstOrCreate($carteleria);
+        }
+        // Carteleria::insert(Maestro::select('carteleria')->distinct('carteleria')->get()->toArray());
+        $medidas=Maestro::select('medida')->distinct('medida')->get()->toArray();
+        foreach ($medidas as $medida){
+            Medida::firstOrCreate($medida);
+        }
+        // Medida::insert(Maestro::select('medida')->distinct('medida')->get()->toArray());
+        $mobiliarios=Maestro::select('mobiliario')->distinct('mobiliario')->get()->toArray();
+        foreach ($mobiliarios as $mobiliario){
+            Mobiliario::firstOrCreate($mobiliario);
+        }
+        // Mobiliario::insert(Maestro::select('mobiliario')->distinct('mobiliario')->get()->toArray());
+        $propxelementos=Maestro::select('propxelemento')->distinct('propxelemento')->get()->toArray();
+        foreach ($propxelementos as $propxelemento){
+            Propxelemento::firstOrCreate($propxelemento);
+        }
+        // Propxelemento::insert(Maestro::select('propxelemento')->distinct('propxelemento')->get()->toArray());
+        $segmentos=Maestro::select('segmento')->distinct('segmento')->get()->toArray();
+        foreach ($segmentos as $segmento){
+            Segmento::firstOrCreate($segmento);
+        }
+        // Segmento::insert(Maestro::select('segmento')->distinct('segmento')->get()->toArray());
+        if($origen=="SGH"){
+            $furnitures=Maestro::select('furniture_type')->distinct('furniture_type')->get()->toArray();
+            foreach ($furnitures as $furniture){
+                Furniture::firstOrCreate($furniture);
+            }
+            // Furniture::insert(Maestro::select('furniture_type')->distinct('furniture_type')->get()->toArray());
+        }
+        $storeconcepts=Maestro::select('storeconcept')->distinct('storeconcept')->get()->toArray();
+        foreach ($storeconcepts as $storeconcept){
+            Storeconcept::firstOrCreate($storeconcept);
+        }
+        // Storeconcept::insert(Maestro::select('storeconcept')->distinct('storeconcept')->get()->toArray());
+        $materials=Maestro::select('material')->distinct('material')->get()->toArray();
+        foreach ($materials as $material){
+            Material::firstOrCreate($material);
+        }
+        // Material::insert(Maestro::select('material')->distinct('material')->get()->toArray());
+        $tarifafamilias=Maestro::select('material','medida')
+        ->groupBy('material','medida')
+        ->get();
+        foreach ($tarifafamilias as $tf){
+            $mat=!is_null($tf->material)?$tf->material:'';
+            $med=!is_null($tf->medida)?$tf->medida:'';
+            $e=$mat . $med;
+            $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+            $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+            $e=str_replace($sust, $por, $e);
+            $e=strtolower($e);
+            TarifaFamilia::firstOrCreate(
+                ['matmed'=>$e],
+                ['material'=>$mat,
+                'medida'=>$med]
+            );
+        }
+
+        Maestro::insertStoresSGH();
+        Maestro::insertElementosSGH();
         Maestro::insertStoreElementos(); 
 
         dd('finalizado');

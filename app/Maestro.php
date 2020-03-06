@@ -131,7 +131,7 @@ class Maestro extends Model
                 }
                 else{
                     if($store['area']=='Canarias')
-                        $zona='CA';
+                        $zona='CN'; 
                     else
                         $zona='ES';
                 }
@@ -208,7 +208,7 @@ class Maestro extends Model
                 }
                 else{
                     if($store['area']=='Canarias')
-                        $zona='CA';
+                        $zona='CN';
                     else
                         $zona='ES';
                 }
@@ -218,7 +218,7 @@ class Maestro extends Model
                 $conceptoId=Storeconcept::where('storeconcept',$store['storeconcept'])->first();
                 $areaId=Area::where('area',$store['area'])->first();
                 
-                Store::firstOrCreate([
+                Store::updateOrCreate([
                     'id' => $store['store']
                 ], [
                     'name'=>$store['name'],
@@ -252,6 +252,16 @@ class Maestro extends Model
         foreach (array_chunk($elementos->toArray(),100) as $t){
             $dataSet = [];
             foreach ($t as $elemento) {
+                $mat=!is_null($elemento['material'])?$elemento['material']:'';
+                $med=!is_null($elemento['medida'])?$elemento['medida']:'';
+                $matmed=$mat . $med;
+                $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+                $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+                $matmed=str_replace($sust, $por, $matmed);
+                $matmed=strtolower($matmed);
+
+                $familia=TarifaFamilia::where('matmed',$matmed)->first()->tarifa_id;
+
                 $dataSet[] = [
                     'elementificador'=>$elemento['elementificador'],
                     'ubicacion_id'=>Ubicacion::where('ubicacion',$elemento['ubicacion'])->first()['id'],
@@ -267,6 +277,8 @@ class Maestro extends Model
                     'material_id'=>Material::where('material',$elemento['material'])->first()['id'],
                     'material'=>$elemento['material'],
                     'unitxprop'=>$elemento['unitxprop'],
+                    'familia_id'=>$familia,
+                    'matmed'=>$matmed,
                     'observaciones'=>$elemento['observaciones'],
                 ];
             }

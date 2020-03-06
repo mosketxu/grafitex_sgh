@@ -37,6 +37,7 @@ class CreateCampaignElementosTable extends Migration
             $table->string('medida',50)->index();
             $table->string('material',50)->index();
             $table->integer('familia')->index();
+            $table->string('matmed')->index();
             $table->string('unitxprop',20)->nullable();
             $table->string('imagen')->nullable();
             $table->string('observaciones')->nullable();

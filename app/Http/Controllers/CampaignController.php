@@ -426,7 +426,7 @@ class CampaignController extends Controller
                     $zona='PT';
                 }else{
                     if($gen['area']=='Canarias')
-                       $zona='CA';
+                       $zona='CN';
                     else
                        $zona='ES';
                 }

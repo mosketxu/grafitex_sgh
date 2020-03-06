@@ -30,10 +30,10 @@ class TarifaSeeder extends Seeder
             ['zona'=>' ','familia'=>'Tela','tipo'=>0,'tramo1'=>1,'tarifa1'=>5,'tramo2'=>5,'tarifa2'=>10,'tramo3'=>15,'tarifa3'=>20],
             ['zona'=>' ','familia'=>'Vinilo','tipo'=>0,'tramo1'=>1,'tarifa1'=>5,'tramo2'=>5,'tarifa2'=>10,'tramo3'=>15,'tarifa3'=>20],
             ['zona'=>'ES','familia'=>'Picking','tipo'=>1,'tramo1'=>1,'tarifa1'=>5,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
-            ['zona'=>'CA','familia'=>'Picking','tipo'=>1,'tramo1'=>1,'tarifa1'=>6,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
+            ['zona'=>'CN','familia'=>'Picking','tipo'=>1,'tramo1'=>1,'tarifa1'=>6,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
             ['zona'=>'PT','familia'=>'Picking','tipo'=>1,'tramo1'=>1,'tarifa1'=>7,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
             ['zona'=>'ES','familia'=>'Transporte','tipo'=>2,'tramo1'=>1,'tarifa1'=>5,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
-            ['zona'=>'CA','familia'=>'Transporte','tipo'=>2,'tramo1'=>1,'tarifa1'=>6,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
+            ['zona'=>'CN','familia'=>'Transporte','tipo'=>2,'tramo1'=>1,'tarifa1'=>6,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
             ['zona'=>'PT','familia'=>'Transporte','tipo'=>2,'tramo1'=>1,'tarifa1'=>7,'tramo2'=>0,'tarifa2'=>0,'tramo3'=>0,'tarifa3'=>0],
         ]);
     }

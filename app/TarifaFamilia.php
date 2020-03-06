@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TarifaFamilia extends Model
 {
-    protected $fillable=['tarifa_id','material','medida'];
+    protected $fillable=['tarifa_id','matmed','material','medida'];
 
     public function tarifafamilia()
     {

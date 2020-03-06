@@ -42,6 +42,7 @@ class CreateElementsTable extends Migration
             $table->string('material',50)->index();
 
             $table->bigInteger('familia_id')->index()->default(1);
+            $table->string('matmed')->index(); 
             // $table->foreign('familia_id')->references('id')->on('tarifa_familias');
             // $table->string('material',50)->index();
 

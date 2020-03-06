@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-auto mr-auto">
                         @can('maestro.create')
-                        <a href="" role="button" data-toggle="modal" data-target="#importMaestro" data-backdrop="static" data-keyboard="false">
+                        {{-- <a href="" role="button" data-toggle="modal" data-target="#importMaestro" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-plus-circle fa-2x text-primary mt-2"></i>
                             <span class="badge badge-primary">Fichero Grafitex</span>
                         </a>
@@ -34,7 +34,7 @@
                         <a href="" role="button" data-toggle="modal" data-target="#actualizaTablas" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-sync-alt fa-2x text-primary mt-2"></i>
                             <span class="badge badge-primary">Actualizar tablas Grafitex</span>
-                        </a>
+                        </a> --}}
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="" role="button" data-toggle="modal" data-target="#importMaestroSHG" data-backdrop="static" data-keyboard="false">
                             <i class="fas fa-plus-circle fa-2x text-success mt-2"></i>

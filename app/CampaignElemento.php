@@ -11,7 +11,7 @@ class CampaignElemento extends Model
     public $timestamps = true;
     
     protected $fillable=['campaign_id','tienda_id', 'store_id','country','idioma','name','area','segmento','storeconcept','ubicacion','mobiliario',
-        'propxlemento','carteleria','medida','material','unitxprop','imagen','observaciones','precio','validado','motivo','otros','updated_by'
+        'propxlemento','carteleria','medida','material','familia','matmed','unitxprop','imagen','observaciones','precio','validado','motivo','otros','updated_by'
     ];
 
 

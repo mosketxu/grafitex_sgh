@@ -16,6 +16,7 @@ class Elemento extends Model
         'carteleria_id',
         'medida_id',
         'familia_id',
+        'matmed',
         'material_id',
         'unitxprop',
         'observaciones',
