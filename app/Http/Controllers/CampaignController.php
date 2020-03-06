@@ -453,6 +453,7 @@ class CampaignController extends Controller
                         'carteleria'  => $gen['carteleria'],
                         'medida'  => $gen['medida'],
                         'material'  => $gen['material'],
+                        'matmed'  => $gen['matmed'],
                         'familia'=>$fam,
                         'unitxprop'  => $gen['unitxprop'],
                         'imagen'  => str_replace('+','',str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida']))))))).'.jpg',
