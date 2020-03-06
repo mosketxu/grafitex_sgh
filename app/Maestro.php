@@ -289,6 +289,7 @@ class Maestro extends Model
     
     static function insertStoreElementos()
     {
+        // dd(Maestro::get()->count());
         Maestro::chunk(100, function ($maestros) {
             $dataSet = [];
             foreach ($maestros as $elemento) {

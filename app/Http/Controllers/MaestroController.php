@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\{MaestrosImport, MaestrosImportSGH};
-use App\{Maestro,Ubicacion,Area, Carteleria, Country, Furniture, Material, Medida, Mobiliario, Segmento, Storeconcept,Propxelemento, TarifaFamilia};
+use App\{Maestro,Ubicacion,Area, Carteleria, Elemento, Furniture, Material, Medida, Mobiliario, Segmento, Storeconcept,Propxelemento, TarifaFamilia};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,38 +79,10 @@ class MaestroController extends Controller
 
     public function actualizarTablas($origen)
     {
-        // $tarifafamilias=TarifaFamilia::get();
-        // foreach ($tarifafamilias as $tf){
-        //     $mat=!is_null($tf->material)?$tf->material:'';
-        //     $med=!is_null($tf->medida)?$tf->medida:'';
-        //     $e=$mat . $med;
-        //     $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-        //     $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-        //     $e=str_replace($sust, $por, $e);
-        //     $e=strtolower($e);
-        //     TarifaFamilia::where('id',$tf->id)->update[
-        //         'matmed'=$e
-        //         ]
-        //     );
-        // }
 
         //elimino los elementos de las stores para volver a añadirlos
         DB::table('store_elementos')->delete();
         DB::table('elementos')->delete(); // si no los elimino es muy lento y salta
-
-        //No elimino nada más. Intento actualizar sin mas.
-        // DB::table('stores')->delete();
-        // DB::table('ubicacions')->delete();
-        // DB::table('areas')->delete();
-        // DB::table('cartelerias')->delete();
-        // DB::table('medidas')->delete();
-        // DB::table('mobiliarios')->delete();
-        // DB::table('segmentos')->delete();
-        // if($origen=="SGH")
-        //     DB::table('furnitures')->delete();
-        // DB::table('propxelementos')->delete();
-        // DB::table('storeconcepts')->delete();
-        // DB::table('materiales')->delete();
 
         //Inserto actualizo Ubicaciones
         $ubicaciones=Maestro::select('ubicacion')->distinct('ubicacion')->get()->toArray();
@@ -196,4 +168,35 @@ class MaestroController extends Controller
         return view('home')->with($notification);
         
     }
+
+    public function actualizastoreelementos()
+    {
+        DB::table('store_elementos')->delete();
+
+        // dd(Maestro::get()->count());
+        Maestro::chunk(100, function ($maestros) {
+            $dataSet = [];
+            foreach ($maestros as $elemento) {
+                $dataSet[] = [
+                    'store_id'=>$elemento['store'],
+                    'elemento_id'=>Elemento::where('elementificador',$elemento['elementificador'])->first()['id'],
+                    'elementificador'=>$elemento['elementificador'],
+                    ];
+            }
+            DB::table('store_elementos')->insert($dataSet);
+        });
+
+        dd('finalizado');
+
+        $notification = array(
+            'message' => '¡Proceso finalizado satisfactoriamente!',
+            'alert-type' => 'success'
+        );
+
+        dd('finalizado');
+        
+        return redirect('/maestro')->with($notification);
+
+    }
+    
 }
