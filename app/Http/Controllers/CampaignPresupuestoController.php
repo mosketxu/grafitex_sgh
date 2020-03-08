@@ -200,8 +200,7 @@ class CampaignPresupuestoController extends Controller
         ->where('familia',$familiaId)
         ->get();
 
-        $tarifas=Tarifa::where('tipo','0')
-        ->get();
+        $tarifas=Tarifa::where('tipo','0')->get();
         $campaign=Campaign::find($campaignId);
 
         return view('campaign.presupuesto.elementos',compact('campaign','elementos','presupuesto','tarifas'));
@@ -237,9 +236,13 @@ class CampaignPresupuestoController extends Controller
 
     public function updateelemento(Request $request)
     {
-        
+        $precio=Tarifa::where('id',$request->familia)->first()->tarifa1;
+
         $campaignelem=CampaignElemento::where('elemento_id',$request->elemento_id)
-        ->update(['familia'=>$request->familia]);
+        ->update([
+            'familia'=>$request->familia,
+            'precio'=>$precio]
+        );
 
         $campaignelem=CampaignElemento::where('elemento_id',$request->elemento_id)->first();
 
@@ -247,18 +250,9 @@ class CampaignPresupuestoController extends Controller
         ->where('medida',$campaignelem->medida)
         ->update(['familia_id'=>$request->familia]);
 
-        // $t=TarifaFamilia::where('material',$campaignelem->material)
-        // ->where('medida',$campaignelem->medida)
-        // ->get();
-
         TarifaFamilia::where('material',$campaignelem->material)
         ->where('medida',$campaignelem->medida)
         ->update(['tarifa_id'=>$request->familia]);
-
-        // $t=TarifaFamilia::where('material',$campaignelem->material)
-        // ->where('medida',$campaignelem->medida)
-        // ->first();
-        
 
         $notification = array(
             'message' => 'Tarifa actualizada satisfactoriamente!',
@@ -267,6 +261,7 @@ class CampaignPresupuestoController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    
     public function refresh($campaignId,$presupuestoId)
     {
         // elimino los detalles del presupuesto y de picking y trasnporte para poner nuevos precios
@@ -281,21 +276,26 @@ class CampaignPresupuestoController extends Controller
         //actualizo los valores de la familia en los elementos de la campaña
 
         $elementos=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','campaign_elementos.tienda_id')
-            // ->select('campaign_tiendas.campaign_id','campaign_elementos.id as elemId','material','medida')
             ->where('campaign_id',$campaignId)
             ->get();
 
         foreach ($elementos as $elemento){
             $familia=TarifaFamilia::getFamilia($elemento['material'],$elemento['medida']);
             $fam=$familia['id'];
+            $precio=Tarifa::where('id',$fam)->first()->tarifa1;
 
             if (is_null($fam))
                 $fam=1;
-
-                CampaignElemento::where('elemento_id',$elemento->elemento_id)
-            ->update([
-                'familia'=>$fam
+            CampaignElemento::where('elemento_id',$elemento->elemento_id)
+                ->update([
+                    'familia'=>$fam,
+                    'precio'=>$precio,
             ]);
+
+            Elemento::where('matmed',$familia->matmed)
+                ->update([
+                    'familia_id'=>$fam,
+                ]);
         }
         
         $totalpresupuestoMat= CampaignElemento::asignElementosPrecio($campaignId);

@@ -156,6 +156,9 @@ class Maestro extends Model
                 ]);
             }
         }
+        unset($dataSet);
+        unset($stores);
+
         return true;
     }
 
@@ -191,6 +194,10 @@ class Maestro extends Model
             }
             DB::table('elementos')->insert($dataSet);
         }
+
+        unset($dataSet);
+        unset($elementos);
+
         return true;
     }
 
@@ -237,6 +244,9 @@ class Maestro extends Model
                 ]);
             }
         }
+        unset($dataSet);
+        unset($stores);
+
         return true;
     }
 
@@ -284,6 +294,9 @@ class Maestro extends Model
             }
             DB::table('elementos')->insert($dataSet);
         }
+        unset($dataSet);
+        unset($elementos);
+
         return true;
     }
     
@@ -304,5 +317,8 @@ class Maestro extends Model
             }
             DB::table('store_elementos')->insertOrIgnore($dataSet);
         });
+        unset($dataSet);
+        unset($maestros);
+
     }
 }

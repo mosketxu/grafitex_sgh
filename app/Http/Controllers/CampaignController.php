@@ -16,6 +16,7 @@ use App\{
     CampaignTienda,
     Medida,
     Segmento,
+    Tarifa,
     VCampaignGaleria,
     TarifaFamilia,
     Ubicacion,
@@ -542,9 +543,12 @@ class CampaignController extends Controller
         ->get();
         
         $materialmedidas=CampaignElemento::tienda($campaignId)
-        ->select('material','medida', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
-        ->groupBy('material','medida')
+        ->join('tarifas','tarifas.id','campaign_elementos.familia')
+        ->select('tarifas.familia as tfam','campaign_elementos.familia','matmed','material','medida', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
+        ->groupBy('tarifas.familia','familia','matmed','material','medida')
         ->get();
+
+        $tarifas=Tarifa::where('tipo','0')->get();
         
         $idiomamatmobmedidas=CampaignElemento::tienda($campaignId)
         ->select('idioma','material','medida','mobiliario', DB::raw('count(*) as totales'),DB::raw('SUM(unitxprop) as unidades'))
@@ -554,7 +558,7 @@ class CampaignController extends Controller
         return view('campaign.conteos', 
             compact('campaign','conteodetallado','tiendaszonas','materiales','segmentos',
                 'conceptos','mobiliarios','propxelementos','cartelerias','medidas',
-                'materialmedidas','idiomamatmobmedidas','busqueda'));
+                'materialmedidas','tarifas','idiomamatmobmedidas','busqueda'));
     }
 
 

@@ -132,7 +132,7 @@
                                              <th class="text-center">Totales</th>
                                              <th class="text-center">Promedio<br/>Total</th>
                                              <th class="text-center">Promedio<br/>Zona</th>
-                                             <th class="text-center">Pickin</th>
+                                             <th class="text-center">Picking</th>
                                              <th class="text-center">Transp.</th>
                                           </tr>
                                        </thead>

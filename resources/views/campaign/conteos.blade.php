@@ -463,7 +463,6 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    {{-- <td><a href="{{action('CampaignElementoController@export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td> --}}
                                     <td><a href="{{route('campaign.conteo.export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                                     <div class="table-responsive">
                                         <table id="tcampaignIdiomaMaterialMedida"
@@ -505,9 +504,6 @@
 @push('scriptchosen')
 
 <script>
-    $(document).ready( function () {
-    });
-
     $('#menucampaign').addClass('active');
     $('#navestadisticas').toggleClass('activo');
 </script>

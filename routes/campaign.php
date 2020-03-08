@@ -105,7 +105,7 @@ Route::group(['prefix' => 'campaign'], function () {
 
         Route::put('/updateelemento', 'CampaignPresupuestoController@updateelemento')->name('campaign.presupuesto.updateelemento')
             ->middleware('can:presupuesto.edit');
-    
+
         Route::get('/refresh/{campaign}/{campaignpresupuesto}', 'CampaignPresupuestoController@refresh')->name('campaign.presupuesto.refresh')
             ->middleware('can:presupuesto.edit');
                 
