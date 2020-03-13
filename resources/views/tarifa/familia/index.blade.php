@@ -61,11 +61,78 @@
                             </form>
                         </div>
                     </div>
+                    <div class="card collapsed-card">
+                        {{-- card-header --}}
+                        <div class="card-header text-black bg-white}} p-0" data-card-widget="collapse" style="cursor: pointer">
+                            <h3 class="card-title pl-3">{{$sinidentificar->familia}}  </h3>
+                            <div class="card-tools pr-3">
+                                <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        {{-- card-body --}}
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm small" cellspacing="0" width=100%>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Material</th>
+                                            <th>Medida</th>
+                                            <th>Familia</th>
+                                            <th width="150px" class="">Acción</th>
+                                        </tr>        
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($sinidentificar->tarifafamilias as $familia)
+                                        <form id="form{{$familia->id}}" role="form" method="post" action="{{ route('tarifafamilia.update') }}" >
+                                            @method('PUT')
+                                            @csrf
+                                            <tr>
+                                                <input type="hidden" name="id" value="{{$familia->id}}" >
+                                                <td><span class="badge text-gray">{{$familia->id}}</span></td>
+                                                <td><input class="form-control-plaintext" type="text" name="material" value="{{$familia->material}}"/></td>
+                                                <td><input class="form-control-plaintext" type="text" name="medida" value="{{$familia->medida}}"/></td>
+                                                <td>
+                                                    <select name="tarifa_id" id="tarifa_id" onchange="update('form{{$familia->id}}',{{$familia->id}})" class="form-control-plaintext my-0 py-0">
+                                                        <option value="{{$familia->tarifa_id}}" selected>{{$sinidentificar->familia}}</option>
+                                                        @foreach($familias as $tarifa)
+                                                        <option value="{{$tarifa->id}}">{{$tarifa->familia}}</option>                                
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td width="150px">
+                                                    <div class="row">
+                                                        <button type="submit" class="enlace">
+                                                            <i class="far fa-edit text-primary fa-2x mx-1"></i>
+                                                        </button>
+                                        </form>
+                                        <form role="form" method="post" action="{{ route('tarifafamilia.destroy',$familia->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                                        <button type="submit" class="enlace">
+                                                            <i class="far fa-trash-alt text-danger fa-2x ml-1"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-none">{{$i=0}}</div>
                     @foreach ($tarifafamilias as $tarifafamilia) 
                     {{-- <div class="card collapsed-card"> --}}
                     <div class="card collapsed-card">
                         {{-- card-header --}}
-                        <div class="card-header text-white bg-{{$colors[rand(0,17)]}} p-0" data-card-widget="collapse" style="cursor: pointer">
+
+                        {{-- <div class="card-header text-white bg-{{$colors[rand(0,16)]}} p-0" data-card-widget="collapse" style="cursor: pointer"> --}}
+                        <div class="card-header text-white bg-{{$colors[$i++]}} p-0" data-card-widget="collapse" style="cursor: pointer">
+                            @if ($i>16)
+                                <div class="d-none">{{$i=0}}</div>
+                            @endif
                             <h3 class="card-title pl-3">{{$tarifafamilia->familia}}  </h3>
                             <div class="card-tools pr-3">
                                 <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>

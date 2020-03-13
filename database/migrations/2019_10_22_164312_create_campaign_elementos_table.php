@@ -42,6 +42,13 @@ class CreateCampaignElementosTable extends Migration
             $table->string('imagen')->nullable();
             $table->string('observaciones')->nullable();
             $table->decimal('precio',8,2)->nullable();
+            $table->integer('estadorecepcion')->default(0);
+            $table->string('obsrecepcion')->nullable();
+            $table->dateTime('fecharecepcion')->nullable();
+            $table->string('OK')->nullable();
+            $table->string('KO')->nullable();
+            $table->integer('updated_at')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

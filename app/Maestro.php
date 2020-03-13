@@ -262,16 +262,6 @@ class Maestro extends Model
         foreach (array_chunk($elementos->toArray(),100) as $t){
             $dataSet = [];
             foreach ($t as $elemento) {
-                // $mat=!is_null($elemento['material'])?$elemento['material']:'';
-                // $med=!is_null($elemento['medida'])?$elemento['medida']:'';
-                // $matmed=$mat . $med;
-                // $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-                // $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-                // $matmed=str_replace($sust, $por, $matmed);
-                // $matmed=strtolower($matmed);
-
-                // $familia=TarifaFamilia::where('matmed',$matmed)->first()->tarifa_id;
-                // dd($elemento);
                 $familia=TarifaFamilia::where('matmed',$elemento['matmed'])->first()->tarifa_id;
 
                 $dataSet[] = [
@@ -305,18 +295,14 @@ class Maestro extends Model
     
     static function insertStoreElementos()
     {
-        // dd(Maestro::get()->count());
         Maestro::chunk(100, function ($maestros) {
             $dataSet = [];
             foreach ($maestros as $elemento) {
-                // $existe=StoreElemento::where('store_id',$elemento['store'])->where('elementificador',$elemento['elementificador'])->count();
-                // if($existe==0){
                     $dataSet[] = [
                     'store_id'=>$elemento['store'],
                     'elemento_id'=>Elemento::where('elementificador',$elemento['elementificador'])->first()['id'],
                     'elementificador'=>$elemento['elementificador'],
                     ];
-                // };
             }
             DB::table('store_elementos')->insertOrIgnore($dataSet);
         });

@@ -16,7 +16,17 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->bigInteger('id'); /*store code*/
             $table->primary('id');
+            $table->string('luxotica',15)->nullable();
             $table->string('name',100)->index();
+            $table->string('address',100)->nullable();
+            $table->string('city',30)->nullable();
+            $table->string('province',30)->nullable();
+            $table->string('cp',10)->nullable();
+            $table->string('phone',10)->nullable();
+            $table->string('email',80)->nullable();
+            $table->string('winterschedule',30)->nullable();
+            $table->string('summerschedule',30)->nullable();
+            $table->string('deliverytime',30)->nullable();
             $table->string('country',2)->index();
             $table->string('zona',2)->index();
             $table->bigInteger('area_id')->index();
@@ -30,6 +40,8 @@ class CreateStoresTable extends Migration
             $table->string('furniture_type')->nullable();
             $table->string('observaciones',50)->nullable();
             $table->string('imagen',100)->default('SGH.jpg');
+
+
             $table->timestamps();
 
 

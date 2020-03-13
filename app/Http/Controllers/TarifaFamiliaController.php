@@ -21,18 +21,21 @@ class TarifaFamiliaController extends Controller
         } 
         $tarifafamilias = Tarifa::search($request->busca)
         ->where('tipo',0)
+        ->where('id','<>','1')
+        ->orderBy('familia')
         ->paginate(25);
         
         $familias = Tarifa::where('tipo',0)
         ->orderBy('familia')
         ->get();
 
+        $sinidentificar=Tarifa::where('id',1)->first();
 
         $colors = array('primary','secondary','info','success', 'danger', 'warning',
-            'black', 'gray', 'indigo', 'navy', 'purple', 'fuchsia',
+            'gray', 'indigo', 'navy', 'purple', 'fuchsia',
             'pink', 'maroon', 'orange', 'lime', 'teal', 'olive');
-        shuffle($colors);
-        return view('tarifa.familia.index', compact('tarifafamilias','familias','busqueda','colors'));
+        // shuffle($colors);
+        return view('tarifa.familia.index', compact('sinidentificar','tarifafamilias','familias','busqueda','colors'));
     }
 
     /**

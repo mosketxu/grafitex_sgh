@@ -32,6 +32,7 @@ class CreateMaestrosTable extends Migration
             $table->string('carteleria',50);
             $table->string('medida',50)->index();
             $table->string('material',50)->index();
+            $table->string('matmed')->index();
             $table->string('unitxprop',20)->nullable();
             $table->string('observaciones')->nullable();
             $table->softDeletes();

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\{MaestrosImport, MaestrosImportSGH};
-use App\{Maestro,Ubicacion,Area, Carteleria, Elemento, Furniture, Material, Medida, Mobiliario, Segmento, Storeconcept,Propxelemento, TarifaFamilia};
+use App\{Maestro,Ubicacion,Area, CampaignElemento, Carteleria, Elemento, Furniture, Material, Medida, Mobiliario, Segmento, Storeconcept,Propxelemento, TarifaFamilia};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,7 +79,6 @@ class MaestroController extends Controller
 
     public function actualizarTablas($origen)
     {
-
         //elimino los elementos de las stores para volver a añadirlos
         DB::table('store_elementos')->delete();
         DB::table('elementos')->delete(); // si no los elimino es muy lento y salta
@@ -136,20 +135,11 @@ class MaestroController extends Controller
         foreach ($materials as $material){
             Material::firstOrCreate($material);
         }
-        // Material::insert(Maestro::select('material')->distinct('material')->get()->toArray());
-        // $tarifafamilias=Maestro::select('material','medida',)
+
         $tarifafamilias=Maestro::select('material','medida','matmed')
         ->groupBy('material','medida','matmed')
         ->get();
         foreach ($tarifafamilias as $tf){
-            // $mat=!is_null($tf->material)?$tf->material:'';
-            // $med=!is_null($tf->medida)?$tf->medida:'';
-            // $e=$mat . $med;
-            // $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-            // $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-            // $e=str_replace($sust, $por, $e);
-            // $e=strtolower($e);
-
             TarifaFamilia::firstOrCreate(
                 ['matmed'=>$tf->matmed],
                 ['material'=>$tf->material,

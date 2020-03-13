@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToCampaignElementosTable extends Migration
+class AddColumnsToCampaignElementos extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddColumnsToCampaignElementosTable extends Migration
     public function up()
     {
         Schema::table('campaign_elementos', function (Blueprint $table) {
-            $table->string('matmed')->index()->after('familia');
+            $table->string('elemento')->index()->after('imagen');
+            $table->string('ECI')->after('elemento');
         });
     }
 
@@ -26,7 +27,8 @@ class AddColumnsToCampaignElementosTable extends Migration
     public function down()
     {
         Schema::table('campaign_elementos', function (Blueprint $table) {
-            $table->dropColumn('matmed');
+            $table->dropColumn('elemento');
+            $table->dropColumn('ECI');
         });
     }
 }

@@ -67,32 +67,23 @@ class CampaignElemento extends Model
         $total=0;
 
         foreach ($elementos as $elemento){
-            // $conteo=CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
-            // ->where('campaign_id',$campaignId)
-            // ->where('familia',$elemento->familia)
-            // ->count();
-          
             $fam=Tarifa::where('id',$elemento->familia)->first();
-            
-            //anulo los tramos 2 y 3
-            // if($conteo<$fam->tramo2)
-                $elemento->precio=$fam->tarifa1;
-            // elseif($conteo>$fam->tramo3)
-                // $elemento->precio=$fam->tarifa3;
-            // else
-                // $elemento->precio=$fam->tarifa2;
-            
+            $elemento->precio=$fam->tarifa1;
             $total=$total+$elemento->precio;
-
             $elemento->save();
         }
-
-        // return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','tienda_id')
-        // ->select(DB::raw('SUM(unitxprop*precio) as total'))
-        // ->first();
-
         return $total;
-
-
     }
+
+    static function getGaleria($campaignId)
+    {
+        return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','campaign_elementos.tienda_id')
+        ->where('campaign_id',$campaignId)
+        ->select('campaign_id','mobiliario','carteleria','medida','ECI','elemento','imagen')
+        ->groupBy('campaign_id','mobiliario','carteleria','medida','ECI','elemento','imagen')
+        ->get();
+    }
+
 }
+
+

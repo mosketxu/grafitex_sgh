@@ -38,75 +38,46 @@
         <section class="content">
             <div class="container">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">
-                                    <input type="hidden" name="id" value="{{ $tarifa->id }}"/>
-                                    <input type="hidden" name="tipo" value="0"/>
-                                    <div class="form-group col">
-                                        <label for="zona">Zona</label>
-                                        <input type="text" class="form-control form-control-sm" id="zona"
-                                            name="zona" value="{{ $tarifa->zona }}"
-                                            disabled />
-                                    </div>
-                                    <div class="form-group col">
-                                        <label for="zona">Familia</label>
-                                        <input type="text" class="form-control form-control-sm" id="familia"
-                                            name="familia" value="{{ $tarifa->familia }}"
-                                            disabled />
+                    <form method="post" action="{{ route('tarifa.update',$tarifa->id) }}"> 
+                        @method("PUT")
+                        @csrf
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <input type="hidden" name="id" value="{{ $tarifa->id }}"/>
+                                        <input type="hidden" name="tipo" value="0"/>
+                                        <div class="form-group col">
+                                            <label for="zona">Zona</label>
+                                            <input type="text" class="form-control form-control-sm" id="zona"
+                                                name="zona" value="{{ $tarifa->zona }}"
+                                                disabled />
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="zona">Familia</label>
+                                            <input type="text" class="form-control form-control-sm" id="familia"
+                                                name="familia" value="{{ $tarifa->familia }}"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="{{ route('tarifa.update',$tarifa->id) }}"> 
-                            @method("PUT")
-                            @csrf
+                        <div class="card-body">
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label"></label>
-                                {{-- <label for="tramo1" class="col-sm-1 col-form-label">Tramo1</label> --}}
-                                {{-- <div class="col-sm-3"> --}}
-                                    {{-- <input type="text" class="form-control" name="tramo1" id="tramo1" value="{{$tarifa->tramo1}}"> --}}
                                     <input type="hidden" class="form-control" name="tramo1" id="tramo1" value="1">
-                                {{-- </div> --}}
                                 <label for="tarifa1" class="col-sm-1 col-form-label">Tarifa1</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control"  name="tarifa1" id="tarifa1" value="{{$tarifa->tarifa1}}">
                                 </div>
                                 <label for="" class="col-sm-2 col-form-label"></label>
                             </div>
-                            {{-- <div class="form-group row">
-                                <label for="" class="col-sm-2 col-form-label"></label>
-                                <label for="tramo2" class="col-sm-1 col-form-label">Tramo2</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="tramo2" id="tramo2" value="{{$tarifa->tramo2}}">
-                                </div>
-                                <label for="tarifa2" class="col-sm-1 col-form-label">Tarifa2</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control"  name="tarifa2" id="tarifa2" value="{{$tarifa->tarifa2}}">
-                                </div>
-                                <label for="" class="col-sm-2 col-form-label"></label>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-2 col-form-label"></label>
-                                <label for="tramo3" class="col-sm-1 col-form-label">Tramo3</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="tramo3" id="tramo3" value="{{$tarifa->tramo3}}">
-                                </div>
-                                <label for="tarifa3" class="col-sm-1 col-form-label">Tarifa3</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control"  name="tarifa3" id="tarifa3" value="{{$tarifa->tarifa3}}">
-                                </div>
-                                <label for="" class="col-sm-2 col-form-label"></label>
-                            </div> --}}
                             <div class="footer text-center">
                                 <a type="button" class="btn btn-default" href="{{route('tarifa.index')}}">Volver</a>
                                 <input class="btn btn-primary" type="submit" value="Guardar">
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
