@@ -72,8 +72,8 @@ class CampaignPresupuestoController extends Controller
         $campPresu->save();
 
         // guardo los materiales en campaign_presupuestos_detalle para tener historico si se cambian los precios en una segunda versión del presupuesto
-        $materiales=VCampaignResumenElemento::where('campaign_id',$request->campaign_id)
-        ->get();
+        $materiales=CampaignElemento::getElementos($request->campaign_id);
+
         if($materiales->count()>0){
             foreach (array_chunk($materiales->toArray(),1000) as $t){
                 $dataSet = [];

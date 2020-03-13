@@ -52,7 +52,7 @@
             <tr>
                <td width="49%" ></td>
                <td width="25%" style="padding-left:10px; border:1px solid"><span style="font-size: small">Núm.Presupuesto</span></td>
-               <td width="25%" style="padding-left:10px; border:1px solid"><span style="font-size: small">{{$presupuesto->referencia}}-es</span></td>
+               <td width="25%" style="padding-left:10px; border:1px solid"><span style="font-size: small">{{$presupuesto->id}}-es</span></td>
             </tr>
          </tbody>
    </table>

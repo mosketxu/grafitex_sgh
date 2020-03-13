@@ -84,6 +84,26 @@ class CampaignElemento extends Model
         ->get();
     }
 
+    static function getElementos($campaignId)
+    {
+        return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','campaign_elementos.tienda_id')
+        ->where('campaign_id',$campaignId)
+        ->select('campaign_id','familia','precio',DB::raw('SUM(unitxprop) as unidades'),DB::raw('SUM(unitxprop * precio) as tot'))
+        ->groupBy('campaign_id','familia','precio')
+        ->get();
+    }
+
+    static function getPromedios($campaignId)
+    {
+        return CampaignElemento::join('campaign_tiendas','campaign_tiendas.id','campaign_elementos.tienda_id')
+        ->where('campaign_id',$campaignId)
+        ->select('campaign_id','zona','campaign_elementos.store_id as store_id',DB::raw('SUM(unitxprop * precio) as tot'))
+        ->groupBy('campaign_id','zona','campaign_elementos.store_id')
+        ->get();
+
+    }
+
+
 }
 
 
