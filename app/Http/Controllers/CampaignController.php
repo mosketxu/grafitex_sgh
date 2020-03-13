@@ -380,127 +380,128 @@ class CampaignController extends Controller
                             'campaign_id'  => $id,
                             'store_id'  => $store['store'],
                             'store'  => $store['name'],
-                            ]);
-                        };
-                    }
-                });
-            }
+                        ]);
+                    };
+                }
+            });
+        }
             
         // Separo en una tabla los stores y en otra todo los elementos de la store
         
         // $tiendas=Maestro::CampaignTiendas($id)->get();
         $tiendas=StoreElemento::join('stores','stores.id','store_id')
-        ->join('elementos','elementos.id','elemento_id')
-        ->select('store_id as store')
-        ->campstosto($campaign->id)
-        ->campstoseg($campaign->id)
-        ->campstoubi($campaign->id)
-        ->campstomob($campaign->id)
-        ->campstomed($campaign->id)
-        ->groupBy('store','name')
-        ->get();
+            ->join('elementos','elementos.id','elemento_id')
+            ->select('store_id as store')
+            ->campstosto($campaign->id)
+            ->campstoseg($campaign->id)
+            ->campstoubi($campaign->id)
+            ->campstomob($campaign->id)
+            ->campstomed($campaign->id)
+            ->groupBy('store','name')
+            ->get();
         
         foreach ($tiendas as $tienda) {
             if(CampaignTienda::where('campaign_id',$id)->where('store_id',$tienda->store)->count()==0){
                 $tiendaId = CampaignTienda::insertGetId(["campaign_id"=>$id,"store_id"=>$tienda->store]);
             }
-        else{
-            $tiendaId=CampaignTienda::where('campaign_id',$id)->where('store_id',$tienda->store)->first()->id;
-        }
-        
-        $t=$tienda->store;
-        
-        $generar=StoreElemento::join('stores','stores.id','store_id')
-        ->join('elementos','elementos.id','elemento_id')
-        ->campstoubi($campaign->id)
-        ->campstomob($campaign->id)
-        ->campstomed($campaign->id)
-        ->where('store_id',$t)
-        ->get();
-        
-        foreach ($generar as $gen){
-            if ($gen['country']=='PT'){
-                $zona='PT';
-            }else{
-                if($gen['area']=='Canarias')
-                $zona='CN';
-                else
-                $zona='ES';
+            else{
+                $tiendaId=CampaignTienda::where('campaign_id',$id)->where('store_id',$tienda->store)->first()->id;
             }
-            $familia=TarifaFamilia::getFamilia($gen['material'],$gen['medida']);
-            $fam=$familia['id'];
+        
+            $t=$tienda->store;
             
-            if (is_null($fam))
-            $fam=1;
-            
-            $elemento=$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida'];
-            $sust=array(" ","/","-","+",".","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-            $por=array("","","","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-            $elemento=strtolower(str_replace($sust, $por, $elemento));
-            
-            if(substr($gen['name'],0,3)==='ECI')
-                $eci='ECI';
-            else
-                $eci='';
+            $generar=StoreElemento::join('stores','stores.id','store_id')
+            ->join('elementos','elementos.id','elemento_id')
+            ->campstoubi($campaign->id)
+            ->campstomob($campaign->id)
+            ->campstomed($campaign->id)
+            ->where('store_id',$t)
+            ->get();
+        
+            foreach ($generar as $gen){
+                if ($gen['country']=='PT'){
+                    $zona='PT';
+                }else{
+                    if($gen['area']=='Canarias')
+                    $zona='CN';
+                    else
+                    $zona='ES';
+                }
+                $familia=TarifaFamilia::getFamilia($gen['material'],$gen['medida']);
+                $fam=$familia['id'];
+                
+                if (is_null($fam))
+                $fam=1;
 
-            $imagen=$elemento.$eci.'.jpg';
-            $mat=!is_null($gen['material'])?$gen['material']:'';
-            $med=!is_null($gen['medida'])?$gen['medida']:'';
-            $matmed=$mat . $med;
-            $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-            $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-            $matmed=str_replace($sust, $por, $matmed);
-            $matmed=strtolower($matmed);
+                $elemento=$gen['mobiliario'].$gen['carteleria'].$gen['medida'];
+                $sust=array(" ","/","-","+",".","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+                $por=array("","","","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+                
+                if(substr($gen['name'],0,3)==='ECI')
+                    $eci='ECI';
+                else
+                    $eci='';
+                $elemento=strtolower(str_replace($sust, $por, $elemento)).$eci;
+
+                $imagen=$elemento.'.jpg';
+                $mat=!is_null($gen['material'])?$gen['material']:'';
+                $med=!is_null($gen['medida'])?$gen['medida']:'';
+                $matmed=$mat . $med;
+                $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+                $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+                $matmed=str_replace($sust, $por, $matmed);
+                $matmed=strtolower($matmed);
             
-            CampaignElemento::insert([
-                'tienda_id'  => $tiendaId,
-                'elemento_id'  => $gen['elemento_id'],
-                'store_id'  => $gen['store_id'],
-                'name'  => $gen['name'],
-                'country'  => $gen['country'],
-                'idioma'  => $gen['idioma'],
-                'area'  => $gen['area'],
-                'zona'  => $zona,
-                'segmento'  => $gen['segmento'],
-                'storeconcept'  => $gen['concepto'],
-                'ubicacion'  => $gen['ubicacion'],
-                'mobiliario'  => $gen['mobiliario'],
-                'propxelemento'  => $gen['propxelemento'],
-                'carteleria'  => $gen['carteleria'],
-                'medida'  => $gen['medida'],
-                'material'  => $gen['material'],
-                'matmed'  => $gen['matmed'],
-                'familia'=>$fam,
-                'unitxprop'  => $gen['unitxprop'], 
-                'imagen'  => $imagen,
-                'elemento'  => $elemento,
-                'ECI'=>$eci,
+                
+                $i=CampaignElemento::insert([
+                    'tienda_id'  => $tiendaId,
+                    'elemento_id'  => $gen['elemento_id'],
+                    'store_id'  => $gen['store_id'],
+                    'name'  => $gen['name'],
+                    'country'  => $gen['country'],
+                    'idioma'  => $gen['idioma'],
+                    'area'  => $gen['area'],
+                    'zona'  => $zona,
+                    'segmento'  => $gen['segmento'],
+                    'storeconcept'  => $gen['concepto'],
+                    'ubicacion'  => $gen['ubicacion'],
+                    'mobiliario'  => $gen['mobiliario'],
+                    'propxelemento'  => $gen['propxelemento'],
+                    'carteleria'  => $gen['carteleria'],
+                    'medida'  => $gen['medida'],
+                    'material'  => $gen['material'],
+                    'matmed'  => $gen['matmed'],
+                    'familia'=>$fam,
+                    'unitxprop'  => $gen['unitxprop'], 
+                    'imagen'  => $imagen,
+                    'elemento'  => $elemento,
+                    'ECI'=>$eci,
                 ]);
             }
         }
             
-            //relleno la tabla imagenes
-            // $imagenes=VCampaignGaleria::getGaleria($id);
-            $imagenes=CampaignElemento::getGaleria($id);
-            // dd($imagenes);
-            foreach (array_chunk($imagenes->toArray(),1000) as $t){
-                $dataSet = [];
-                foreach ($t as $gen) {
-                    $dataSet[] = [
-                        'campaign_id'  => $id,
-                        'mobiliario'  => $gen['mobiliario'],
-                        'carteleria'  => $gen['carteleria'],
-                        'medida'  => $gen['medida'],
-                        'elemento'  => $gen['elemento'],
-                        'eci'  => $gen['ECI'],
-                        'imagen'  => $gen['imagen'],
-                    ];
-                }
-                DB::table('campaign_galerias')->insert($dataSet);
+        //relleno la tabla imagenes
+        // $imagenes=VCampaignGaleria::getGaleria($id);
+        $imagenes=CampaignElemento::getGaleria($id);
+        // dd($imagenes);
+        foreach (array_chunk($imagenes->toArray(),1000) as $t){
+            $dataSet = [];
+            foreach ($t as $gen) {
+                $dataSet[] = [
+                    'campaign_id'  => $id,
+                    'mobiliario'  => $gen['mobiliario'],
+                    'carteleria'  => $gen['carteleria'],
+                    'medida'  => $gen['medida'],
+                    'elemento'  => $gen['elemento'],
+                    'eci'  => $gen['ECI'],
+                    'imagen'  => $gen['imagen'],
+                ];
             }
+            DB::table('campaign_galerias')->insert($dataSet);
+        }
 
-        return redirect()->route('campaign.elementos', $campaign);
-    }
+    return redirect()->route('campaign.elementos', $campaign);
+}
 
     public function conteo($campaignId, Request $request) 
     {

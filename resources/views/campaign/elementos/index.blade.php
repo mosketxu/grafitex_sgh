@@ -102,14 +102,7 @@
                                         <th id="tCarteleria">Carteleria</th>
                                         <th id="tMedida">Medida</th>
                                         <th id="tMaterial">Material</th>
-                                        {{-- <th id="tTarifa">Tarifa</th> --}}
-                                        {{-- <th id="tPrecio">€/ud</th> --}}
                                         <th id="tUnit" class="text-center">Unit x Prop</th>
-                                        {{-- <th id="tComb" class="text-center">
-                                            <label class="p-0 m-0 text-center" style="width: 30px;">X1</label>
-                                            <label class="p-0 m-0 text-center" style="width: 30px;">X2</label>
-                                            <label class="p-0 m-0 text-center" style="width: 30px;">X3</label>
-                                        </th> --}}
                                         <th id="tObservaciones">Observaciones</th>
                                         <th width="150px">Imagen </th>
                                         <th width="50px" class="text-center"><span class="ml-1">Acción</th>
@@ -119,7 +112,6 @@
                                    @foreach ($elementos as $elemento)
                                    <tr>
                                     <form id="form{{$elemento->id}}" role="form" method="post" action="javascript:void(0)" enctype="multipart/form-data">
-                                    {{-- <form id="form{{$elemento->id}}" role="form" method="post" action="{{route('campaign.elementos.updateimagenindex')}}" enctype="multipart/form-data"> --}}
                                         @csrf
                                         <input type="text" class="d-none" name="elementoId" value="{{$elemento->id}}">
                                         <td class="d-none">{{$elemento->id}}</td>

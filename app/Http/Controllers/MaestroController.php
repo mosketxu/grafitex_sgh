@@ -79,6 +79,33 @@ class MaestroController extends Controller
 
     public function actualizarTablas($origen)
     {
+        // *************
+            // $elementos=CampaignElemento::where('elemento','<>','')->get();
+            
+            // $elementos=CampaignElemento::get();
+            // foreach (array_chunk($elementos->toArray(),100) as $ts){
+            //     foreach ($ts as $t) {
+            //         $elemento=$t['mobiliario'].$t['carteleria'].$t['medida'];
+            //         $sust=array(" ","/","-","+",".","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+            //         $por=array("","","","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+            //         if(substr($t['name'],0,3)==='ECI')
+            //             $eci='ECI';
+            //         else
+            //             $eci='';
+            //         $elemento=strtolower(str_replace($sust, $por, $elemento)).$eci;
+            //         $imagen=$elemento.'.jpg';
+            //         CampaignElemento::where('id',$t['id'])
+            //             ->update([
+            //             'imagen'  => $imagen,
+            //             'elemento'  => $elemento,
+            //             'ECI'=>$eci,
+            //         ]);
+            //         // dd($elemento);
+            //     }
+            // }
+            // dd('ya');
+        //********** */
+
         //elimino los elementos de las stores para volver a añadirlos
         DB::table('store_elementos')->delete();
         DB::table('elementos')->delete(); // si no los elimino es muy lento y salta
