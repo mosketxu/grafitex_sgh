@@ -137,21 +137,23 @@ class MaestroController extends Controller
             Material::firstOrCreate($material);
         }
         // Material::insert(Maestro::select('material')->distinct('material')->get()->toArray());
-        $tarifafamilias=Maestro::select('material','medida')
-        ->groupBy('material','medida')
+        // $tarifafamilias=Maestro::select('material','medida',)
+        $tarifafamilias=Maestro::select('material','medida','matmed')
+        ->groupBy('material','medida','matmed')
         ->get();
         foreach ($tarifafamilias as $tf){
-            $mat=!is_null($tf->material)?$tf->material:'';
-            $med=!is_null($tf->medida)?$tf->medida:'';
-            $e=$mat . $med;
-            $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-            $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-            $e=str_replace($sust, $por, $e);
-            $e=strtolower($e);
+            // $mat=!is_null($tf->material)?$tf->material:'';
+            // $med=!is_null($tf->medida)?$tf->medida:'';
+            // $e=$mat . $med;
+            // $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+            // $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+            // $e=str_replace($sust, $por, $e);
+            // $e=strtolower($e);
+
             TarifaFamilia::firstOrCreate(
-                ['matmed'=>$e],
-                ['material'=>$mat,
-                'medida'=>$med]
+                ['matmed'=>$tf->matmed],
+                ['material'=>$tf->material,
+                'medida'=>$tf->medida]
             );
         }
 

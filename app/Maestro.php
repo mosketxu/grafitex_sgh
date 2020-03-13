@@ -12,7 +12,7 @@ class Maestro extends Model
     use SoftDeletes;
 
     protected $fillable=['store','country','name','area','segmento','storeconcept','elementificador',
-                        'ubicacion','mobiliario','propxelemento','carteleria','medida','material','unitxprop','observaciones',
+                        'ubicacion','mobiliario','propxelemento','carteleria','medida','material','matmed','unitxprop','observaciones',
                         'channel','store_cluster','furniture_type',
                     ];
 
@@ -254,7 +254,7 @@ class Maestro extends Model
     {
         $elementos=Maestro::select(
             'elementificador','ubicacion','mobiliario',
-            'propxelemento','carteleria','medida','material',
+            'propxelemento','carteleria','medida','material','matmed',
             'unitxprop','observaciones')
             ->get();
 
@@ -262,15 +262,17 @@ class Maestro extends Model
         foreach (array_chunk($elementos->toArray(),100) as $t){
             $dataSet = [];
             foreach ($t as $elemento) {
-                $mat=!is_null($elemento['material'])?$elemento['material']:'';
-                $med=!is_null($elemento['medida'])?$elemento['medida']:'';
-                $matmed=$mat . $med;
-                $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
-                $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
-                $matmed=str_replace($sust, $por, $matmed);
-                $matmed=strtolower($matmed);
+                // $mat=!is_null($elemento['material'])?$elemento['material']:'';
+                // $med=!is_null($elemento['medida'])?$elemento['medida']:'';
+                // $matmed=$mat . $med;
+                // $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+                // $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+                // $matmed=str_replace($sust, $por, $matmed);
+                // $matmed=strtolower($matmed);
 
-                $familia=TarifaFamilia::where('matmed',$matmed)->first()->tarifa_id;
+                // $familia=TarifaFamilia::where('matmed',$matmed)->first()->tarifa_id;
+                // dd($elemento);
+                $familia=TarifaFamilia::where('matmed',$elemento['matmed'])->first()->tarifa_id;
 
                 $dataSet[] = [
                     'elementificador'=>$elemento['elementificador'],
@@ -288,7 +290,8 @@ class Maestro extends Model
                     'material'=>$elemento['material'],
                     'unitxprop'=>$elemento['unitxprop'],
                     'familia_id'=>$familia,
-                    'matmed'=>$matmed,
+                    // 'matmed'=>$matmed,
+                    'matmed'=>$elemento['matmed'],
                     'observaciones'=>$elemento['observaciones'],
                 ];
             }

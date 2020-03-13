@@ -23,11 +23,19 @@ class MaestrosImportSGH implements ToModel, WithHeadingRow, WithChunkReading,Wit
         $e= str_replace(" ","",$row['ubicacion'].$row['mobiliario'].$row['prop_elemento'].$row['carteleria'].$row['medida'].$row['material'].$row['unit_x_prop']);
         $e=str_replace("/","",$e);
         $observaciones="";
-        $udxprop=trim($row['unit_x_prop']);
+        $udxprop=trim($row['unit_x_prop']); 
         if(!is_numeric($udxprop)){
             $observaciones=$udxprop;
             $udxprop=0;
         }
+
+        $mat=!is_null($row['material'])?$row['material']:'';
+        $med=!is_null($row['medida'])?$row['medida']:'';
+        $matmed=$mat . $med;
+        $sust=array(" ","/","-","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+        $por=array("","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+        $matmed=str_replace($sust, $por, $matmed);
+        $matmed=strtolower($matmed);
 
         return new Maestro([
             'store' => trim($row['store_code']),
@@ -43,6 +51,7 @@ class MaestrosImportSGH implements ToModel, WithHeadingRow, WithChunkReading,Wit
             'carteleria' => trim($row['carteleria']), 
             'medida' => trim($row['medida']), 
             'material' => trim($row['material']), 
+            'matmed'=>$matmed,
             'unitxprop' =>$udxprop, 
             'observaciones'=>$observaciones,
             'channel'=>trim($row['channel']),

@@ -57,30 +57,6 @@
                             <span class="badge badge-danger">Inserta Stores Elementos</span>
                         </a>
 
-                        {{-- <form  action="{{route('campaign.delete',$campaign->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="_tokenCampaign" value="{{ csrf_token()}}" id="tokenCampaign">    
-                            @can('campaign.edit')
-                            <a href="{{route('campaign.filtrar', $campaign->id) }}" title="Filtrar"><i class="fas fa-filter text-navy fa-2x mx-1"></i></a>
-                            @endcan
-                            @can('campaign.index')
-                            <a href="{{route('campaign.elementos', $campaign->id ) }}" title="Elementos"><i class="far fas fa-cubes text-teal fa-2x mr-1"></i></a>
-                            <a href="{{route('campaign.galeria', $campaign->id ) }}" title="Galeria"><i class="far fa-images text-purple fa-2x mr-1"></i></a>
-                            <a href="{{route('campaign.etiquetas.pdf', $campaign->id ) }}" title="Etiquetas"><i class="fas fa-tags text-maroon fa-2x mr-1"></i></a>
-                            <a href="{{route('campaign.etiquetas.index',$campaign->id) }}" title="Etiquetas HTML"><i class="fas fa-code text-indigo fa-2x mr-1"></i></a>
-                            <a  href="{{route('campaign.addresses',$campaign->id) }}" title="Direcciones"><i class="fas fa-map-marker-alt text-info fa-2x mr-1"></i></a>
-                            <a href="{{route('campaign.presupuesto', $campaign->id ) }}" title="Presupuesto"><i class="fas fa-money-check-alt text-fuchsia fa-2x mr-1"></i></a>
-                            <a href="{{route('campaign.conteo', $campaign->id ) }}" title="Estadísticas"><i class="fas fa-chart-bar text-orange fa-2x mr-3"></i></a>
-                            @endcan
-                            @can('campaign.edit')
-                            <a href="{{route('campaign.edit', $campaign->id )}}" title="Edit"><i class="far fa-edit text-primary fa-2x ml-3"></i></a>
-                            @endcan
-                            @can('campaign.destroy')
-                            <button type="submit" class="enlace"><i class="far fa-trash-alt text-danger fa-2x ml-1"></i></button>
-                            @endcan
-                        </form> --}}
-
                         &nbsp;&nbsp;
 
                         @endcan

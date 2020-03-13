@@ -436,6 +436,16 @@ class CampaignController extends Controller
 
                 if (is_null($fam))
                     $fam=1;
+
+                $imagen=$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida'];
+                $sust=array(" ","/","-","+",".","(",")","á","é","í",'ó','ú',"Á","É","Í",'Ó','Ú');
+                $por=array("","","","","","","","a","e","i",'o','u',"A","E","I",'O','U');
+                $imagen=str_replace($sust, $por, $imagen);
+                $imagen=strtolower($imagen).'.jpg';
+
+
+
+
                 // if (CampaignElemento::where('tienda_id',$tiendaId)->where('elemento_id',$gen['elemento_id'])->count()==0)
                     CampaignElemento::insert([
                         'tienda_id'  => $tiendaId,
@@ -456,8 +466,9 @@ class CampaignController extends Controller
                         'material'  => $gen['material'],
                         'matmed'  => $gen['matmed'],
                         'familia'=>$fam,
-                        'unitxprop'  => $gen['unitxprop'],
-                        'imagen'  => str_replace('+','',str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida']))))))).'.jpg',
+                        'unitxprop'  => $gen['unitxprop'], 
+                        // 'imagen'  => str_replace('+','',str_replace('/','',str_replace('.','',str_replace(')','',str_replace('(','',str_replace('-','',str_replace(' ','',$gen['mobiliario'].'-'.$gen['carteleria'].'-'.$gen['medida']))))))).'.jpg',
+                        'imagen'  => $imagen,
                     ]);
             }
         }

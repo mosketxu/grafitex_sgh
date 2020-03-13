@@ -200,7 +200,7 @@ class CampaignPresupuestoController extends Controller
         ->where('familia',$familiaId)
         ->get();
 
-        $tarifas=Tarifa::where('tipo','0')->get();
+        $tarifas=Tarifa::where('tipo','0')->orderBy('familia')->get();
         $campaign=Campaign::find($campaignId);
 
         return view('campaign.presupuesto.elementos',compact('campaign','elementos','presupuesto','tarifas'));
