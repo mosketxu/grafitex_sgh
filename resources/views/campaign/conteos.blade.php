@@ -174,13 +174,14 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <td><a href="{{route('campaign.elementosmat.export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                                     <div class="table-responsive">
                                         <table id="tcampaignMateriales" class="table table-hover table-sm small"
                                             cellspacing="0" width=100%>
                                             <thead>
                                                 <tr>
                                                     <th>Material</th>
-                                                    <th>Totales</th>
+                                                    <th>Total</th>
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>
@@ -426,14 +427,15 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <td><a href="{{route('campaign.elementosmatmed.export',$campaign->id)}}" title="Exporta Excel"><i class="far fa-file-excel fa-2x text-success "></i></a></td>
                                     <div class="table-responsive">
                                         <table id="tcampaignMaterialMedida"
                                             class="table table-hover table-sm small" cellspacing="0" width=100%>
                                             <thead>
                                                 <tr>
                                                     <th>Material</th>
-                                                    <th>Medidas</th>
-                                                    <th>Totales</th>
+                                                    <th>Medida</th>
+                                                    <th>Total</th>
                                                     <th>Unidades</th>
                                                 </tr>
                                             </thead>

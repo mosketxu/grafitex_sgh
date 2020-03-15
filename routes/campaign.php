@@ -68,6 +68,12 @@ Route::group(['prefix' => 'campaign'], function () {
 
         Route::get('/export/campaignelementos/{campaign}', 'CampaignElementoController@exportCampaignElementos')->name('campaign.elementos.export')
             ->middleware('can:campaign.index');
+
+        Route::get('/export/campaignelementosmat/{campaign}', 'CampaignElementoController@exportCampaignElementosMat')->name('campaign.elementosmat.export')
+            ->middleware('can:campaign.index');
+
+        Route::get('/export/campaignelementosmatmed/{campaign}', 'CampaignElementoController@exportCampaignElementosMatMed')->name('campaign.elementosmatmed.export')
+            ->middleware('can:campaign.index');
     });
     // galeria
     Route::group(['prefix' => 'galeria'], function () {

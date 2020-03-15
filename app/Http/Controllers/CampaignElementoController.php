@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\{Campaign,CampaignElemento, CampaignTienda};
 use Illuminate\Http\Request;
-use App\Exports\{CampaignElemenIdiMatMedMobExport, CampaignElementosExport};
+use App\Exports\{CampaignElemenIdiMatMedMobExport, CampaignElementosExport,CampaignElemenMatExport,CampaignElemenMatMedExport};
 use Maatwebsite\Excel\Facades\Excel;
 
 use Image;
@@ -207,6 +207,16 @@ class CampaignElementoController extends Controller
     {
         return Excel::download(new CampaignElementosExport($campaignId), 'campaignelementos.xlsx');
     }
-    
+
+    public function exportCampaignElementosMat($campaignId)
+    {
+        return Excel::download(new CampaignElemenMatExport($campaignId), 'materiales.xlsx');
+    }
+
+    public function exportCampaignElementosMatMed($campaignId)
+    {
+        return Excel::download(new CampaignElemenMatMedExport($campaignId), 'materialesmedidas.xlsx');
+    }
+
 
 }
