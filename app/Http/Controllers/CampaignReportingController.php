@@ -15,8 +15,10 @@ class CampaignReportingController extends Controller
     {
         $today=Carbon::now()->format('d/m/Y');
         
-        $etiquetas=Campaign::where('id',$campaignId)
+        $etiquetas=Campaign::where('id',$campaignId) 
         ->first(); 
+
+        // dd($etiquetas->tiendaselementos->first());
 
         return view('reporting.etiquetasHTML',compact('etiquetas','today'));
         // return view('reporting.etiquetasHTMLBootstrap',compact('etiquetas','today'));

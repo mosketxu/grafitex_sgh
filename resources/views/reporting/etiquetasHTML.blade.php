@@ -43,10 +43,10 @@
                             <tr> 
                                 <th style="text-align: center;" width="25%">
                                     {{$campaignstore->store_id}} <br>
-                                    {{$campaignstore->tienda->segmento}}
+                                    {{$campaignstore->tienda->segmento ?? 'tienda eliminada'}}
                                 </th>
-                                <th class="{{trim(strtolower($campaignstore->tienda->segmento))}}"  width="50%">
-                                    {{$campaignstore->tienda->name}}
+                                <th class="{{trim(strtolower($campaignstore->tienda->segmento ?? 'nohay')) }}"  width="50%">
+                                    {{$campaignstore->tienda->name?? 'tienda eliminada'}}
                                 </th>
                                 <th style="text-align:center;"  width="25%">
                                     <img src="{{asset('img/SGH.jpg')}}" height="25px">
@@ -93,7 +93,7 @@
                     </table>
                 </div>
                 <div class="idioma">
-                    Idioma:{{$campaignstore->tienda->idioma}}
+                    Idioma:{{$campaignstore->tienda->idioma ?? 'Tienda eliminada'}}
                 </div>
                 <div style="page-break-after:always;"></div>
             @endforeach

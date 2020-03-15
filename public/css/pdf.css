@@ -83,6 +83,14 @@ footer {
    font-size:medium;
  }
 
+ .nohay{
+   font-family: DejaVu Sans, Arial, Helvetica Neue, Helvetica, sans-serif;;
+   text-align: center; 
+   background-color:#000000; 
+   color: #ffffff;
+   font-size:medium;
+ }
+
  .idioma{
    margin-top: 3px;
    margin-bottom: 3px;
